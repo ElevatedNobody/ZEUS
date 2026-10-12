@@ -1,0 +1,646 @@
+{
+  "generated_at": "2026-09-28T07:59:45",
+  "registry_version": "1.0.0",
+  "ollama_daemon": "reachable",
+  "installed_models": [
+    "aya:8b",
+    "bge-m3:latest",
+    "codegemma:7b-instruct",
+    "deepseek-coder-v2:latest",
+    "deepseek-r1:7b",
+    "deepseek-r1:8b",
+    "gemma2:2b",
+    "granite4.1-guardian:8b",
+    "hermes3:3b",
+    "mistral:latest",
+    "moondream:latest",
+    "phi3.5:latest",
+    "qwen2.5-coder:7b",
+    "qwen2.5:0.5b",
+    "qwen2.5:3b",
+    "qwen2.5:3b-instruct-q4_K_M",
+    "qwen2.5vl:3b",
+    "qwen3-vl:8b",
+    "qwen3:1.7b",
+    "qwen3:4b",
+    "qwen3:8b"
+  ],
+  "unregistered_models": [
+    "aya:8b",
+    "granite4.1-guardian:8b",
+    "qwen3-vl:8b",
+    "qwen3:1.7b",
+    "qwen3:4b",
+    "qwen3:8b"
+  ],
+  "models": [
+    {
+      "model": "deepseek-r1:7b-qwen-distill-q4_K_M",
+      "ollama_name": "deepseek-r1:7b-qwen-distill-q4_K_M",
+      "resolved_name": null,
+      "parameters": "7B",
+      "quantization": "q4_K_M",
+      "approx_disk_gb": 4.7,
+      "task_types": [
+        "reasoning",
+        "deep_analysis"
+      ],
+      "capabilities": {
+        "vision": false,
+        "coding": true,
+        "reasoning": true,
+        "embedding": false,
+        "reranking": false,
+        "structured_json": false,
+        "multilingual": true,
+        "fast_chat": false,
+        "classification": false
+      },
+      "language": [
+        "en",
+        "zh"
+      ],
+      "local_path": "managed by Ollama (~/.ollama/models or OLLAMA_MODELS)",
+      "health": "absent",
+      "test_status": "not_tested",
+      "test_detail": null
+    },
+    {
+      "model": "qwen2.5-coder:7b-instruct-q4_K_M",
+      "ollama_name": "qwen2.5-coder:7b-instruct-q4_K_M",
+      "resolved_name": null,
+      "parameters": "7B",
+      "quantization": "q4_K_M",
+      "approx_disk_gb": 4.7,
+      "task_types": [
+        "code",
+        "json_structured"
+      ],
+      "capabilities": {
+        "vision": false,
+        "coding": true,
+        "reasoning": true,
+        "embedding": false,
+        "reranking": false,
+        "structured_json": true,
+        "multilingual": false,
+        "fast_chat": false,
+        "classification": false
+      },
+      "language": [
+        "en"
+      ],
+      "local_path": "managed by Ollama",
+      "health": "absent",
+      "test_status": "not_tested",
+      "test_detail": null
+    },
+    {
+      "model": "deepseek-coder-v2:16b-lite-instruct-q4_K_M",
+      "ollama_name": "deepseek-coder-v2:16b-lite-instruct-q4_K_M",
+      "resolved_name": null,
+      "parameters": "16B total / ~2.4B active (MoE)",
+      "quantization": "q4_K_M",
+      "approx_disk_gb": 10.4,
+      "task_types": [
+        "code"
+      ],
+      "capabilities": {
+        "vision": false,
+        "coding": true,
+        "reasoning": true,
+        "embedding": false,
+        "reranking": false,
+        "structured_json": true,
+        "multilingual": false,
+        "fast_chat": false,
+        "classification": false
+      },
+      "language": [
+        "en"
+      ],
+      "local_path": "managed by Ollama",
+      "health": "absent",
+      "test_status": "not_tested",
+      "test_detail": null
+    },
+    {
+      "model": "codegemma:7b-instruct-q4_K_M",
+      "ollama_name": "codegemma:7b-instruct-q4_K_M",
+      "resolved_name": null,
+      "parameters": "7B",
+      "quantization": "q4_K_M",
+      "approx_disk_gb": 5.0,
+      "task_types": [
+        "code"
+      ],
+      "capabilities": {
+        "vision": false,
+        "coding": true,
+        "reasoning": false,
+        "embedding": false,
+        "reranking": false,
+        "structured_json": false,
+        "multilingual": false,
+        "fast_chat": false,
+        "classification": false
+      },
+      "language": [
+        "en"
+      ],
+      "local_path": "managed by Ollama",
+      "health": "absent",
+      "test_status": "not_tested",
+      "test_detail": null
+    },
+    {
+      "model": "qwen2.5vl:3b-q4_K_M",
+      "ollama_name": "qwen2.5vl:3b-q4_K_M",
+      "resolved_name": null,
+      "parameters": "3B",
+      "quantization": "q4_K_M",
+      "approx_disk_gb": 3.2,
+      "task_types": [
+        "vision"
+      ],
+      "capabilities": {
+        "vision": true,
+        "coding": false,
+        "reasoning": true,
+        "embedding": false,
+        "reranking": false,
+        "structured_json": false,
+        "multilingual": true,
+        "fast_chat": false,
+        "classification": false
+      },
+      "language": [
+        "en",
+        "zh"
+      ],
+      "local_path": "managed by Ollama",
+      "health": "absent",
+      "test_status": "not_tested",
+      "test_detail": null
+    },
+    {
+      "model": "moondream:1.8b-q4",
+      "ollama_name": "moondream:1.8b-q4",
+      "resolved_name": null,
+      "parameters": "1.8B",
+      "quantization": "q4",
+      "approx_disk_gb": 1.7,
+      "task_types": [
+        "vision"
+      ],
+      "capabilities": {
+        "vision": true,
+        "coding": false,
+        "reasoning": false,
+        "embedding": false,
+        "reranking": false,
+        "structured_json": false,
+        "multilingual": false,
+        "fast_chat": true,
+        "classification": true
+      },
+      "language": [
+        "en"
+      ],
+      "local_path": "managed by Ollama",
+      "health": "absent",
+      "test_status": "not_tested",
+      "test_detail": null
+    },
+    {
+      "model": "bge-m3",
+      "ollama_name": "bge-m3",
+      "resolved_name": "bge-m3:latest",
+      "parameters": "568M",
+      "quantization": "f16",
+      "approx_disk_gb": 1.2,
+      "task_types": [
+        "embedding"
+      ],
+      "capabilities": {
+        "vision": false,
+        "coding": false,
+        "reasoning": false,
+        "embedding": true,
+        "reranking": false,
+        "structured_json": false,
+        "multilingual": true,
+        "fast_chat": false,
+        "classification": false
+      },
+      "language": [
+        "multilingual (100+)"
+      ],
+      "local_path": "managed by Ollama",
+      "health": "present",
+      "test_status": "not_tested",
+      "test_detail": null
+    },
+    {
+      "model": "bge-reranker-v2-m3",
+      "ollama_name": "bge-reranker-v2-m3",
+      "resolved_name": null,
+      "parameters": "568M",
+      "quantization": "f16",
+      "approx_disk_gb": 1.2,
+      "task_types": [
+        "reranker"
+      ],
+      "capabilities": {
+        "vision": false,
+        "coding": false,
+        "reasoning": false,
+        "embedding": true,
+        "reranking": true,
+        "structured_json": false,
+        "multilingual": true,
+        "fast_chat": false,
+        "classification": false
+      },
+      "language": [
+        "multilingual (100+)"
+      ],
+      "local_path": "managed by Ollama (also usable as a local HuggingFace cross-encoder if downloaded to models/reranker)",
+      "health": "absent",
+      "test_status": "not_tested",
+      "test_detail": null
+    },
+    {
+      "model": "mistral:7b-instruct-q4_K_M",
+      "ollama_name": "mistral:7b-instruct-q4_K_M",
+      "resolved_name": null,
+      "parameters": "7B",
+      "quantization": "q4_K_M",
+      "approx_disk_gb": 4.4,
+      "task_types": [
+        "reasoning",
+        "default"
+      ],
+      "capabilities": {
+        "vision": false,
+        "coding": false,
+        "reasoning": true,
+        "embedding": false,
+        "reranking": false,
+        "structured_json": false,
+        "multilingual": true,
+        "fast_chat": false,
+        "classification": false
+      },
+      "language": [
+        "en",
+        "fr",
+        "de",
+        "es",
+        "it"
+      ],
+      "local_path": "managed by Ollama",
+      "health": "absent",
+      "test_status": "not_tested",
+      "test_detail": null
+    },
+    {
+      "model": "phi3.5:3.8b-mini-instruct-q4_K_M",
+      "ollama_name": "phi3.5:3.8b-mini-instruct-q4_K_M",
+      "resolved_name": null,
+      "parameters": "3.8B",
+      "quantization": "q4_K_M",
+      "approx_disk_gb": 2.2,
+      "task_types": [
+        "fast"
+      ],
+      "capabilities": {
+        "vision": false,
+        "coding": true,
+        "reasoning": true,
+        "embedding": false,
+        "reranking": false,
+        "structured_json": false,
+        "multilingual": false,
+        "fast_chat": true,
+        "classification": true
+      },
+      "language": [
+        "en"
+      ],
+      "local_path": "managed by Ollama",
+      "health": "absent",
+      "test_status": "not_tested",
+      "test_detail": null
+    },
+    {
+      "model": "aya-expanse:8b-q4_K_M",
+      "ollama_name": "aya-expanse:8b-q4_K_M",
+      "resolved_name": null,
+      "parameters": "8B",
+      "quantization": "q4_K_M",
+      "approx_disk_gb": 5.1,
+      "task_types": [
+        "multilingual"
+      ],
+      "capabilities": {
+        "vision": false,
+        "coding": false,
+        "reasoning": true,
+        "embedding": false,
+        "reranking": false,
+        "structured_json": false,
+        "multilingual": true,
+        "fast_chat": false,
+        "classification": false
+      },
+      "language": [
+        "23 languages including Hindi"
+      ],
+      "local_path": "managed by Ollama",
+      "health": "absent",
+      "test_status": "not_tested",
+      "test_detail": null
+    },
+    {
+      "model": "hermes3:3b-q4_K_M",
+      "ollama_name": "hermes3:3b-q4_K_M",
+      "resolved_name": null,
+      "parameters": "3B",
+      "quantization": "q4_K_M",
+      "approx_disk_gb": 2.0,
+      "task_types": [
+        "fast",
+        "json_structured"
+      ],
+      "capabilities": {
+        "vision": false,
+        "coding": false,
+        "reasoning": true,
+        "embedding": false,
+        "reranking": false,
+        "structured_json": true,
+        "multilingual": false,
+        "fast_chat": true,
+        "classification": true
+      },
+      "language": [
+        "en"
+      ],
+      "local_path": "managed by Ollama",
+      "health": "absent",
+      "test_status": "not_tested",
+      "test_detail": null
+    },
+    {
+      "model": "qwen2.5:3b-instruct-q4_K_M",
+      "ollama_name": "qwen2.5:3b-instruct-q4_K_M",
+      "resolved_name": "qwen2.5:3b-instruct-q4_K_M",
+      "parameters": "3B",
+      "quantization": "q4_K_M",
+      "approx_disk_gb": 1.9,
+      "task_types": [
+        "json_structured",
+        "default"
+      ],
+      "capabilities": {
+        "vision": false,
+        "coding": true,
+        "reasoning": true,
+        "embedding": false,
+        "reranking": false,
+        "structured_json": true,
+        "multilingual": true,
+        "fast_chat": true,
+        "classification": true
+      },
+      "language": [
+        "en",
+        "zh",
+        "multi"
+      ],
+      "local_path": "managed by Ollama",
+      "health": "present",
+      "test_status": "not_tested",
+      "test_detail": null
+    },
+    {
+      "model": "qwen2.5:0.5b-instruct-q4_K_M",
+      "ollama_name": "qwen2.5:0.5b-instruct-q4_K_M",
+      "resolved_name": null,
+      "parameters": "0.5B",
+      "quantization": "q4_K_M",
+      "approx_disk_gb": 0.4,
+      "task_types": [
+        "classify"
+      ],
+      "capabilities": {
+        "vision": false,
+        "coding": false,
+        "reasoning": false,
+        "embedding": false,
+        "reranking": false,
+        "structured_json": true,
+        "multilingual": false,
+        "fast_chat": true,
+        "classification": true
+      },
+      "language": [
+        "en"
+      ],
+      "local_path": "managed by Ollama",
+      "health": "absent",
+      "test_status": "not_tested",
+      "test_detail": null
+    },
+    {
+      "model": "gemma2:2b-instruct-q4_K_M",
+      "ollama_name": "gemma2:2b-instruct-q4_K_M",
+      "resolved_name": null,
+      "parameters": "2B",
+      "quantization": "q4_K_M",
+      "approx_disk_gb": 1.6,
+      "task_types": [
+        "fast"
+      ],
+      "capabilities": {
+        "vision": false,
+        "coding": false,
+        "reasoning": false,
+        "embedding": false,
+        "reranking": false,
+        "structured_json": false,
+        "multilingual": false,
+        "fast_chat": true,
+        "classification": true
+      },
+      "language": [
+        "en"
+      ],
+      "local_path": "managed by Ollama",
+      "health": "absent",
+      "test_status": "not_tested",
+      "test_detail": null
+    },
+    {
+      "model": "granite3.1-dense:2b-instruct-q4_K_M",
+      "ollama_name": "granite3.1-dense:2b-instruct-q4_K_M",
+      "resolved_name": null,
+      "parameters": "2B",
+      "quantization": "q4_K_M",
+      "approx_disk_gb": 1.6,
+      "task_types": [
+        "classify"
+      ],
+      "capabilities": {
+        "vision": false,
+        "coding": true,
+        "reasoning": false,
+        "embedding": false,
+        "reranking": false,
+        "structured_json": true,
+        "multilingual": true,
+        "fast_chat": true,
+        "classification": true
+      },
+      "language": [
+        "en",
+        "multi"
+      ],
+      "local_path": "managed by Ollama",
+      "health": "absent",
+      "test_status": "not_tested",
+      "test_detail": null
+    },
+    {
+      "model": "smollm2:1.7b-instruct-q4_K_M",
+      "ollama_name": "smollm2:1.7b-instruct-q4_K_M",
+      "resolved_name": null,
+      "parameters": "1.7B",
+      "quantization": "q4_K_M",
+      "approx_disk_gb": 1.1,
+      "task_types": [
+        "classify"
+      ],
+      "capabilities": {
+        "vision": false,
+        "coding": false,
+        "reasoning": false,
+        "embedding": false,
+        "reranking": false,
+        "structured_json": false,
+        "multilingual": false,
+        "fast_chat": true,
+        "classification": true
+      },
+      "language": [
+        "en"
+      ],
+      "local_path": "managed by Ollama",
+      "health": "absent",
+      "test_status": "not_tested",
+      "test_detail": null
+    }
+  ],
+  "slots": {
+    "embedding": {
+      "required": true,
+      "preferred": "bge-m3",
+      "preference_order": [
+        "bge-m3"
+      ],
+      "resolved": "bge-m3:latest",
+      "status": "ok",
+      "reason": "Industrial knowledge base cannot be built or searched without it."
+    },
+    "reranker": {
+      "required": false,
+      "preferred": "bge-reranker-v2-m3",
+      "preference_order": [
+        "bge-reranker-v2-m3"
+      ],
+      "resolved": null,
+      "status": "degraded",
+      "reason": "Evidence ranking degrades gracefully to a deterministic hybrid scorer."
+    },
+    "vision": {
+      "required": false,
+      "preferred": "qwen2.5vl:3b-q4_K_M",
+      "preference_order": [
+        "qwen3-vl:8b",
+        "qwen3-vl:4b",
+        "qwen2.5vl:3b-q4_K_M",
+        "qwen2.5vl:3b",
+        "moondream:1.8b-q4",
+        "moondream"
+      ],
+      "resolved": "qwen3-vl:8b",
+      "status": "ok",
+      "reason": "Only needed for scanned pages and photographs that OCR cannot resolve."
+    },
+    "reasoning": {
+      "required": true,
+      "preferred": "mistral:7b-instruct-q4_K_M",
+      "preference_order": [
+        "deepseek-r1:8b",
+        "qwen3:8b",
+        "deepseek-r1:14b",
+        "qwen3:14b",
+        "mistral:7b-instruct-q4_K_M",
+        "deepseek-r1:7b-qwen-distill-q4_K_M"
+      ],
+      "resolved": "deepseek-r1:8b",
+      "status": "ok",
+      "reason": "Grounded answering and findings generation."
+    },
+    "json_structured": {
+      "required": true,
+      "preferred": "qwen2.5:3b-instruct-q4_K_M",
+      "preference_order": [
+        "qwen3:8b",
+        "qwen3:4b",
+        "qwen2.5:3b-instruct-q4_K_M",
+        "qwen2.5-coder:7b-instruct-q4_K_M"
+      ],
+      "resolved": "qwen3:8b",
+      "status": "ok",
+      "reason": "Schema-constrained extraction."
+    },
+    "code": {
+      "required": false,
+      "preferred": "qwen2.5-coder:7b-instruct-q4_K_M",
+      "preference_order": [
+        "qwen2.5-coder:7b",
+        "qwen2.5-coder:14b",
+        "qwen2.5-coder:7b-instruct-q4_K_M",
+        "codegemma:7b-instruct-q4_K_M",
+        "qwen2.5-coder:3b",
+        "deepseek-coder-v2:16b-lite-instruct-q4_K_M"
+      ],
+      "resolved": "qwen2.5-coder:7b",
+      "status": "ok",
+      "reason": "Coding Agent only."
+    },
+    "classify": {
+      "required": false,
+      "preferred": "granite3.1-dense:2b-instruct-q4_K_M",
+      "preference_order": [
+        "qwen3:1.7b",
+        "granite3.1-dense:2b-instruct-q4_K_M",
+        "smollm2:1.7b-instruct-q4_K_M",
+        "qwen2.5:0.5b-instruct-q4_K_M",
+        "qwen3:4b"
+      ],
+      "resolved": "qwen3:1.7b",
+      "status": "ok",
+      "reason": "Deterministic classification runs first; the model only breaks ties."
+    }
+  },
+  "present": 2,
+  "absent": 15,
+  "probed": false,
+  "policy": {
+    "never_pull_automatically": true,
+    "note": "Nothing in MEDHA pulls or downloads a model. If a slot's models are missing, the affected feature reports a clear 'model not available locally' status instead of substituting a different model or reaching the network."
+  }
+}

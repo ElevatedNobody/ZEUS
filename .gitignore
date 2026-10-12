@@ -1,0 +1,38 @@
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+
+# Logs and temporary files
+logs/
+*.log
+*.bak
+*.tmp
+
+# Databases (keep structure, ignore actual data if sensitive)
+# database/*.db          # uncomment if you want to ignore databases
+
+# Models (never commit model weights)
+models/
+**/models/
+
+# IDE and OS files
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Environment variables
+.env
+*.env
+
+# Backups
+backups/

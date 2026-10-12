@@ -1,0 +1,122 @@
+/* ZEUS sign-in: the voice wave behind a frosted-glass card. The wave moves
+   only while the screen is .awake - for a few seconds after it appears or the
+   operator touches it - then it settles, so a sign-in screen left waiting does
+   not keep the page repainting. */
+.auth-screen {
+  position: fixed; inset: 0; z-index: 90;
+  display: grid; grid-template-columns: 1.15fr 1fr;
+  background: transparent;
+  overflow: hidden;
+}
+.auth-screen.leaving { animation: auth-out var(--t-slow) var(--ease-spring) forwards; }
+@keyframes auth-out { to { opacity: 0; transform: scale(1.02); } }
+
+/* ---- the scene: brand over the wave ------------------------------------------------ */
+.auth-scene { position: relative; overflow: hidden; }
+.auth-brand { position: absolute; left: 56px; top: 52px; display: flex; align-items: center; gap: 16px; }
+.auth-brand .badge { width: 52px; height: 52px; border-radius: 18px; }
+.auth-brand .badge > div { border-radius: 17px; }
+.auth-brand .badge svg { width: 26px; height: 26px; }
+.auth-brand .word { font-family: var(--font-display); font-weight: 800; font-size: 40px; letter-spacing: -0.02em; line-height: 1; color: #fff; }
+.auth-brand .tag { margin-top: 6px; font-family: var(--font-mono); font-size: var(--fs-11); color: var(--ink-3); max-width: 46ch; }
+.auth-voice { position: absolute; left: 0; right: 0; top: 34%; text-align: center; pointer-events: none; }
+.auth-voice .voice-status-text { display: inline-block; }
+.auth-foot { position: absolute; left: 56px; bottom: 28px; right: 56px; display: flex; gap: 16px; color: var(--ink-3); font-size: var(--fs-11); font-family: var(--font-mono); letter-spacing: 0.06em; }
+.auth-foot .num { color: #fff; font-weight: 600; }
+
+/* ---- the panel ---------------------------------------------------------------------- */
+.auth-panel { display: grid; place-items: center; padding: 32px; background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.55) 30%); }
+.auth-card {
+  width: min(420px, 100%);
+  background: var(--glass);
+  -webkit-backdrop-filter: blur(28px); backdrop-filter: blur(28px);
+  border: 1px solid rgba(255, 255, 255, 0.1); border-radius: var(--r-28);
+  box-shadow: var(--shadow-float), 0 0 50px rgba(0, 242, 254, 0.06); padding: 28px;
+  animation: pop var(--t-slow) var(--ease-spring);
+}
+.auth-card.shake { animation: shake 420ms var(--ease-snap); }
+@keyframes shake { 20%, 60% { transform: translateX(-8px); } 40%, 80% { transform: translateX(8px); } }
+.auth-state {
+  display: flex; align-items: center; gap: 10px; margin-bottom: 18px;
+  font-family: var(--font-mono); font-weight: 700; letter-spacing: 0.16em; font-size: var(--fs-11); text-transform: uppercase; color: var(--ink-2);
+}
+.auth-state .led { width: 8px; height: 8px; border-radius: 50%; background: var(--ink-3); box-shadow: 0 0 0 4px rgba(125, 139, 160, 0.15); }
+.auth-state[data-tone="live"] { color: var(--cyan); }
+.auth-state[data-tone="live"] .led { background: var(--cyan); box-shadow: 0 0 12px var(--cyan); }
+.auth-screen.awake .auth-state[data-tone="live"] .led { animation: pulse 1.2s ease-in-out infinite; }
+.auth-state[data-tone="ok"] { color: var(--ok); }
+.auth-state[data-tone="ok"] .led { background: var(--ok); box-shadow: 0 0 12px var(--ok); }
+.auth-state[data-tone="fail"] { color: var(--fail); }
+.auth-state[data-tone="fail"] .led { background: var(--fail); box-shadow: 0 0 12px var(--fail); }
+.auth-state[data-tone="warn"] { color: var(--warn); }
+.auth-state[data-tone="warn"] .led { background: var(--warn); box-shadow: 0 0 12px var(--warn); }
+.auth-title { font-size: var(--fs-24); font-weight: 800; margin-bottom: 4px; }
+.auth-sub { color: var(--ink-2); margin-bottom: 20px; }
+.auth-switch { display: grid; grid-template-columns: 1fr 1fr; margin-bottom: 20px; }
+.auth-switch .tab { height: 34px; }
+
+/* floating-label fields with a spectrum underline that sweeps in */
+.float { position: relative; margin-bottom: 14px; }
+.float input {
+  width: 100%; height: 52px; padding: 20px 14px 6px;
+  border-radius: var(--r-12); border: 1px solid rgba(255, 255, 255, 0.1); background: rgba(0, 0, 0, 0.6); color: var(--ink);
+  transition: border-color var(--t-fast);
+  user-select: text;
+}
+.float label { position: absolute; left: 15px; top: 16px; color: var(--ink-3); pointer-events: none; transition: transform var(--t-fast) var(--ease-snap), color var(--t-fast); transform-origin: left top; }
+.float input:focus { border-color: rgba(0, 242, 254, 0.45); }
+.float input:focus, .float input:not(:placeholder-shown) { outline: none; }
+.float input:focus + label, .float input:not(:placeholder-shown) + label { transform: translateY(-10px) scale(0.78); color: var(--cyan); }
+.float::after { content: ""; position: absolute; left: 12px; right: 12px; bottom: 0; height: 2px; border-radius: 2px; background: var(--gradient-flare); transform: scaleX(0); transition: transform var(--t-med) var(--ease-spring); }
+.float:focus-within::after { transform: scaleX(1); }
+.keystrip { display: flex; gap: 3px; height: 10px; margin: -4px 2px 14px; }
+.keystrip i { flex: 1; border-radius: 2px; background: rgba(255, 255, 255, 0.08); transform: scaleY(0.4); transition: transform var(--t-fast) var(--ease-spring), background var(--t-fast); }
+.keystrip i.on { background: var(--cyan); box-shadow: 0 0 6px rgba(0, 242, 254, 0.6); transform: scaleY(1); }
+.keystrip i.on:nth-child(n+6) { background: var(--violet); box-shadow: 0 0 6px rgba(168, 85, 247, 0.6); }
+.keystrip i.on:nth-child(n+11) { background: var(--magenta); box-shadow: 0 0 6px rgba(244, 63, 94, 0.6); }
+.auth-msg { min-height: 20px; font-size: var(--fs-12); color: var(--fail); margin: 4px 0 10px; }
+.auth-msg.ok { color: var(--ok); }
+.auth-msg.info { color: var(--ink-2); }
+.auth-actions { display: flex; gap: 8px; }
+.auth-actions .btn { flex: 1; height: 44px; }
+.auth-links { display: flex; justify-content: space-between; align-items: center; margin-top: 16px; }
+.auth-unavailable { margin-top: 16px; font-size: var(--fs-11); color: var(--ink-3); }
+
+/* ---- face scanner ------------------------------------------------------------------- */
+.scanner { position: relative; width: 220px; height: 220px; margin: 4px auto 18px; }
+.scanner .ring { position: absolute; inset: 0; border-radius: 50%; }
+.scanner svg.segments { position: absolute; inset: 0; width: 100%; height: 100%; transform: rotate(-90deg); }
+.scanner svg.segments circle { fill: none; stroke-width: 6; stroke-linecap: round; transition: stroke var(--t-med); }
+.scanner .preview {
+  position: absolute; inset: 16px; border-radius: 50%; overflow: hidden;
+  background: radial-gradient(circle, #0b1320, #000);
+  display: grid; place-items: center; color: var(--ink-3); font-size: var(--fs-12); text-align: center; padding: 18px;
+}
+.scanner .preview img { width: 100%; height: 100%; object-fit: cover; }
+.scanner .sweep { position: absolute; inset: 16px; border-radius: 50%; overflow: hidden; pointer-events: none; }
+.scanner.scanning .sweep::after {
+  content: ""; position: absolute; left: 0; right: 0; height: 30%;
+  background: linear-gradient(180deg, transparent, rgba(0, 242, 254, 0.3), transparent);
+  animation: sweep 1.4s var(--ease-snap) infinite;
+}
+@keyframes sweep { from { transform: translateY(-100%); } to { transform: translateY(340%); } }
+.scanner[data-tone="ok"] .preview { box-shadow: 0 0 0 3px var(--ok), 0 0 40px rgba(16, 185, 129, 0.4); }
+.scanner[data-tone="fail"] .preview { box-shadow: 0 0 0 3px var(--magenta); }
+.face-steps { display: grid; gap: 6px; margin-bottom: 16px; }
+.face-steps div { display: flex; align-items: center; gap: 10px; font-size: var(--fs-12); color: var(--ink-3); font-family: var(--font-mono); }
+.face-steps div::before { content: ""; width: 8px; height: 8px; border-radius: 50%; border: 1px solid var(--steel-3); }
+.face-steps div.done { color: var(--ink); }
+.face-steps div.done::before { background: var(--ok); border-color: var(--ok); }
+.face-steps div.active { color: var(--cyan); }
+.face-steps div.active::before { background: var(--cyan); border-color: var(--cyan); animation: pulse 1s infinite; }
+.face-steps div.fail { color: var(--fail); }
+.face-steps div.fail::before { background: var(--fail); border-color: var(--fail); }
+
+/* ---- initializing ------------------------------------------------------------------- */
+.boot { display: grid; gap: 8px; margin-top: 8px; }
+.boot div { display: flex; align-items: center; justify-content: space-between; font-size: var(--fs-12); color: var(--ink-3); padding: 8px 12px; border-radius: var(--r-12); background: rgba(0, 0, 0, 0.5); border: 1px solid var(--glass-line); font-family: var(--font-mono); }
+.boot div.running { color: var(--cyan); }
+.boot div.done { color: var(--ink); }
+.boot div.failed, .boot div.unavailable { color: var(--warn); }
+
+@media (max-width: 1100px) { .auth-screen { grid-template-columns: 1fr; } .auth-scene { display: none; } .auth-panel { background: none; } }

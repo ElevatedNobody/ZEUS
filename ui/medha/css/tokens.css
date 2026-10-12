@@ -1,0 +1,83 @@
+/* ZEUS "Voice Core" design tokens - the ONLY place colours, type, radii,
+   depth and motion are defined. See docs/UI_DESIGN_SYSTEM.md.
+
+   Palette: pure black void, frosted glass panels, and the iridescent
+   cyan / sky / violet / magenta spectrum of the voice wave. Fonts are local
+   only: Plus Jakarta Sans and JetBrains Mono are used when installed on the
+   machine, otherwise the Windows equivalents - nothing is fetched. */
+:root {
+  /* surfaces */
+  --crude: #000000;                         /* the void behind everything */
+  --bitumen: #070b12;                       /* solid panel (fields, sheets) */
+  --steel-1: #0b111a;                       /* raised solid */
+  --steel-2: #131b27;                       /* hover / track */
+  --steel-3: #223044;                       /* strong line */
+  --glass: linear-gradient(135deg, rgba(12, 18, 28, 0.72) 0%, rgba(3, 7, 14, 0.55) 100%);
+  --glass-solid: rgba(6, 10, 17, 0.92);
+  --glass-line: rgba(255, 255, 255, 0.08);
+  --glass-line-hi: rgba(0, 242, 254, 0.35);
+  --glass-blur: blur(22px);
+
+  /* text */
+  --ink: #f1f5f9;
+  --ink-2: #aab6c7;
+  --ink-3: #7d8ba0;
+
+  /* the spectrum */
+  --cyan: #00f2fe;
+  --sky: #38bdf8;
+  --violet: #a855f7;
+  --magenta: #f43f5e;
+  --gold: #f59e0b;
+  --emerald: #10b981;
+
+  /* roles (names kept from the first design system; values are the spectrum) */
+  --flare: var(--cyan);
+  --flare-deep: var(--violet);
+  --flare-soft: rgba(0, 242, 254, 0.12);
+  --flare-line: rgba(0, 242, 254, 0.45);
+  --process: var(--sky);
+  --process-soft: rgba(56, 189, 248, 0.13);
+
+  --ok: #34d399;
+  --ok-soft: rgba(16, 185, 129, 0.15);
+  --warn: #fbbf24;
+  --warn-soft: rgba(245, 158, 11, 0.14);
+  --fail: #fb7185;
+  --fail-soft: rgba(244, 63, 94, 0.15);
+  --sample: #c084fc;
+  --sample-soft: rgba(168, 85, 247, 0.15);
+
+  --gradient-flare: linear-gradient(90deg, var(--cyan) 0%, var(--violet) 60%, var(--magenta) 100%);
+  --gradient-button: linear-gradient(135deg, var(--cyan) 0%, var(--sky) 100%);
+  --gradient-ring: linear-gradient(45deg, #06b6d4 0%, var(--violet) 50%, #ec4899 100%);
+  --hairline: 1px solid var(--glass-line);
+  --highlight: inset 0 1px 0 0 rgba(255, 255, 255, 0.10);
+  --shadow-float: 0 20px 50px -10px rgba(0, 0, 0, 0.95), inset 0 1px 0 0 rgba(255, 255, 255, 0.10);
+  --glow-cyan: 0 0 25px rgba(0, 242, 254, 0.35);
+
+  --font-ui: "Plus Jakarta Sans", "Segoe UI Variable Text", "Segoe UI Variable", "Segoe UI", system-ui, sans-serif;
+  --font-display: "Plus Jakarta Sans", "Segoe UI Variable Display", "Segoe UI Variable", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", "Cascadia Mono", "Cascadia Code", "Consolas", monospace;
+  --font-industrial: var(--font-mono);
+
+  --fs-11: 11px; --fs-12: 12px; --fs-13: 13px; --fs-15: 15px;
+  --fs-18: 18px; --fs-24: 24px; --fs-32: 32px; --fs-44: 44px;
+
+  --r-8: 8px; --r-12: 12px; --r-18: 16px; --r-28: 24px; --r-pill: 999px;
+  --gap-4: 4px; --gap-8: 8px; --gap-12: 12px; --gap-16: 16px; --gap-24: 24px; --gap-32: 32px;
+
+  --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-snap: cubic-bezier(0.3, 0, 0.2, 1);
+  --t-fast: 180ms;
+  --t-med: 320ms;
+  --t-slow: 500ms;
+
+  --rail-w: 64px;
+  --strip-h: 76px;
+  --sheet-w: min(460px, 38vw);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root { --t-fast: 0ms; --t-med: 0ms; --t-slow: 0ms; }
+}

@@ -1,0 +1,783 @@
+{
+  "schema_version": "1.0.0",
+  "generated_at": "2026-09-28T07:59:44",
+  "generated_at_epoch": 1790562584.0915744,
+  "project_root": "C:\\Users\\NIRBHAY\\Desktop\\ZEUS\\AGNI_ROG_Strix_2026-09-24_v3\\ZEUS",
+  "problem_statement": "SIH26117 - Sovereign On-Premise Agentic AI Workbench",
+  "offline_architecture": {
+    "network_services": "none",
+    "web_frameworks": "none (no FastAPI/Flask/REST/websocket)",
+    "model_runtime": "ollama (loopback only)",
+    "vector_store": "local sqlite",
+    "telemetry": "none"
+  },
+  "platform": {
+    "system": "Windows",
+    "release": "10",
+    "machine": "AMD64",
+    "processor": "Intel64 Family 6 Model 198 Stepping 2, GenuineIntel",
+    "is_windows": true
+  },
+  "python": {
+    "version": "3.11.9",
+    "version_info": [
+      3,
+      11,
+      9
+    ],
+    "executable": "C:\\Users\\NIRBHAY\\Desktop\\ZEUS\\AGNI_ROG_Strix_2026-09-24_v3\\ZEUS\\.venv\\Scripts\\python.exe",
+    "implementation": "CPython",
+    "architecture": "64bit",
+    "meets_minimum": true,
+    "virtual_environment": {
+      "active": true,
+      "path": "C:\\Users\\NIRBHAY\\Desktop\\ZEUS\\AGNI_ROG_Strix_2026-09-24_v3\\ZEUS\\.venv"
+    }
+  },
+  "libraries": {
+    "installed": {
+      "Pillow": "12.3.0",
+      "PySide6": "6.11.2",
+      "faster-whisper": "1.2.1",
+      "httpx": "0.28.1",
+      "numpy": "2.4.6",
+      "opencv-python-headless": "5.0.0.93",
+      "openpyxl": "3.1.5",
+      "pandas": "3.0.6",
+      "pypdf": "6.19.0",
+      "python-docx": "1.2.0",
+      "python-pptx": "1.0.2",
+      "pyttsx3": "2.99",
+      "reportlab": "5.0.1",
+      "sounddevice": "0.5.6"
+    },
+    "missing_required": [
+      {
+        "package": "PyMuPDF",
+        "import": "fitz",
+        "severity": "required"
+      }
+    ],
+    "missing_optional": [
+      {
+        "package": "pytesseract",
+        "import": "pytesseract",
+        "severity": "optional"
+      },
+      {
+        "package": "paddleocr",
+        "import": "paddleocr",
+        "severity": "optional"
+      },
+      {
+        "package": "paddlepaddle",
+        "import": "paddle",
+        "severity": "optional"
+      },
+      {
+        "package": "easyocr",
+        "import": "easyocr",
+        "severity": "optional"
+      },
+      {
+        "package": "unstructured",
+        "import": "unstructured",
+        "severity": "optional"
+      },
+      {
+        "package": "chromadb",
+        "import": "chromadb",
+        "severity": "optional"
+      },
+      {
+        "package": "FlagEmbedding",
+        "import": "FlagEmbedding",
+        "severity": "optional"
+      },
+      {
+        "package": "sentence-transformers",
+        "import": "sentence_transformers",
+        "severity": "optional"
+      }
+    ]
+  },
+  "ocr_engines": {
+    "tesseract": {
+      "python_binding": false,
+      "binary": {
+        "available": true,
+        "path": "C:\\Program Files\\Tesseract-OCR\\tesseract.exe",
+        "version": "tesseract v5.4.0.20240606",
+        "languages": [
+          "eng",
+          "osd"
+        ]
+      },
+      "usable": false,
+      "role": "reliable local OCR fallback"
+    },
+    "paddleocr": {
+      "python_binding": false,
+      "backend_installed": false,
+      "models": {
+        "model_cache_present": false,
+        "locations": [],
+        "note": "PaddleOCR must have its models cached locally before the machine is disconnected."
+      },
+      "usable": false,
+      "role": "document OCR + layout/structure analysis"
+    },
+    "easyocr": {
+      "python_binding": false,
+      "usable": false,
+      "role": "existing ZEUS screen OCR (preserved, unchanged)"
+    },
+    "available": []
+  },
+  "document_processors": {
+    "PyMuPDF": null,
+    "pypdf": "6.19.0",
+    "python-docx": "1.2.0",
+    "openpyxl": "3.1.5",
+    "python-pptx": "1.0.2",
+    "pandas": "3.0.6",
+    "unstructured": null
+  },
+  "image_processing": {
+    "Pillow": "12.3.0",
+    "opencv-python-headless": "5.0.0.93",
+    "numpy": "2.4.6"
+  },
+  "ollama": {
+    "binary_on_path": true,
+    "daemon_reachable": true,
+    "host": "http://127.0.0.1:11434",
+    "models": [
+      "aya:8b",
+      "bge-m3:latest",
+      "codegemma:7b-instruct",
+      "deepseek-coder-v2:latest",
+      "deepseek-r1:7b",
+      "deepseek-r1:8b",
+      "gemma2:2b",
+      "granite4.1-guardian:8b",
+      "hermes3:3b",
+      "mistral:latest",
+      "moondream:latest",
+      "phi3.5:latest",
+      "qwen2.5-coder:7b",
+      "qwen2.5:0.5b",
+      "qwen2.5:3b",
+      "qwen2.5:3b-instruct-q4_K_M",
+      "qwen2.5vl:3b",
+      "qwen3-vl:8b",
+      "qwen3:1.7b",
+      "qwen3:4b",
+      "qwen3:8b"
+    ],
+    "error": null
+  },
+  "models": {
+    "vision_models": [
+      "moondream:latest",
+      "qwen2.5vl:3b"
+    ],
+    "embedding_models": [
+      "bge-m3:latest"
+    ],
+    "reranker_models": [],
+    "text_models": [
+      "aya:8b",
+      "codegemma:7b-instruct",
+      "deepseek-coder-v2:latest",
+      "deepseek-r1:7b",
+      "deepseek-r1:8b",
+      "gemma2:2b",
+      "granite4.1-guardian:8b",
+      "hermes3:3b",
+      "mistral:latest",
+      "phi3.5:latest",
+      "qwen2.5-coder:7b",
+      "qwen2.5:0.5b",
+      "qwen2.5:3b",
+      "qwen2.5:3b-instruct-q4_K_M",
+      "qwen3-vl:8b",
+      "qwen3:1.7b",
+      "qwen3:4b",
+      "qwen3:8b"
+    ]
+  },
+  "embedding": {
+    "embedding_model": "bge-m3:latest",
+    "embedding_available": true,
+    "embedding_health": "ready",
+    "embedding_detail": "bge-m3:latest returned a 1024-dimension vector",
+    "embedding_dimension": 1024,
+    "embedding_candidates": [
+      "bge-m3:latest"
+    ],
+    "reranker_model": "deterministic hybrid scorer (dense score + lexical overlap + taxonomy terms + equipment tag match + element type + OCR confidence). No cross-encoder model directory found at models/reranker.",
+    "reranker_available": true,
+    "reranker_health": "degraded",
+    "reranker_detail": "hybrid_local ranked 2 passages; no cross-encoder present, hybrid local scoring in use",
+    "reranker_candidates": [],
+    "local_cross_encoder": {
+      "FlagEmbedding": false,
+      "sentence_transformers": false,
+      "local_model_dir": "C:\\Users\\NIRBHAY\\Desktop\\ZEUS\\AGNI_ROG_Strix_2026-09-24_v3\\ZEUS\\models\\reranker",
+      "local_model_present": false
+    }
+  },
+  "vector_store": {
+    "type": "sqlite (local file, in-process)",
+    "path": "C:\\Users\\NIRBHAY\\AppData\\Local\\Temp\\agni_tests_meicgywb\\data\\medha.db",
+    "exists": true,
+    "size_bytes": 212992,
+    "server_required": false,
+    "chromadb_installed": false,
+    "chromadb_used": false,
+    "industrial_kb": {
+      "documents": 0,
+      "chunks": 0,
+      "embedded_chunks": 0,
+      "assets": 0,
+      "by_class": {},
+      "by_type": {}
+    },
+    "error": null
+  },
+  "existing_medha": {
+    "entry_point": {
+      "main.py": true,
+      "launcher.py": true
+    },
+    "ui": {
+      "framework": "PySide6 (native desktop, no browser)",
+      "dashboard": false,
+      "hud_widgets": false,
+      "pyside6_installed": true
+    },
+    "voice": {
+      "tts_module": true,
+      "tts_engine": "Chatterbox TTS (local weights, models/chatterbox)",
+      "tts_fallback": "pyttsx3 (offline SAPI on Windows)",
+      "pyttsx3_installed": true,
+      "chatterbox_engine": true,
+      "chatterbox_installed": false,
+      "stt_module": true,
+      "stt_engine": "faster-whisper (local weights, models/whisper)",
+      "faster_whisper_installed": true,
+      "offline_enforcement": true,
+      "note": "Voice is one layer over the existing command processor and memory - no cloud speech services, no separate voice memory."
+    },
+    "memory": {
+      "database": true,
+      "memory_manager": true,
+      "store": "sqlite (database/medha.db)"
+    },
+    "model_layer": {
+      "ollama_client": true,
+      "model_router": true,
+      "model_activity": true
+    },
+    "orchestration": {
+      "decision_engine": true,
+      "planner": true,
+      "task_manager": true,
+      "security_manager": true
+    },
+    "tools": {
+      "registry": true,
+      "count": 244,
+      "names": [
+        "acknowledge_alert",
+        "add_employee",
+        "add_event",
+        "add_file_to_vault",
+        "add_note",
+        "add_todo",
+        "agenda_for",
+        "agent_roster",
+        "ambiguous_entities",
+        "analyze_image",
+        "analyze_spreadsheet",
+        "apply_wfp_firewall",
+        "approval_note",
+        "approve_permit",
+        "ask_industrial_kb",
+        "ask_knowledge_base",
+        "automation_overview",
+        "calculate",
+        "cancel_reminder",
+        "cancel_shutdown",
+        "cancel_task",
+        "capability_report",
+        "classify_industrial_document",
+        "clear_industrial_knowledge_base",
+        "clear_knowledge_base",
+        "close_application",
+        "close_window",
+        "company_intelligence",
+        "company_registers",
+        "company_timeline",
+        "company_year_detail",
+        "compare_document_revisions",
+        "complete_todo",
+        "convert_file",
+        "copy_file",
+        "create_analysis_artifact",
+        "create_folder",
+        "create_presentation",
+        "create_schedule",
+        "create_spreadsheet",
+        "delete_event",
+        "delete_file",
+        "delete_note",
+        "delete_todo",
+        "department_roster",
+        "describe_agent",
+        "disengage_lockdown",
+        "document_provenance",
+        "engage_lockdown",
+        "engineering_calculate",
+        "engineering_formula",
+        "equipment_details",
+        "equipment_presentation",
+        "equipment_trend",
+        "evaluate_company_rag",
+        "executive_briefing_pack",
+        "executive_presentation",
+        "executive_report",
+        "executive_workbook",
+        "explain_last_run",
+        "export_plant_data",
+        "export_vault_file",
+        "extract_industrial_document",
+        "face_status",
+        "find_employee",
+        "find_generated_document",
+        "find_part",
+        "find_sop",
+        "firewall_status",
+        "focus_window",
+        "forget_document",
+        "forget_fact",
+        "forget_industrial_document",
+        "get_analysis",
+        "get_battery",
+        "get_clipboard",
+        "get_cpu_usage",
+        "get_disk_usage",
+        "get_memory_usage",
+        "get_system_info",
+        "get_time",
+        "hardware_profile",
+        "hermes_context",
+        "hermes_context_preview",
+        "hotkey",
+        "import_readings_csv",
+        "index_file",
+        "index_folder",
+        "index_my_documents",
+        "industrial_agent_status",
+        "industrial_model_health",
+        "industrial_status",
+        "industrial_term",
+        "ingest_company_directory",
+        "ingest_company_document",
+        "ingest_industrial_document",
+        "ingest_industrial_folder",
+        "ingest_industrial_knowledge_corpus",
+        "inspection_history",
+        "inventory_summary",
+        "knowledge_coverage",
+        "knowledge_fabric_status",
+        "knowledge_overview",
+        "knowledge_stats",
+        "list_agents",
+        "list_analyses",
+        "list_artifacts",
+        "list_employees",
+        "list_engineering_formulas",
+        "list_equipment",
+        "list_events",
+        "list_generated_documents",
+        "list_industrial_agents",
+        "list_industrial_documents",
+        "list_isolations",
+        "list_knowledge_sources",
+        "list_meetings",
+        "list_memories",
+        "list_notes",
+        "list_permits",
+        "list_plant_alerts",
+        "list_plant_datasets",
+        "list_running_apps",
+        "list_specialists",
+        "list_todos",
+        "list_users",
+        "list_vault_files",
+        "list_windows",
+        "lock_screen",
+        "lock_vault",
+        "log_inspection",
+        "log_maintenance",
+        "maintenance_due",
+        "maintenance_history",
+        "maintenance_report",
+        "maximize_window",
+        "media_control",
+        "minimize_window",
+        "model_integrity_report",
+        "model_roles",
+        "model_routing",
+        "model_verification",
+        "monitoring_status",
+        "mouse_click",
+        "mouse_move",
+        "move_file",
+        "network_status",
+        "open_and_type",
+        "open_application",
+        "open_browser",
+        "open_document",
+        "open_file_explorer",
+        "open_settings",
+        "open_vault_file",
+        "operations_presentation",
+        "overdue_tasks",
+        "pin_trusted_models",
+        "pipeline_status",
+        "plant_data_sources",
+        "plant_snapshot",
+        "plant_status",
+        "plant_telemetry",
+        "press_key",
+        "process_meeting_audio",
+        "process_meeting_transcript",
+        "productivity_snapshot",
+        "rag_write_document",
+        "raise_plant_alert",
+        "read_file",
+        "read_screen",
+        "rebuild_knowledge_graph",
+        "record_isolation",
+        "reembed_company_knowledge",
+        "register_equipment",
+        "register_face",
+        "reindex_company_knowledge",
+        "release_models",
+        "remember_fact",
+        "remind_me",
+        "remove_artifact_record",
+        "remove_company_document",
+        "remove_employee",
+        "remove_face",
+        "remove_vault_file",
+        "remove_wfp_firewall",
+        "request_permit",
+        "resolve_alert",
+        "restart_pc",
+        "reveal_artifact",
+        "run_command",
+        "run_diagnostics",
+        "run_industrial_agent",
+        "run_python_sandboxed",
+        "safety_report",
+        "safety_status",
+        "schedule_maintenance",
+        "schedule_meeting",
+        "search_company_documents",
+        "search_files",
+        "search_industrial_evidence",
+        "search_knowledge",
+        "security_events",
+        "security_status",
+        "seed_industrial_demo_data",
+        "set_clipboard",
+        "set_isolation_state",
+        "set_network_mode",
+        "set_user_departments",
+        "set_user_role",
+        "show_audit_log",
+        "show_evidence",
+        "shutdown_pc",
+        "solve_equation",
+        "sovereignty_report",
+        "spreadsheet_to_presentation",
+        "spreadsheet_to_report",
+        "stop_watching_folder",
+        "system_information",
+        "take_screenshot",
+        "type_text",
+        "uncomplete_todo",
+        "unit_convert",
+        "update_employee",
+        "update_entity",
+        "update_note",
+        "update_schedule",
+        "update_stock",
+        "update_todo",
+        "validation_report",
+        "vault_audit_log",
+        "vault_overview",
+        "vault_snapshot",
+        "vault_status",
+        "verify_artifact",
+        "verify_audit_chain",
+        "verify_models",
+        "verify_my_face",
+        "view_logs",
+        "watch_folder",
+        "wfp_blocked_connections",
+        "wfp_firewall_status",
+        "whisper_status",
+        "write_document",
+        "write_file"
+      ]
+    },
+    "agents": {
+      "registry": true,
+      "ids": [
+        "automation",
+        "background",
+        "calculation",
+        "conversation",
+        "document_generation",
+        "engineering",
+        "file",
+        "industrial_coding",
+        "industrial_document",
+        "inspection",
+        "knowledge",
+        "math",
+        "operations",
+        "orchestrator",
+        "planning",
+        "productivity",
+        "report_approval",
+        "research",
+        "safety",
+        "system",
+        "vision"
+      ]
+    },
+    "file_document_manager": {
+      "file_tools": [
+        "search_files",
+        "read_file",
+        "write_file",
+        "copy_file",
+        "move_file",
+        "create_folder",
+        "delete_file",
+        "convert_file"
+      ],
+      "generation_tools": [
+        "write_document",
+        "create_presentation",
+        "create_spreadsheet"
+      ]
+    },
+    "startup_scripts": {
+      "START.bat": true,
+      "FIX_PACKAGES.bat": false,
+      "BUILD_EXE.bat": false,
+      "start_medha_industrial.bat": false
+    },
+    "config": {
+      "config.ini": true,
+      "industrial_taxonomy": true,
+      "industrial_schemas": true,
+      "industrial_model_registry": true
+    }
+  },
+  "knowledge": {
+    "corpus_root": "C:\\Users\\NIRBHAY\\Desktop\\ZEUS\\AGNI_ROG_Strix_2026-09-24_v3\\ZEUS\\knowledge\\industrial_history",
+    "corpus_present": true,
+    "domains": [
+      {
+        "domain": "automation_digitalization",
+        "files": 3
+      },
+      {
+        "domain": "boilers",
+        "files": 1
+      },
+      {
+        "domain": "compressors",
+        "files": 1
+      },
+      {
+        "domain": "corrosion",
+        "files": 1
+      },
+      {
+        "domain": "electrical_engineering",
+        "files": 1
+      },
+      {
+        "domain": "emergency_response",
+        "files": 1
+      },
+      {
+        "domain": "engineering_standards",
+        "files": 1
+      },
+      {
+        "domain": "heat_exchangers",
+        "files": 1
+      },
+      {
+        "domain": "hse",
+        "files": 1
+      },
+      {
+        "domain": "industrial_incidents",
+        "files": 1
+      },
+      {
+        "domain": "industrial_manufacturing",
+        "files": 1
+      },
+      {
+        "domain": "inspection",
+        "files": 1
+      },
+      {
+        "domain": "instrumentation_control",
+        "files": 1
+      },
+      {
+        "domain": "lessons_learned",
+        "files": 1
+      },
+      {
+        "domain": "maintenance",
+        "files": 2
+      },
+      {
+        "domain": "mechanical_engineering",
+        "files": 1
+      },
+      {
+        "domain": "oil_gas",
+        "files": 1
+      },
+      {
+        "domain": "petrochemicals",
+        "files": 1
+      },
+      {
+        "domain": "petroleum_refining",
+        "files": 1
+      },
+      {
+        "domain": "piping",
+        "files": 1
+      },
+      {
+        "domain": "process_engineering",
+        "files": 1
+      },
+      {
+        "domain": "process_safety",
+        "files": 1
+      },
+      {
+        "domain": "project_management",
+        "files": 1
+      },
+      {
+        "domain": "pumps",
+        "files": 1
+      },
+      {
+        "domain": "quality",
+        "files": 1
+      },
+      {
+        "domain": "reliability",
+        "files": 1
+      },
+      {
+        "domain": "rotating_equipment",
+        "files": 1
+      },
+      {
+        "domain": "static_equipment",
+        "files": 1
+      },
+      {
+        "domain": "utilities",
+        "files": 1
+      },
+      {
+        "domain": "valves",
+        "files": 1
+      }
+    ],
+    "domain_count": 30,
+    "knowledge_sources_dir": "C:\\Users\\NIRBHAY\\Desktop\\ZEUS\\AGNI_ROG_Strix_2026-09-24_v3\\ZEUS\\knowledge_sources",
+    "knowledge_sources_present": true,
+    "knowledge_source_files": 1
+  },
+  "missing_dependencies": [
+    {
+      "package": "PyMuPDF",
+      "import": "fitz",
+      "severity": "required"
+    },
+    {
+      "package": "pytesseract",
+      "import": "pytesseract",
+      "severity": "optional"
+    },
+    {
+      "package": "paddleocr",
+      "import": "paddleocr",
+      "severity": "optional"
+    },
+    {
+      "package": "paddlepaddle",
+      "import": "paddle",
+      "severity": "optional"
+    },
+    {
+      "package": "easyocr",
+      "import": "easyocr",
+      "severity": "optional"
+    },
+    {
+      "package": "unstructured",
+      "import": "unstructured",
+      "severity": "optional"
+    },
+    {
+      "package": "chromadb",
+      "import": "chromadb",
+      "severity": "optional"
+    },
+    {
+      "package": "FlagEmbedding",
+      "import": "FlagEmbedding",
+      "severity": "optional"
+    },
+    {
+      "package": "sentence-transformers",
+      "import": "sentence_transformers",
+      "severity": "optional"
+    }
+  ],
+  "readiness": {
+    "status": "NOT_READY",
+    "blockers": [
+      "missing required package: PyMuPDF",
+      "no OCR engine usable (need Tesseract or PaddleOCR or EasyOCR)"
+    ],
+    "warnings": [
+      "PaddleOCR not usable - document layout/structure analysis will be limited to the heuristic layout analyser"
+    ]
+  },
+  "environment_status": "NOT_READY"
+}

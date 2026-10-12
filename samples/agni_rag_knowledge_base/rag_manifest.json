@@ -1,0 +1,66 @@
+{
+  "name": "AGNI_Industrial_RAG_Knowledge_Base",
+  "version": "1.0.0",
+  "description": "Sample industrial knowledge base for AGNI RAG: leases, property, employees, tax, vendors. For demo/SIH \u2013 not real legal filings.",
+  "collections": [
+    {
+      "id": "leases",
+      "paths": [
+        "excel/01_Lease_Register_Master.xlsx",
+        "word_md/lease_agreement_template.md",
+        "pptx_md/Lease_Portfolio_Review.md"
+      ]
+    },
+    {
+      "id": "property",
+      "paths": [
+        "excel/02_Property_Asset_Master.xlsx",
+        "word_md/property_title_summary.md"
+      ]
+    },
+    {
+      "id": "hr_employee",
+      "paths": [
+        "excel/03_Employee_HR_Master.xlsx",
+        "word_md/employee_handbook_extract.md",
+        "word_md/posh_policy_summary.md",
+        "pptx_md/HR_Policy_Map.md"
+      ]
+    },
+    {
+      "id": "tax",
+      "paths": [
+        "excel/04_Tax_Compliance_Master.xlsx",
+        "word_md/gst_sop.md",
+        "word_md/tds_sop.md",
+        "pptx_md/Tax_Compliance_Dashboard.md"
+      ]
+    },
+    {
+      "id": "vendors",
+      "paths": [
+        "excel/05_Vendor_Contracts_Register.xlsx",
+        "word_md/vendor_msa_clauses.md"
+      ]
+    },
+    {
+      "id": "ehs",
+      "paths": [
+        "word_md/ehs_safety_brief.md"
+      ]
+    }
+  ],
+  "ingest_hints": {
+    "chunk_size": 800,
+    "chunk_overlap": 120,
+    "metadata_keys": [
+      "collection",
+      "doc_type",
+      "entity",
+      "source_path"
+    ],
+    "excel": "Convert each sheet row to text block: 'Column: value' joined; prefix sheet name.",
+    "markdown": "Split by ## headings; keep heading path as metadata."
+  },
+  "disclaimer": "All data is fictional and for RAG system testing only."
+}

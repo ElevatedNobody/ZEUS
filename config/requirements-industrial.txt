@@ -1,0 +1,64 @@
+# ZEUS - Industrial Workbench dependencies (SIH26117)
+# ADDITIVE to requirements.txt - it is not replaced. Install with:
+#     python scripts/setup_industrial_env.py
+# or directly:
+#     pip install -r requirements-industrial.txt
+#
+# Everything here runs locally. Nothing in this list starts a server, calls a
+# cloud API, or sends telemetry. There is deliberately NO FastAPI, Flask,
+# uvicorn, websocket server, remote vector database or cloud SDK.
+
+# ---------------------------------------------------------------- PDF / documents
+PyMuPDF>=1.24.0            # primary PDF engine: text, layout blocks, tables, page render
+pypdf>=4.2.0               # PDF fallback reader (already in requirements.txt)
+python-docx>=1.1.0         # DOCX read + write
+openpyxl>=3.1.2            # XLSX read + write
+python-pptx>=0.6.23        # PPTX read + write
+pandas>=2.2.0              # CSV / tabular normalisation
+numpy>=1.26.0              # vector maths for retrieval and reranking
+
+# ---------------------------------------------------------------------- imaging
+Pillow>=10.3.0             # image IO, page rendering, vision model input
+opencv-python-headless>=4.9.0   # OCR pre-processing (greyscale, denoise, threshold)
+
+# -------------------------------------------------------------------------- OCR
+pytesseract>=0.3.10        # python binding for the Tesseract ENGINE (see note below)
+# easyocr>=1.7.1           # already used by ZEUS for screen OCR - kept, not replaced
+
+# PaddleOCR: strongest document OCR + PP-Structure layout analysis.
+# Large download (paddlepaddle is several hundred MB). Install with:
+#     python scripts/setup_industrial_env.py --with-paddle --prefetch-paddle
+# The prefetch step caches its models locally so the machine can then be
+# disconnected permanently. Without PaddleOCR the pipeline falls back to
+# Tesseract plus the built-in deterministic layout analyser.
+# paddleocr>=2.7.0
+# paddlepaddle>=2.6.0
+
+# ------------------------------------------------------------------- optional
+# unstructured>=0.14.0     # local partitioning for HTML/EML/RTF/ODT/XML only.
+#                          # Used with strategy="fast" - no hosted model, no
+#                          # remote inference, analytics disabled by env var.
+# FlagEmbedding>=1.2.10    # enables the TRUE BGE cross-encoder reranker when a
+#                          # local model copy is placed in models/reranker/
+# sentence-transformers>=2.7.0   # alternative local cross-encoder runtime
+
+# ============================================================================
+# NATIVE (non-pip) COMPONENTS
+# ============================================================================
+# 1. Tesseract OCR engine  - REQUIRED for the Tesseract fallback layer.
+#    Windows: install the UB Mannheim build and tick "Add to PATH":
+#             https://github.com/UB-Mannheim/tesseract/wiki
+#    Linux:   sudo apt-get install tesseract-ocr
+#    pytesseract is only the binding; it cannot work without this binary.
+#
+# 2. Ollama                - the local model runtime, already used by ZEUS.
+#    Serves on http://localhost:11434 (loopback only).
+#
+# 3. Ollama models         - pull ONCE while connected, then never again:
+#      ollama pull bge-m3                        (embeddings - REQUIRED)
+#      ollama pull bge-reranker-v2-m3            (evidence ranking)
+#      ollama pull qwen2.5vl:3b-q4_K_M           (vision)
+#      ollama pull mistral:7b-instruct-q4_K_M    (reasoning)
+#      ollama pull qwen2.5:3b-instruct-q4_K_M    (structured extraction)
+#    ZEUS never pulls a model by itself - a missing model is reported, never
+#    silently substituted.

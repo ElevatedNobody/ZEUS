@@ -1,0 +1,41 @@
+# ZEUS - optional neural voice stack
+#
+# NOTHING here is required. ZEUS starts, runs and is fully usable without
+# any of it: with no speech provider installed it runs in TEXT MODE, and with
+# only pyttsx3 (in requirements.txt) it speaks using the voice already built
+# into the operating system.
+#
+# Install this only if you want speech INPUT, or a better speech output voice
+# than the operating system's. It is roughly 2 GB of libraries, plus model
+# weights fetched once by scripts/setup_models.py.
+#
+#     pip install -r requirements-voice.txt
+#     python scripts/setup_models.py       # once, on a machine with a network
+#
+# After that, ZEUS never contacts the network for voice again: the engines
+# load from explicit local directories under models/, `enforce_offline()` sets
+# the flags that forbid huggingface_hub from reaching out, and a model that is
+# missing is reported as missing rather than downloaded.
+
+# --- speech input (there is no zero-download option: recognisers need weights)
+# faster-whisper loads a LOCAL CTranslate2 model from models/whisper.
+faster-whisper>=1.0.0
+
+# vosk is a much smaller alternative (~50 MB a model) for constrained machines.
+vosk>=0.3.45
+
+# --- speech output, better than the OS voice
+# Chatterbox loads LOCAL checkpoints from models/chatterbox via
+# ChatterboxTTS.from_local(); from_pretrained() (which downloads) is never
+# called at runtime.
+chatterbox-tts>=0.1.1
+
+# torch is Chatterbox's runtime. On a machine with no CUDA GPU - which
+# includes the target hardware for this project - install the CPU build, which
+# is a fraction of the size:
+#     pip install torch torchaudio --index-url https://download.pytorch.org/whl/cpu
+torch>=2.0.0
+torchaudio>=2.0.0
+
+# Used ONLY by scripts/setup_models.py, at setup time, never at runtime.
+huggingface_hub>=0.23.0

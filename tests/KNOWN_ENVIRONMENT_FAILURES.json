@@ -1,0 +1,11 @@
+{
+  "tests/test_end_to_end_industrial.py::test_i2_industrial_answers_work_with_ollama_down": "requires Ollama to be STOPPED; it asserts that first, so it fails on any machine where Ollama is running. Failing before the 2026-09-25 repair.",
+  "tests/test_industrial_plant.py::test_report_works_without_a_language_model": "assumes no language model is reachable; with Ollama running the narrative IS (correctly) included. Failing before the 2026-09-25 repair.",
+  "tests/test_rag_and_vision.py::test_index_folder_reports_ollama_offline_clearly": "assumes Ollama is offline; with it running the result has no 'error' key. Failing before the 2026-09-25 repair.",
+  "tests/test_install_everything.py::test_check_never_downloads_whisper": "assumes the Whisper model is NOT downloaded; on a machine where it is, --check correctly reports ok=True. Failing before the 2026-09-25 repair.",
+  "tests/test_voice_integration.py::test_model_paths_resolve_absolutely_regardless_of_cwd": "POSIX path in the test ('/tmp/...'): on Windows it resolves to 'C:/tmp/...'. Failing before the 2026-09-25 repair.",
+  "tests/test_voice_integration.py::test_whisper_loads_from_the_local_directory": "POSIX path in the test ('/tmp/...' vs 'C:\\tmp\\...' on Windows). Failing before the 2026-09-25 repair.",
+  "tests/test_voice_integration.py::test_chatterbox_loads_from_local_files_only": "POSIX path in the test ('/tmp/...' vs 'C:\\tmp\\...' on Windows). Failing before the 2026-09-25 repair.",
+  "tests/test_command_center.py::test_backdrop_keeps_the_silhouette_below_the_working_area": "UI rendering threshold: measured lightness 72 vs limit 70 on this display. Failing before the 2026-09-25 repair.",
+  "tests/test_chatterbox_voice.py::test_nothing_is_still_called_jarvis": "naming audit that scans the .venv inside the install folder (third-party packages such as networkx contain the word) and legacy JARVIS references kept in comments and in the jarvis.db -> medha.db migration. Failing before the 2026-09-25 repair."
+}

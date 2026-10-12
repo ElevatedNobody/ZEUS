@@ -1,0 +1,110 @@
+{
+  "_note": "Local gazetteer for the knowledge fabric (knowledge_fabric/entities.py). Generic petroleum / industrial vocabulary only - no real company, supplier, customer, person or site names are shipped. Add your organisation's own names under COMPANY, SUBSIDIARY, PLANT, REFINERY, LOCATION, VENDOR and CUSTOMER; each entry is either a string or {\"name\": ..., \"aliases\": [...]}. Short all-caps aliases (<= 5 letters) match case-sensitively so 'SRU' does not match 'sru' inside a word.",
+  "COMPANY": [],
+  "SUBSIDIARY": [],
+  "PLANT": [],
+  "REFINERY": [],
+  "LOCATION": [],
+  "VENDOR": [],
+  "CUSTOMER": [],
+  "DEPARTMENT": [
+    {"name": "Operations", "aliases": ["Operations Department", "Production Department"]},
+    {"name": "Maintenance", "aliases": ["Maintenance Department", "Mechanical Maintenance"]},
+    {"name": "Inspection", "aliases": ["Inspection Department", "Inspection & Corrosion"]},
+    {"name": "HSE", "aliases": ["Safety Department", "Health Safety and Environment", "Fire & Safety"]},
+    {"name": "Finance", "aliases": ["Finance Department", "Accounts", "Finance & Accounts"]},
+    {"name": "Projects", "aliases": ["Projects Department", "Project Management"]},
+    {"name": "Procurement", "aliases": ["Materials Management", "Purchase Department"]},
+    {"name": "Human Resources", "aliases": ["HR Department", "Personnel"]},
+    {"name": "Quality Control", "aliases": ["Laboratory", "QC Laboratory"]},
+    {"name": "Process Engineering", "aliases": ["Technical Services", "Process Technology"]},
+    {"name": "Instrumentation", "aliases": ["Instrumentation Department", "Control Systems"]},
+    {"name": "Electrical", "aliases": ["Electrical Department", "Electrical Maintenance"]},
+    {"name": "Information Technology", "aliases": ["IT Department", "Systems Department"]}
+  ],
+  "UNIT": [
+    {"name": "Crude Distillation Unit", "aliases": ["CDU", "Atmospheric Distillation Unit"]},
+    {"name": "Vacuum Distillation Unit", "aliases": ["VDU"]},
+    {"name": "Fluid Catalytic Cracking Unit", "aliases": ["FCCU", "FCC Unit", "Cat Cracker"]},
+    {"name": "Hydrocracker Unit", "aliases": ["HCU", "Hydrocracker"]},
+    {"name": "Hydrogen Generation Unit", "aliases": ["HGU", "Hydrogen Unit", "Hydrogen Plant"]},
+    {"name": "Sulphur Recovery Unit", "aliases": ["SRU", "Sulfur Recovery Unit"]},
+    {"name": "Diesel Hydrodesulphurisation Unit", "aliases": ["DHDS", "DHDT"]},
+    {"name": "Naphtha Hydrotreater", "aliases": ["NHT"]},
+    {"name": "Continuous Catalytic Reformer", "aliases": ["CCR", "Catalytic Reformer"]},
+    {"name": "Delayed Coker Unit", "aliases": ["DCU", "Coker"]},
+    {"name": "Visbreaker Unit", "aliases": ["VBU", "Visbreaker"]},
+    {"name": "Amine Regeneration Unit", "aliases": ["ARU"]},
+    {"name": "Sour Water Stripper", "aliases": ["SWS"]},
+    {"name": "Captive Power Plant", "aliases": ["CPP"]},
+    {"name": "Effluent Treatment Plant", "aliases": ["ETP"]}
+  ],
+  "PROCESS": [
+    "distillation", "catalytic cracking", "hydrocracking", "hydrotreating", "reforming",
+    "coking", "desulphurisation", "blending", "fractionation", "sweetening"
+  ],
+  "PRODUCT": [
+    {"name": "LPG", "aliases": ["Liquefied Petroleum Gas"]},
+    {"name": "Naphtha"},
+    {"name": "Motor Spirit", "aliases": ["MS", "Petrol", "Gasoline"]},
+    {"name": "ATF", "aliases": ["Aviation Turbine Fuel", "Jet Fuel"]},
+    {"name": "Kerosene", "aliases": ["SKO"]},
+    {"name": "High Speed Diesel", "aliases": ["HSD", "Diesel", "Gas Oil"]},
+    {"name": "Fuel Oil", "aliases": ["Furnace Oil", "FO"]},
+    {"name": "Bitumen"},
+    {"name": "Petroleum Coke", "aliases": ["Petcoke"]},
+    {"name": "Sulphur", "aliases": ["Sulfur"]},
+    {"name": "Polypropylene"},
+    {"name": "Benzene"}
+  ],
+  "FINANCIAL_METRIC": [
+    {"name": "Revenue", "aliases": ["Turnover", "Revenue from Operations", "Net Sales"]},
+    {"name": "Net Profit", "aliases": ["PAT", "Profit After Tax", "Net Income"]},
+    {"name": "Net Loss"},
+    {"name": "Profit Before Tax", "aliases": ["PBT"]},
+    {"name": "EBITDA"},
+    {"name": "Gross Refining Margin", "aliases": ["GRM"]},
+    {"name": "Operating Cost", "aliases": ["Operating Expenses", "OPEX"]},
+    {"name": "Maintenance Cost", "aliases": ["Maintenance Expenditure", "Maintenance Expense"]},
+    {"name": "Capital Expenditure", "aliases": ["CAPEX", "Capex"]},
+    {"name": "Crude Cost", "aliases": ["Cost of Crude"]},
+    {"name": "Fuel and Loss", "aliases": ["Fuel & Loss"]},
+    {"name": "Working Capital"},
+    {"name": "Interest Cost", "aliases": ["Finance Cost"]},
+    {"name": "Debt", "aliases": ["Borrowings"]}
+  ],
+  "KPI": [
+    {"name": "Crude Throughput", "aliases": ["Throughput", "Crude Processed"]},
+    {"name": "Production"},
+    {"name": "Capacity Utilisation", "aliases": ["Capacity Utilization"]},
+    {"name": "Availability", "aliases": ["Plant Availability", "Mechanical Availability"]},
+    {"name": "MTBF", "aliases": ["Mean Time Between Failures"]},
+    {"name": "MTTR", "aliases": ["Mean Time To Repair"]},
+    {"name": "OEE", "aliases": ["Overall Equipment Effectiveness"]},
+    {"name": "Energy Intensity Index", "aliases": ["EII"]},
+    {"name": "Specific Energy Consumption", "aliases": ["SEC"]},
+    {"name": "Downtime", "aliases": ["Unplanned Downtime"]},
+    {"name": "Distillate Yield"},
+    {"name": "Lost Time Injury", "aliases": ["LTI"]},
+    {"name": "Total Recordable Incident Rate", "aliases": ["TRIR"]}
+  ],
+  "PERSON_ROLE": [
+    "Plant Manager", "Maintenance Manager", "Operations Manager", "Chief Engineer",
+    "Safety Officer", "HSE Manager", "Inspection Engineer", "Process Engineer",
+    "Reliability Engineer", "Finance Controller", "Chief Financial Officer", "Managing Director",
+    "Project Manager", "Shift In-charge", "Refinery Head"
+  ],
+  "MAINTENANCE": [
+    "turnaround", "planned shutdown", "overhaul", "preventive maintenance",
+    "predictive maintenance", "breakdown maintenance", "condition monitoring"
+  ],
+  "INSPECTION": [
+    {"name": "Risk Based Inspection", "aliases": ["RBI"]},
+    {"name": "Non-Destructive Testing", "aliases": ["NDT"]},
+    "thickness survey", "ultrasonic testing", "radiography", "hydrotest"
+  ],
+  "REPORT": [
+    "annual report", "audit report", "inspection report", "maintenance report",
+    "incident report", "MIS report", "board report"
+  ]
+}

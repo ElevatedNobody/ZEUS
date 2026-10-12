@@ -1,0 +1,75 @@
+# ZEUS - core runtime dependencies (Python 3.11 or 3.12, Windows 10/11)
+#
+# Installed into the project's own .venv by SETUP_AGNI.bat. Internet is needed
+# for installation only; nothing here contacts a network service at runtime.
+#
+# Deliberately NOT here:
+#   * the neural (Chatterbox) expressive voice stack - it lives in its own
+#     environment (see requirements-voice.txt), because its pinned versions
+#     would otherwise break the rest of the application (they did: a
+#     mismatched vision library made EasyOCR unimportable).
+#   * cloud SDKs of any kind (openai, anthropic, google-*) - tests fail the build
+#     if one is imported.
+#   * chromadb, selenium, webdriver-manager - unused, and chromadb ships
+#     telemetry.
+
+# --- runtime basics
+psutil>=5.9.0
+httpx>=0.27.0
+requests>=2.31.0          # used by the installer's readiness checks only
+loguru>=0.7.2
+python-dotenv>=1.0.0
+watchdog>=4.0.0
+
+# --- desktop UI (PySide6 includes QtWebEngine, which hosts the ZEUS interface
+#     in-process - no web server, no browser)
+PySide6>=6.7.0,<6.12
+
+# --- security
+argon2-cffi>=23.1.0
+bcrypt>=4.1.0
+cryptography>=42.0.0
+
+# --- documents and data
+numpy>=1.26.0
+pandas>=2.2.0
+openpyxl>=3.1.2
+python-docx>=1.1.0
+python-pptx>=0.6.23
+reportlab>=4.2.0
+pypdf>=4.2.0
+PyMuPDF>=1.24.0
+Pillow>=10.3.0
+
+# --- deterministic engineering maths (the model explains, this computes)
+sympy>=1.12
+scipy>=1.11
+
+# --- OCR: RapidOCR runs PP-OCR models through ONNX Runtime. The models ship
+#     inside the wheel, so it works offline from the first run and needs no
+#     GPU framework.
+rapidocr-onnxruntime>=1.3.24; python_version < "3.13"
+# rapidocr-onnxruntime stops at Python 3.12; its successor ships the same
+# offline ONNX models and runs on 3.13+. ocr_engines.py accepts either.
+rapidocr>=3.0; python_version >= "3.13"
+onnxruntime>=1.17.0
+# --- face login (InsightFace, vendored in third_party/insightface). Optional:
+#     if these do not install, ZEUS runs and face login reports why it is off.
+onnx>=1.13
+scikit-image>=0.21
+tqdm>=4.60
+opencv-python-headless>=4.9.0
+
+# --- voice (small, local). Speech OUTPUT falls back to the Windows voice
+#     (pyttsx3). Speech INPUT (the Whisper recogniser) is optional and lives in
+#     requirements-voice.txt; SETUP_AGNI.bat installs it with the model sized
+#     for this machine and proves which device it runs on.
+sounddevice>=0.4.6
+soundfile>=0.12.1
+pyttsx3>=2.90
+
+# --- desktop automation
+pyautogui>=0.9.54
+pygetwindow>=0.0.9
+pyperclip>=1.8.2
+pywin32>=306; sys_platform == 'win32'

@@ -1,0 +1,8 @@
+# SAMPLE DATA - illustrative past projects for the DEMO scenario; not company records.
+project,code,activity,category,unit,quantity,planned duration,actual start,actual finish,contractor,location,conditions,blockers,evidence
+NH-44 Package 2 (SAMPLE),P09-CON,Pier concreting - Pier P09,concreting,m3,176,2,2024-08-12,2024-08-14,Vasundhara Infra Ltd (SAMPLE),Km 88,monsoon,rain,6
+NH-44 Package 2 (SAMPLE),P10-CON,Pier concreting - Pier P10,concreting,m3,176,2,2024-08-20,2024-08-21,Vasundhara Infra Ltd (SAMPLE),Km 88,monsoon,,4
+Expressway Pkg 5 (SAMPLE),P21-CON,Pier concreting - Pier P21,concreting,m3,190,2,2023-11-03,2023-11-06,Kaveri Buildcon (SAMPLE),Km 41,post-monsoon,cement supply,5
+Expressway Pkg 5 (SAMPLE),P22-CON,Pier concreting - Pier P22,concreting,m3,190,2,2023-11-10,2023-11-11,Kaveri Buildcon (SAMPLE),Km 41,post-monsoon,,3
+SH-17 Bridge (SAMPLE),P05-EXC,Foundation excavation - Pier P05,excavation,m3,400,5,2022-03-01,2022-03-06,Narmada Constructions (SAMPLE),Km 7,summer,,2
+SH-17 Bridge (SAMPLE),P05-CAP,Pier cap - Pier P05,concreting,m3,58,5,2022-03-20,2022-03-26,Narmada Constructions (SAMPLE),Km 7,summer,shuttering shortage,3

@@ -1,0 +1,12 @@
+# ZEUS - development / verification dependencies.
+#
+# The regression suite (tests/, run by TEST_AGNI.bat all / regression) needs
+# pytest. Not needed to RUN ZEUS. Install into ZEUS's own interpreter:
+#     .venv\Scripts\python.exe -m pip install -r requirements-dev.txt
+# (pip is blocked while the ZEUS sovereign firewall is applied - run
+#  FIREWALL_AGNI.bat remove first, and FIREWALL_AGNI.bat apply afterwards.)
+pytest>=8.0
+pytest-timeout>=2.3
+# tests/e2e (the real ZEUS window, driven over Chromium's debugging protocol;
+# opt-in: set AGNI_RUN_E2E=1)
+websocket-client>=1.6

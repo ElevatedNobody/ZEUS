@@ -1,0 +1,127 @@
+{
+  "_note": "Practice library for knowledge_fabric/reasoning.py. Generic, widely used industrial / refinery improvement actions - NOT company facts. Each action is matched to a driver that the company's own evidence supports; its expected impact is described qualitatively and must be quantified from the company's data (field data_required). Edit freely: add your organisation's standard actions, owners and review cadences.",
+  "drivers": {
+    "maintenance_cost": {
+      "match": ["maintenance cost", "maintenance expenditure", "repair", "spares", "breakdown", "failure", "bearing", "seal", "cavitation", "corrosion", "vibration"],
+      "label": "rising maintenance cost / repeated equipment failures",
+      "actions": [
+        {"action": "Rank equipment by maintenance cost over the analysis period (Pareto) and run a formal root-cause analysis on every repeat failure among the top ten",
+         "owner": "Reliability Engineer", "timeline": "0-3 months", "dependencies": ["work-order history with equipment tags", "failure codes"],
+         "cost_category": "OPEX - low", "expected_impact": "fewer repeat failures on the highest-cost equipment; lower corrective maintenance spend",
+         "risk": "RCA findings not closed out; failure coding too poor to rank reliably", "kpi": "maintenance cost per unit of throughput; repeat-failure count",
+         "data_required": "work orders, cost per work order, failure mode per equipment tag", "success_condition": "repeat failures on the top-ten list reduced quarter on quarter for two consecutive quarters",
+         "monitoring_frequency": "monthly"},
+        {"action": "Move critical rotating equipment from breakdown to condition-based maintenance (vibration, oil analysis, thermography) with defined alarm limits",
+         "owner": "Maintenance Manager", "timeline": "3-12 months", "dependencies": ["criticality ranking", "condition-monitoring instruments or service"],
+         "cost_category": "OPEX - medium", "expected_impact": "breakdowns caught earlier; planned instead of emergency repairs",
+         "risk": "alarms ignored without a response procedure", "kpi": "share of planned vs unplanned work orders; MTBF of critical equipment",
+         "data_required": "equipment criticality list, historical MTBF", "success_condition": "planned work share rising and MTBF of critical equipment improving over two quarters",
+         "monitoring_frequency": "monthly"},
+        {"action": "Review spares inventory: remove slow-moving stock, set min/max levels for critical spares, renegotiate high-value spares contracts",
+         "owner": "Procurement Manager", "timeline": "3-6 months", "dependencies": ["spares consumption history", "criticality list"],
+         "cost_category": "OPEX - low (working-capital release)", "expected_impact": "lower spares holding cost without stock-outs on critical items",
+         "risk": "stock-out of a critical spare", "kpi": "spares inventory value; critical-spare stock-outs",
+         "data_required": "inventory register with consumption per item", "success_condition": "inventory value down with zero critical stock-outs",
+         "monitoring_frequency": "quarterly"}
+      ]
+    },
+    "downtime": {
+      "match": ["downtime", "shutdown", "outage", "trip", "availability", "unplanned", "slowdown", "turnaround"],
+      "label": "unplanned downtime / low availability",
+      "actions": [
+        {"action": "Run a bad-actor elimination programme on the units and equipment with the most unplanned downtime hours",
+         "owner": "Operations Manager", "timeline": "0-6 months", "dependencies": ["downtime log with cause codes"],
+         "cost_category": "OPEX - low", "expected_impact": "recovered production hours on the worst performers",
+         "risk": "downtime causes recorded inconsistently", "kpi": "unplanned downtime hours; mechanical availability",
+         "data_required": "downtime events with duration and cause per unit", "success_condition": "unplanned downtime on bad actors reduced for two consecutive quarters",
+         "monitoring_frequency": "weekly"},
+        {"action": "Optimise turnaround scope and duration using risk-based inspection results",
+         "owner": "Turnaround Manager", "timeline": "12-24 months", "dependencies": ["RBI assessments", "previous turnaround records"],
+         "cost_category": "OPEX - medium", "expected_impact": "shorter planned outages and fewer post-turnaround failures",
+         "risk": "scope cut on equipment that later fails", "kpi": "turnaround duration; post-start-up failures",
+         "data_required": "RBI results, turnaround work lists and durations", "success_condition": "next turnaround on schedule with no scope-related failures in six months",
+         "monitoring_frequency": "per turnaround"}
+      ]
+    },
+    "energy": {
+      "match": ["energy", "fuel", "steam", "power", "furnace", "eii", "fuel and loss", "specific energy"],
+      "label": "high energy consumption / fuel and loss",
+      "actions": [
+        {"action": "Commission an energy audit (furnaces, steam system, steam traps, flare) and implement the no-cost and low-cost measures first",
+         "owner": "Process Engineering Manager", "timeline": "0-6 months", "dependencies": ["metered fuel, steam and power data"],
+         "cost_category": "OPEX - low", "expected_impact": "lower fuel and loss and energy intensity",
+         "risk": "savings not verified because metering is missing", "kpi": "Energy Intensity Index; fuel and loss %",
+         "data_required": "fuel, steam and power consumption per unit", "success_condition": "EII and fuel & loss below the audited baseline for two quarters",
+         "monitoring_frequency": "monthly"}
+      ]
+    },
+    "margin": {
+      "match": ["grm", "margin", "crude cost", "crude price", "spread", "realisation", "realization", "product price", "cost of crude"],
+      "label": "margin squeeze (crude cost vs product realisation)",
+      "actions": [
+        {"action": "Re-optimise the crude basket and product slate with the refinery LP model against current prices; review the price-risk (hedging) policy",
+         "owner": "Planning & Optimisation Head", "timeline": "0-3 months", "dependencies": ["LP model", "crude assays", "price data"],
+         "cost_category": "OPEX - low", "expected_impact": "higher gross refining margin for the same throughput",
+         "risk": "model not calibrated to actual yields", "kpi": "gross refining margin per barrel",
+         "data_required": "crude and product prices, unit yields, crude assays", "success_condition": "GRM gap to benchmark narrowing over two quarters",
+         "monitoring_frequency": "monthly"}
+      ]
+    },
+    "throughput": {
+      "match": ["throughput", "production", "capacity utilisation", "capacity utilization", "utilisation", "utilization", "yield", "crude processed"],
+      "label": "low throughput / capacity utilisation / yield",
+      "actions": [
+        {"action": "Carry out a debottlenecking study of the constraining unit and act on the low-capex items",
+         "owner": "Technical Services Manager", "timeline": "6-18 months", "dependencies": ["unit test runs", "design data"],
+         "cost_category": "CAPEX - medium", "expected_impact": "higher sustainable throughput",
+         "risk": "bottleneck moves to the next unit", "kpi": "capacity utilisation %; distillate yield",
+         "data_required": "unit loads, constraints log, test-run data", "success_condition": "capacity utilisation above baseline for two quarters after the change",
+         "monitoring_frequency": "monthly"}
+      ]
+    },
+    "finance_cost": {
+      "match": ["interest", "debt", "borrowing", "finance cost", "working capital", "receivable", "inventory holding"],
+      "label": "high finance cost / working capital",
+      "actions": [
+        {"action": "Refinance high-cost borrowings and set a working-capital reduction target (inventory days, receivable days)",
+         "owner": "Chief Financial Officer", "timeline": "3-12 months", "dependencies": ["debt schedule", "working-capital data"],
+         "cost_category": "OPEX - low", "expected_impact": "lower interest cost and cash tied up in operations",
+         "risk": "covenant or supply constraints", "kpi": "interest cost; cash conversion cycle",
+         "data_required": "debt schedule with rates; inventory and receivable days", "success_condition": "interest cost and working-capital days below baseline for two quarters",
+         "monitoring_frequency": "quarterly"}
+      ]
+    },
+    "safety": {
+      "match": ["incident", "injury", "fire", "leak", "spill", "near miss", "process safety", "lti", "trir"],
+      "label": "safety incidents",
+      "actions": [
+        {"action": "Close all open incident-investigation actions and run a process-safety gap assessment against the applicable standard",
+         "owner": "HSE Manager", "timeline": "0-6 months", "dependencies": ["incident register", "action tracker"],
+         "cost_category": "OPEX - low", "expected_impact": "fewer incidents and incident-related outages",
+         "risk": "actions closed on paper only", "kpi": "TRIR; open investigation actions; loss of containment events",
+         "data_required": "incident register with actions and status", "success_condition": "no overdue investigation actions; incident rate below baseline",
+         "monitoring_frequency": "monthly"}
+      ]
+    },
+    "revenue": {
+      "match": ["revenue", "sales", "turnover", "demand", "volume sold", "market share"],
+      "label": "falling revenue",
+      "actions": [
+        {"action": "Review customer and product mix: rank products by contribution margin and shift volume towards the highest-margin outlets",
+         "owner": "Marketing Head", "timeline": "0-6 months", "dependencies": ["sales by product and customer", "contribution margins"],
+         "cost_category": "OPEX - low", "expected_impact": "higher contribution per unit sold",
+         "risk": "contract obligations limit the shift", "kpi": "contribution margin by product; revenue per tonne",
+         "data_required": "sales and margin by product and customer", "success_condition": "contribution margin above baseline for two quarters",
+         "monitoring_frequency": "monthly"}
+      ]
+    }
+  },
+  "data_foundation": {
+    "action": "Close the data gaps before deciding: collect the missing years, departments and document types listed in the coverage report",
+    "owner": "Head of Information Systems", "timeline": "0-3 months", "dependencies": ["document owners in each department"],
+    "cost_category": "OPEX - low", "expected_impact": "the analysis can move from partial to complete evidence",
+    "risk": "decisions taken on an incomplete record", "kpi": "years and departments covered in the knowledge base",
+    "data_required": "the documents listed as MISSING in the coverage report", "success_condition": "coverage report shows the analysis period as AVAILABLE",
+    "monitoring_frequency": "monthly"
+  }
+}

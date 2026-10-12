@@ -1,0 +1,111 @@
+============================================
+  MEDHA - How to run
+============================================
+
+EASIEST WAY (recommended):
+  1. Double-click START.bat
+  2. Wait for the desktop window to open
+
+REQUIREMENTS:
+  - Python 3.11 or 3.12 recommended (3.14 has many package issues)
+  - Ollama installed from https://ollama.com
+  - Run once:  ollama pull qwen2.5:7b
+
+MAKE A REAL .EXE:
+  1. Double-click BUILD_EXE.bat
+  2. Wait 5-15 minutes
+  3. Run dist\MEDHA.exe
+
+COMMAND LINE:
+  python main.py          -> desktop UI
+  python main.py --voice  -> UI + microphone
+  python main.py --cli    -> text only
+
+UI:
+  Native Windows app (PySide6)
+  AURA-style dark glass design
+  NOT a browser / NOT HTML
+
+VOICE (fully offline - local Whisper + local Chatterbox):
+  Mic button in the window = listen once, then MEDHA speaks the reply.
+
+  One-time setup, needs internet ONCE:
+    pip install -r requirements.txt
+    python scripts\setup_models.py          -> models\whisper + models\chatterbox
+    (no CUDA GPU? pip install torch torchaudio --index-url https://download.pytorch.org/whl/cpu)
+
+  Check it:
+    python main.py --voice-status
+
+  Voice not working? Run the diagnostic - it names the root cause:
+    python scripts\voice_doctor.py
+    python scripts\voice_doctor.py --record --speak
+
+  After setup you can unplug the network permanently - nothing in the voice
+  path ever contacts a cloud speech service.
+
+============================================
+
+============================================
+  LOGIN (required, fully local)
+============================================
+
+Every launch opens the MEDHA login screen first. Nothing behind it - the
+dashboard, chat, memory, documents, agents, settings - is loaded until you
+authenticate.
+
+FIRST RUN:
+  The login screen asks you to create the account that owns this
+  workstation (user ID + password, at least 8 characters). It is stored
+  only on this machine, hashed with Argon2id (or bcrypt/scrypt if Argon2
+  is not installed). There is NO default username or password.
+
+FROM THE TERMINAL:
+  python main.py --setup-user        create an account
+  python main.py --change-password   change a password
+  python main.py --auth-status       show the local auth configuration
+
+IN THE APP:
+  LOCK    (top bar) hides MEDHA and asks for your password again -
+          the application keeps running
+  LOG OUT (top bar) ends the session and returns to the login screen
+  EXIT    (login screen) closes MEDHA
+
+FORGOT THE PASSWORD?
+  There is no recovery back door by design. Create a new account with
+  python main.py --setup-user, or delete database\medha.db to start
+  over (that also deletes your history).
+
+LOCKOUT:
+  5 wrong passwords lock the account for 60 seconds. Both numbers are in
+  config.ini under [auth].
+
+============================================
+  INDUSTRIAL WORKBENCH (SIH26117)
+============================================
+
+START:
+  Double-click start_medha_industrial.bat
+  (verifies Python, Ollama, models, OCR and the knowledge base,
+   prints a readiness report, then starts the normal MEDHA UI)
+
+FIRST-TIME SETUP (needs internet once, then never again):
+  python scripts\setup_industrial_env.py --with-paddle --prefetch-paddle
+  ollama pull bge-m3
+  ollama pull bge-reranker-v2-m3
+  ollama pull qwen2.5vl:3b-q4_K_M
+
+  Tesseract is a separate native install (UB Mannheim build, tick "Add to PATH"):
+  https://github.com/UB-Mannheim/tesseract/wiki
+
+LOAD YOUR DOCUMENTS:
+  put files in knowledge_sources\  then:
+  python scripts\ingest_industrial_knowledge.py
+
+VERIFY OFFLINE (disconnect Wi-Fi / Ethernet / VPN first):
+  python scripts\offline_test.py
+
+FULL DOCUMENTATION:
+  INDUSTRIAL_README.md
+
+START.bat still works exactly as before for plain MEDHA.

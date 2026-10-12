@@ -1,0 +1,411 @@
+{
+  "version": "1.0.0",
+  "description": "Structured schemas for common industrial documents. Each schema declares document metadata, expected fields, extraction patterns, validation rules and the evidence/source fields that must accompany every extracted value. Used by industrial/schemas.py for classification, extraction and validation - entirely local, no network.",
+  "common": {
+    "document_metadata": [
+      "document_id", "filename", "source_path", "document_type", "document_class",
+      "title", "revision", "doc_date", "author", "department", "plant_unit",
+      "confidentiality", "page_count", "file_hash", "extraction_method", "ingested_at"
+    ],
+    "evidence_fields": [
+      "source_page", "source_section", "source_heading", "source_location",
+      "extraction_method", "ocr_confidence", "evidence_chunk_ids", "claim_type"
+    ],
+    "generic_patterns": {
+      "revision": ["(?i)\\brev(?:ision)?\\.?\\s*[:#-]?\\s*([A-Z0-9][A-Z0-9.\\-]{0,7})\\b"],
+      "doc_date": [
+        "(?i)\\b(?:date|dated|issued\\s*on)\\s*[:\\-]?\\s*(\\d{1,2}[-/.]\\d{1,2}[-/.]\\d{2,4})",
+        "(?i)\\b(?:date|dated)\\s*[:\\-]?\\s*(\\d{4}-\\d{2}-\\d{2})",
+        "(?i)\\b(\\d{1,2}\\s+(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\\s+\\d{4})"
+      ],
+      "document_number": ["(?i)\\b(?:doc(?:ument)?|report)\\s*(?:no\\.?|number|#)\\s*[:\\-]?\\s*([A-Z0-9][A-Z0-9/\\-_.]{3,30})"],
+      "equipment_id": ["\\b([A-Z]{1,4}-?\\d{2,5}[A-Z]?)\\b"],
+      "plant_unit": ["(?i)\\b(?:unit|plant|area|block)\\s*[:\\-]?\\s*([A-Z0-9][A-Za-z0-9 &/\\-]{1,40})"],
+      "department": ["(?i)\\b(?:department|dept\\.?|section)\\s*[:\\-]?\\s*([A-Za-z][A-Za-z &/\\-]{2,40})"],
+      "confidentiality": ["(?i)\\b(public|internal(?:\\s+use\\s+only)?|confidential|restricted|secret)\\b"],
+      "author": ["(?i)\\b(?:prepared\\s*by|author|inspector|engineer|written\\s*by|reported\\s*by)\\s*[:\\-]?\\s*([A-Z][A-Za-z.]*(?:[ \\t]+[A-Z][A-Za-z.]*){0,3})"],
+      "approved_by": ["(?i)\\b(?:approved\\s*by|authorised\\s*by|authorized\\s*by|reviewed\\s*by)\\s*[:\\-]?\\s*([A-Z][A-Za-z.]*(?:[ \\t]+[A-Z][A-Za-z.]*){0,3})"]
+    }
+  },
+  "schemas": {
+    "inspection_report": {
+      "name": "Inspection Report",
+      "description": "Record of an in-service or shutdown inspection of an equipment item, with measurements, defects and recommendations.",
+      "classification": {
+        "keywords": ["inspection report", "inspection", "inspected by", "thickness", "ut reading", "cml", "tml", "visual inspection", "ndt", "corrosion", "next inspection due", "fitness for service"],
+        "filename_hints": ["inspection", "insp", "ndt", "ut", "rbi", "thickness"],
+        "min_score": 2
+      },
+      "expected_fields": ["equipment_id", "equipment_type", "inspection_date", "inspector", "location", "operating_condition", "measurements", "defects", "observations", "images", "severity", "recommendation", "required_action", "supporting_sop", "revision", "source_page"],
+      "extraction_fields": [
+        {"name": "equipment_id", "type": "tag", "required": true, "patterns": ["(?i)\\b(?:equipment|equip\\.?|asset|tag)\\s*(?:id|no\\.?|number|#)?\\s*[:\\-]\\s*\\|?\\s*([A-Z]{1,4}-?\\d{2,5}[A-Z]?)", "\\b([A-Z]{1,4}-\\d{3,5}[A-Z]?)\\b"]},
+        {"name": "equipment_type", "type": "taxonomy_term", "required": false, "taxonomy_categories": ["rotating_equipment", "static_equipment", "piping_valves"]},
+        {"name": "inspection_date", "type": "date", "required": true, "patterns": ["(?i)\\b(?:inspection|inspected|survey)\\s*(?:date|on)\\s*[:\\-]?\\s*([0-9A-Za-z/\\-. ]{6,20})"], "fallback": "doc_date"},
+        {"name": "inspector", "type": "person", "required": true, "patterns": ["(?i)\\b(?:inspector|inspected\\s*by)\\s*[:\\-]?\\s*([A-Z][A-Za-z.]*(?:[ \\t]+[A-Z][A-Za-z.]*){0,3})"], "fallback": "author"},
+        {"name": "location", "type": "text", "required": false, "patterns": ["(?i)\\blocation\\s*[:\\-]\\s*([A-Za-z0-9][A-Za-z0-9 ,/&\\-]{2,60})", "(?i)\\b(?:area|unit)\\s*[:\\-]\\s*([A-Za-z0-9][A-Za-z0-9 ,/&\\-]{2,60})"]},
+        {"name": "operating_condition", "type": "text", "required": false, "patterns": ["(?i)\\b(?:operating\\s*condition|service\\s*condition|condition\\s*at\\s*inspection)\\s*[:\\-]?\\s*(.{3,120})"]},
+        {"name": "measurements", "type": "table", "required": false, "source": "tables", "notes": "Thickness/CML tables are captured as table elements with their page number preserved."},
+        {"name": "defects", "type": "list", "required": false, "patterns": ["(?i)\\b(?:defect|damage|flaw|crack|pitting|thinning|leak|erosion|corrosion)\\b[^.\\n]{0,160}"]},
+        {"name": "observations", "type": "list", "required": false, "patterns": ["(?i)\\b(?:observation|observed|noted|finding)s?\\s*[:\\-]?\\s*(.{3,300})"]},
+        {"name": "images", "type": "asset_refs", "required": false, "source": "assets"},
+        {"name": "severity", "type": "enum", "required": false, "enum": ["low", "medium", "high", "critical", "minor", "major"], "patterns": ["(?i)\\bseverity\\s*[:\\-]?\\s*(low|medium|high|critical|minor|major)"]},
+        {"name": "recommendation", "type": "text", "required": true, "patterns": ["(?i)\\b(?:recommendation|recommended|suggest(?:ed)?)\\s*[:\\-]?\\s*(.{3,400})"]},
+        {"name": "required_action", "type": "text", "required": false, "patterns": ["(?i)\\b(?:action\\s*required|required\\s*action|corrective\\s*action|action\\s*plan)\\s*[:\\-]?\\s*(.{3,400})"]},
+        {"name": "supporting_sop", "type": "reference", "required": false, "patterns": ["(?i)\\b(?:sop|procedure|as\\s*per)\\s*[:\\-]?\\s*([A-Z0-9][A-Z0-9/\\-_.]{3,30})"]},
+        {"name": "next_inspection_due", "type": "date", "required": false, "patterns": ["(?i)\\bnext\\s*(?:inspection|due)\\s*(?:date)?\\s*[:\\-]?\\s*([0-9A-Za-z/\\-. ]{6,20})"]}
+      ],
+      "validation": [
+        {"field": "equipment_id", "rule": "required", "detail": "An inspection finding without an equipment tag cannot be attributed to an asset."},
+        {"field": "inspection_date", "rule": "date_parseable", "detail": "Date must parse to a real calendar date."},
+        {"field": "severity", "rule": "in_enum", "detail": "Severity must be one of the declared values."},
+        {"field": "measurements", "rule": "numeric_units", "detail": "Thickness values should carry a unit (mm/inch) - flag if absent."},
+        {"field": "recommendation", "rule": "requires_evidence", "detail": "Every recommendation must cite at least one evidence chunk."}
+      ]
+    },
+    "maintenance_report": {
+      "name": "Maintenance Report",
+      "description": "Record of maintenance work executed on an asset, including cause, work done, parts and return-to-service status.",
+      "classification": {
+        "keywords": ["maintenance report", "job completed", "work done", "spares used", "breakdown", "overhaul", "repair", "restored to service", "downtime"],
+        "filename_hints": ["maintenance", "maint", "repair", "overhaul", "job"],
+        "min_score": 2
+      },
+      "expected_fields": ["equipment_id", "work_order_no", "maintenance_type", "date_started", "date_completed", "technician", "reported_problem", "work_performed", "parts_used", "downtime_hours", "root_cause", "status", "revision", "source_page"],
+      "extraction_fields": [
+        {"name": "equipment_id", "type": "tag", "required": true, "patterns": ["(?i)\\b(?:equipment|asset|tag)\\s*(?:id|no\\.?|#)?\\s*[:\\-]\\s*\\|?\\s*([A-Z]{1,4}-?\\d{2,5}[A-Z]?)"]},
+        {"name": "work_order_no", "type": "reference", "required": false, "patterns": ["(?i)\\b(?:work\\s*order|w\\.?o\\.?|job)\\s*(?:no\\.?|number|#)?\\s*[:\\-]?\\s*([A-Z0-9][A-Z0-9/\\-]{3,20})"]},
+        {"name": "maintenance_type", "type": "enum", "required": false, "enum": ["preventive", "predictive", "corrective", "breakdown", "shutdown", "modification"], "patterns": ["(?i)\\b(preventive|predictive|corrective|breakdown|shutdown|modification)\\s*maintenance"]},
+        {"name": "date_started", "type": "date", "required": false, "patterns": ["(?i)\\b(?:start(?:ed)?\\s*date|date\\s*started)\\s*[:\\-]?\\s*([0-9A-Za-z/\\-. ]{6,20})"]},
+        {"name": "date_completed", "type": "date", "required": false, "patterns": ["(?i)\\b(?:complet(?:ed|ion)\\s*date|date\\s*completed)\\s*[:\\-]?\\s*([0-9A-Za-z/\\-. ]{6,20})"]},
+        {"name": "technician", "type": "person", "required": false, "patterns": ["(?i)\\b(?:technician|executed\\s*by|carried\\s*out\\s*by|fitter)\\s*[:\\-]?\\s*([A-Z][A-Za-z.]*(?:[ \\t]+[A-Z][A-Za-z.]*){0,3})"], "fallback": "author"},
+        {"name": "reported_problem", "type": "text", "required": false, "patterns": ["(?i)\\b(?:reported\\s*problem|complaint|symptom|problem\\s*description)\\s*[:\\-]?\\s*(.{3,300})"]},
+        {"name": "work_performed", "type": "text", "required": true, "patterns": ["(?i)\\b(?:work\\s*(?:done|performed|carried\\s*out)|job\\s*description)\\s*[:\\-]?\\s*(.{3,500})"]},
+        {"name": "parts_used", "type": "list", "required": false, "patterns": ["(?i)\\b(?:spares?|parts?)\\s*(?:used|replaced|consumed)\\s*[:\\-]?\\s*(.{3,300})"]},
+        {"name": "downtime_hours", "type": "number", "required": false, "patterns": ["(?i)\\bdowntime\\s*[:\\-]?\\s*([0-9.]{1,6})\\s*(?:hrs?|hours?)"]},
+        {"name": "root_cause", "type": "text", "required": false, "patterns": ["(?i)\\broot\\s*cause\\s*[:\\-]?\\s*(.{3,300})"]},
+        {"name": "status", "type": "enum", "required": false, "enum": ["completed", "pending", "in progress", "deferred", "cancelled"], "patterns": ["(?i)\\bstatus\\s*[:\\-]?\\s*(completed|pending|in\\s*progress|deferred|cancelled)"]}
+      ],
+      "validation": [
+        {"field": "equipment_id", "rule": "required", "detail": "Maintenance history must be attributable to an asset."},
+        {"field": "work_performed", "rule": "required", "detail": "A maintenance record with no work description has no value in history."},
+        {"field": "date_completed", "rule": "date_after", "compare_to": "date_started", "detail": "Completion cannot precede start."},
+        {"field": "downtime_hours", "rule": "non_negative", "detail": "Downtime must be zero or positive."}
+      ]
+    },
+    "equipment_history": {
+      "name": "Equipment History",
+      "description": "Consolidated life history of one asset: installation, modifications, failures, inspections and interventions.",
+      "classification": {
+        "keywords": ["equipment history", "asset history", "history card", "installation date", "service history", "failure history", "life cycle"],
+        "filename_hints": ["history", "asset", "lifecycle", "equipment_card"],
+        "min_score": 2
+      },
+      "expected_fields": ["equipment_id", "equipment_type", "manufacturer", "model", "serial_number", "installation_date", "design_conditions", "service_fluid", "events", "failures", "modifications", "current_status", "source_page"],
+      "extraction_fields": [
+        {"name": "equipment_id", "type": "tag", "required": true, "patterns": ["(?i)\\b(?:equipment|asset|tag)\\s*(?:id|no\\.?|#)?\\s*[:\\-]\\s*\\|?\\s*([A-Z]{1,4}-?\\d{2,5}[A-Z]?)"]},
+        {"name": "manufacturer", "type": "text", "required": false, "patterns": ["(?i)\\b(?:manufacturer|make|oem|vendor)\\s*[:\\-]?\\s*([A-Za-z0-9][A-Za-z0-9 .&\\-]{2,50})"]},
+        {"name": "model", "type": "text", "required": false, "patterns": ["(?i)\\b(?:model|type\\s*no\\.?)\\s*[:\\-]?\\s*([A-Za-z0-9][A-Za-z0-9 ./\\-]{1,40})"]},
+        {"name": "serial_number", "type": "text", "required": false, "patterns": ["(?i)\\b(?:serial|sr\\.?\\s*no\\.?|s/n)\\s*[:\\-]?\\s*([A-Z0-9][A-Z0-9/\\-]{2,30})"]},
+        {"name": "installation_date", "type": "date", "required": false, "patterns": ["(?i)\\b(?:installed|installation|commissioned)\\s*(?:on|date)?\\s*[:\\-]?\\s*([0-9A-Za-z/\\-. ]{4,20})"]},
+        {"name": "design_conditions", "type": "text", "required": false, "patterns": ["(?i)\\bdesign\\s*(?:pressure|temperature|conditions)\\s*[:\\-]?\\s*(.{3,120})"]},
+        {"name": "service_fluid", "type": "text", "required": false, "patterns": ["(?i)\\b(?:service|fluid|medium)\\s*[:\\-]?\\s*([A-Za-z][A-Za-z0-9 ,/\\-]{2,60})"]},
+        {"name": "events", "type": "list", "required": false, "source": "tables"},
+        {"name": "current_status", "type": "enum", "required": false, "enum": ["in service", "standby", "out of service", "decommissioned", "under maintenance"]}
+      ],
+      "validation": [
+        {"field": "equipment_id", "rule": "required", "detail": "History must belong to a single identified asset."},
+        {"field": "installation_date", "rule": "date_parseable", "detail": "Installation date must be a real date if present."},
+        {"field": "events", "rule": "chronological", "detail": "Event dates should be non-decreasing when a sequence is present."}
+      ]
+    },
+    "sop": {
+      "name": "Standard Operating Procedure",
+      "description": "Approved step-by-step procedure for an operating, maintenance or safety task.",
+      "classification": {
+        "keywords": ["standard operating procedure", "sop", "procedure", "purpose", "scope", "responsibility", "step 1", "precautions", "work instruction"],
+        "filename_hints": ["sop", "procedure", "wi", "instruction"],
+        "min_score": 2
+      },
+      "expected_fields": ["sop_number", "title", "purpose", "scope", "responsibility", "prerequisites", "ppe_required", "steps", "precautions", "references", "revision", "effective_date", "approved_by", "source_page"],
+      "extraction_fields": [
+        {"name": "sop_number", "type": "reference", "required": true, "patterns": ["(?i)\\b(?:sop|procedure|doc)\\s*(?:no\\.?|number|#)\\s*[:\\-]?\\s*([A-Z0-9][A-Z0-9/\\-_.]{3,30})"], "fallback": "document_number"},
+        {"name": "purpose", "type": "text", "required": false, "patterns": ["(?i)\\b(?:purpose|objective)\\s*[:\\-]?\\s*(.{3,400})"]},
+        {"name": "scope", "type": "text", "required": false, "patterns": ["(?i)\\bscope\\s*[:\\-]?\\s*(.{3,400})"]},
+        {"name": "responsibility", "type": "text", "required": false, "patterns": ["(?i)\\bresponsibilit(?:y|ies)\\s*[:\\-]?\\s*(.{3,400})"]},
+        {"name": "ppe_required", "type": "list", "required": false, "patterns": ["(?i)\\b(?:ppe|personal\\s*protective\\s*equipment)\\s*[:\\-]?\\s*(.{3,200})"]},
+        {"name": "steps", "type": "ordered_list", "required": true, "source": "numbered_paragraphs"},
+        {"name": "precautions", "type": "list", "required": false, "patterns": ["(?i)\\b(?:precaution|caution|warning|safety\\s*note)s?\\s*[:\\-]?\\s*(.{3,300})"]},
+        {"name": "references", "type": "list", "required": false, "patterns": ["(?i)\\b(?:reference|refer\\s*to|as\\s*per)\\s*[:\\-]?\\s*(.{3,200})"]},
+        {"name": "effective_date", "type": "date", "required": false, "patterns": ["(?i)\\b(?:effective|issue)\\s*date\\s*[:\\-]?\\s*([0-9A-Za-z/\\-. ]{6,20})"], "fallback": "doc_date"},
+        {"name": "approved_by", "type": "person", "required": false, "patterns": ["(?i)\\bapproved\\s*by\\s*[:\\-]?\\s*([A-Z][A-Za-z.]*(?:[ \\t]+[A-Z][A-Za-z.]*){0,3})"]}
+      ],
+      "validation": [
+        {"field": "revision", "rule": "required", "detail": "An SOP without a revision cannot be cited safely - procedures change."},
+        {"field": "steps", "rule": "non_empty", "detail": "A procedure must contain at least one step."},
+        {"field": "approved_by", "rule": "present_or_flag", "detail": "Unapproved SOPs must be flagged, never cited as authoritative."}
+      ]
+    },
+    "engineering_drawing": {
+      "name": "Engineering Drawing / P&ID",
+      "description": "Drawing sheet - P&ID, PFD, isometric, GA or datasheet drawing - identified by title block and drawing number.",
+      "classification": {
+        "keywords": ["p&id", "piping and instrumentation", "drawing no", "drg no", "sheet", "scale", "title block", "isometric", "general arrangement", "process flow diagram", "revision cloud", "as built"],
+        "filename_hints": ["pid", "p&id", "drawing", "drg", "iso", "ga", "pfd", "layout"],
+        "min_score": 2
+      },
+      "expected_fields": ["drawing_number", "drawing_title", "sheet_number", "revision", "scale", "drawn_by", "checked_by", "approved_by", "plant_unit", "equipment_tags", "line_numbers", "instrument_tags", "legend_notes", "as_built_status", "source_page"],
+      "extraction_fields": [
+        {"name": "drawing_number", "type": "reference", "required": true, "patterns": ["(?i)\\b(?:drawing|drg|dwg)\\s*(?:no\\.?|number|#)\\s*[:\\-]?\\s*([A-Z0-9][A-Z0-9/\\-_.]{3,30})"]},
+        {"name": "drawing_title", "type": "text", "required": false, "patterns": ["(?i)\\btitle\\s*[:\\-]?\\s*(.{3,120})"]},
+        {"name": "sheet_number", "type": "text", "required": false, "patterns": ["(?i)\\bsheet\\s*(?:no\\.?)?\\s*[:\\-]?\\s*(\\d{1,3}\\s*(?:of\\s*\\d{1,3})?)"]},
+        {"name": "scale", "type": "text", "required": false, "patterns": ["(?i)\\bscale\\s*[:\\-]?\\s*([0-9A-Za-z:./ ]{1,20})"]},
+        {"name": "equipment_tags", "type": "tag_list", "required": false, "source": "taxonomy_tag_patterns"},
+        {"name": "line_numbers", "type": "tag_list", "required": false, "patterns": ["\\b\\d{1,2}\"?-[A-Z]{1,4}-\\d{3,6}-[A-Z0-9]{2,8}\\b"]},
+        {"name": "instrument_tags", "type": "tag_list", "required": false, "patterns": ["\\b(?:PI|PT|PC|TI|TT|TC|FI|FT|FC|LI|LT|LC|AI|AT|XV|PSV|FCV|LCV|PCV|TCV)-?\\d{2,5}[A-Z]?\\b"]},
+        {"name": "as_built_status", "type": "enum", "required": false, "enum": ["as built", "for construction", "for approval", "for information", "preliminary"]}
+      ],
+      "validation": [
+        {"field": "drawing_number", "rule": "required", "detail": "A drawing must be citable by number."},
+        {"field": "revision", "rule": "required", "detail": "Drawings are only meaningful with their revision - superseded revisions must never be cited as current."},
+        {"field": "equipment_tags", "rule": "taxonomy_known", "detail": "Tags should match known equipment tag patterns; unknown patterns are flagged, not invented."}
+      ],
+      "notes": "Drawings are usually scanned or vector-only: the pipeline routes them through layout analysis and OCR, and marks pages that need the vision model for symbol-level understanding."
+    },
+    "shift_log": {
+      "name": "Shift Log",
+      "description": "Chronological operating log for one shift, with plant conditions, abnormalities, actions and handover notes.",
+      "classification": {
+        "keywords": ["shift log", "log book", "handover", "shift in charge", "a shift", "b shift", "c shift", "general shift", "hrs", "operator log"],
+        "filename_hints": ["shiftlog", "log", "handover", "logbook"],
+        "min_score": 2
+      },
+      "expected_fields": ["log_date", "shift", "unit", "shift_incharge", "operators", "entries", "abnormal_conditions", "equipment_status_changes", "handover_notes", "source_page"],
+      "extraction_fields": [
+        {"name": "log_date", "type": "date", "required": true, "patterns": ["(?i)\\b(?:date|shift\\s*date)\\s*[:\\-]?\\s*([0-9A-Za-z/\\-. ]{6,20})"], "fallback": "doc_date"},
+        {"name": "shift", "type": "enum", "required": false, "enum": ["A", "B", "C", "General", "Day", "Night"], "patterns": ["(?i)\\bshift\\s*[:\\-]?\\s*([ABC]|general|day|night)\\b"]},
+        {"name": "unit", "type": "text", "required": false, "fallback": "plant_unit"},
+        {"name": "shift_incharge", "type": "person", "required": false, "patterns": ["(?i)\\bshift\\s*(?:in[\\s\\-]?charge|supervisor|engineer)\\s*[:\\-]?\\s*([A-Z][A-Za-z.]*(?:[ \\t]+[A-Z][A-Za-z.]*){0,3})"]},
+        {"name": "entries", "type": "timestamped_list", "required": true, "patterns": ["(?m)^\\s*(\\d{1,2}[:.]\\d{2})\\s*(?:hrs)?\\s*[-:]?\\s*(.{3,300})$"]},
+        {"name": "abnormal_conditions", "type": "list", "required": false, "patterns": ["(?i)\\b(?:abnormal|upset|trip|alarm|leak|deviation|high\\s*vibration|high\\s*temperature)\\b[^.\\n]{0,160}"]},
+        {"name": "handover_notes", "type": "text", "required": false, "patterns": ["(?i)\\b(?:handover|hand\\s*over|pending\\s*jobs?)\\s*[:\\-]?\\s*(.{3,400})"]}
+      ],
+      "validation": [
+        {"field": "log_date", "rule": "required", "detail": "A log entry with no date cannot be placed in equipment history."},
+        {"field": "entries", "rule": "non_empty", "detail": "Log must contain at least one timestamped entry."},
+        {"field": "entries", "rule": "time_parseable", "detail": "Entry timestamps must parse as times of day."}
+      ]
+    },
+    "incident_report": {
+      "name": "Incident Report",
+      "description": "Report of an unplanned event - injury, loss of containment, fire, near miss - with causes and corrective actions.",
+      "classification": {
+        "keywords": ["incident report", "near miss", "loss of containment", "injury", "fire", "root cause", "corrective action", "immediate cause", "investigation team", "sequence of events"],
+        "filename_hints": ["incident", "nearmiss", "near_miss", "investigation", "accident"],
+        "min_score": 2
+      },
+      "expected_fields": ["incident_id", "incident_date", "incident_time", "location", "unit", "incident_type", "severity", "description", "sequence_of_events", "immediate_cause", "root_cause", "contributing_factors", "injuries", "losses", "corrective_actions", "responsible_person", "target_date", "lessons_learned", "source_page"],
+      "extraction_fields": [
+        {"name": "incident_id", "type": "reference", "required": false, "patterns": ["(?i)\\bincident\\s*(?:no\\.?|number|id|#)\\s*[:\\-]?\\s*([A-Z0-9][A-Z0-9/\\-]{2,25})"]},
+        {"name": "incident_date", "type": "date", "required": true, "patterns": ["(?i)\\b(?:incident|event|occurrence)\\s*date\\s*[:\\-]?\\s*([0-9A-Za-z/\\-. ]{6,20})"], "fallback": "doc_date"},
+        {"name": "incident_time", "type": "time", "required": false, "patterns": ["(?i)\\btime\\s*(?:of\\s*incident)?\\s*[:\\-]?\\s*(\\d{1,2}[:.]\\d{2}\\s*(?:hrs|am|pm)?)"]},
+        {"name": "incident_type", "type": "enum", "required": false, "enum": ["near miss", "first aid", "lost time injury", "fire", "explosion", "loss of containment", "environmental", "property damage", "process safety event"]},
+        {"name": "severity", "type": "enum", "required": false, "enum": ["low", "medium", "high", "critical"]},
+        {"name": "description", "type": "text", "required": true, "patterns": ["(?i)\\b(?:description|what\\s*happened|brief\\s*description)\\s*[:\\-]?\\s*(.{10,800})"]},
+        {"name": "immediate_cause", "type": "text", "required": false, "patterns": ["(?i)\\bimmediate\\s*cause\\s*[:\\-]?\\s*(.{3,300})"]},
+        {"name": "root_cause", "type": "text", "required": false, "patterns": ["(?i)\\broot\\s*cause\\s*[:\\-]?\\s*(.{3,400})"]},
+        {"name": "corrective_actions", "type": "list", "required": false, "patterns": ["(?i)\\b(?:corrective|preventive|recommended)\\s*actions?\\s*[:\\-]?\\s*(.{3,400})"]},
+        {"name": "lessons_learned", "type": "text", "required": false, "patterns": ["(?i)\\blessons?\\s*learn(?:ed|t)\\s*[:\\-]?\\s*(.{3,500})"]},
+        {"name": "target_date", "type": "date", "required": false, "patterns": ["(?i)\\b(?:target|due)\\s*date\\s*[:\\-]?\\s*([0-9A-Za-z/\\-. ]{6,20})"]}
+      ],
+      "validation": [
+        {"field": "incident_date", "rule": "required", "detail": "Incidents must be dated to be usable in trend or lessons-learned analysis."},
+        {"field": "description", "rule": "required", "detail": "An incident record must describe what happened."},
+        {"field": "root_cause", "rule": "distinct_from", "compare_to": "immediate_cause", "detail": "Flag records where root cause merely restates the immediate cause."},
+        {"field": "corrective_actions", "rule": "requires_evidence", "detail": "Actions quoted back to the user must cite the report page they came from."}
+      ]
+    },
+    "safety_report": {
+      "name": "Safety Report",
+      "description": "Periodic or study-based safety document: HSE performance report, HAZOP/LOPA output, safety audit or risk assessment.",
+      "classification": {
+        "keywords": ["safety report", "hse", "hazop", "lopa", "risk assessment", "safety audit", "observation", "unsafe act", "unsafe condition", "safety performance", "ltifr", "risk matrix", "safeguard"],
+        "filename_hints": ["safety", "hse", "hazop", "risk", "audit", "lopa"],
+        "min_score": 2
+      },
+      "expected_fields": ["report_type", "period_covered", "unit", "study_team", "nodes_or_areas", "hazards", "existing_safeguards", "risk_ranking", "recommendations", "responsible_person", "target_date", "status", "revision", "source_page"],
+      "extraction_fields": [
+        {"name": "report_type", "type": "enum", "required": false, "enum": ["hazop", "lopa", "qra", "safety audit", "hse performance", "risk assessment", "jsa"]},
+        {"name": "period_covered", "type": "text", "required": false, "patterns": ["(?i)\\b(?:period|month|quarter|year)\\s*[:\\-]?\\s*([A-Za-z0-9 \\-/]{3,30})"]},
+        {"name": "study_team", "type": "list", "required": false, "patterns": ["(?i)\\b(?:study\\s*team|team\\s*members|participants)\\s*[:\\-]?\\s*(.{3,300})"]},
+        {"name": "hazards", "type": "list", "required": false, "patterns": ["(?i)\\b(?:hazard|deviation|consequence)\\s*[:\\-]?\\s*(.{3,300})"]},
+        {"name": "existing_safeguards", "type": "list", "required": false, "patterns": ["(?i)\\b(?:safeguard|existing\\s*protection|barrier)s?\\s*[:\\-]?\\s*(.{3,300})"]},
+        {"name": "risk_ranking", "type": "text", "required": false, "patterns": ["(?i)\\b(?:risk\\s*(?:rank|rating|level)|sil)\\s*[:\\-]?\\s*([A-Za-z0-9 \\-]{1,20})"]},
+        {"name": "recommendations", "type": "list", "required": false, "patterns": ["(?i)\\brecommendations?\\s*[:\\-]?\\s*(.{3,400})"]}
+      ],
+      "validation": [
+        {"field": "recommendations", "rule": "requires_evidence", "detail": "Safety recommendations must always be traced to their source page."},
+        {"field": "risk_ranking", "rule": "no_inference", "detail": "Never compute or upgrade a risk ranking that the document does not state."}
+      ]
+    },
+    "vendor_document": {
+      "name": "Vendor Document",
+      "description": "Supplier-issued document: manual, drawing, test certificate, quotation or technical bulletin.",
+      "classification": {
+        "keywords": ["vendor", "supplier", "manufacturer", "operation and maintenance manual", "o&m manual", "warranty", "quotation", "purchase order", "test certificate", "installation manual"],
+        "filename_hints": ["vendor", "manual", "om", "o&m", "supplier", "catalog", "quotation"],
+        "min_score": 2
+      },
+      "expected_fields": ["vendor_name", "document_number", "equipment_supplied", "purchase_order", "model", "serial_number", "document_purpose", "warranty_terms", "recommended_spares", "maintenance_intervals", "revision", "source_page"],
+      "extraction_fields": [
+        {"name": "vendor_name", "type": "text", "required": true, "patterns": ["(?i)\\b(?:vendor|supplier|manufacturer|make)\\s*[:\\-]?\\s*([A-Za-z0-9][A-Za-z0-9 .&\\-]{2,50})"]},
+        {"name": "purchase_order", "type": "reference", "required": false, "patterns": ["(?i)\\b(?:purchase\\s*order|p\\.?o\\.?)\\s*(?:no\\.?|#)?\\s*[:\\-]?\\s*([A-Z0-9][A-Z0-9/\\-]{3,25})"]},
+        {"name": "equipment_supplied", "type": "text", "required": false, "patterns": ["(?i)\\b(?:equipment|item|supply\\s*of)\\s*[:\\-]?\\s*([A-Za-z0-9][A-Za-z0-9 ,./\\-]{3,80})"]},
+        {"name": "warranty_terms", "type": "text", "required": false, "patterns": ["(?i)\\bwarrant(?:y|ies)\\s*[:\\-]?\\s*(.{3,300})"]},
+        {"name": "recommended_spares", "type": "list", "required": false, "patterns": ["(?i)\\b(?:recommended\\s*spares?|spare\\s*parts?\\s*list)\\s*[:\\-]?\\s*(.{3,300})"]},
+        {"name": "maintenance_intervals", "type": "list", "required": false, "patterns": ["(?i)\\b(?:every|after)\\s*(\\d{2,6}\\s*(?:hours?|hrs?|months?|years?))"]}
+      ],
+      "validation": [
+        {"field": "vendor_name", "rule": "required", "detail": "Vendor claims must be attributable to the vendor that made them."},
+        {"field": "maintenance_intervals", "rule": "vendor_claim", "detail": "Vendor intervals are company_specific claims, never presented as engineering principle."}
+      ]
+    },
+    "approval_note": {
+      "name": "Approval Note",
+      "description": "Note seeking or recording approval for a proposal, deviation, expenditure or return to service.",
+      "classification": {
+        "keywords": ["approval note", "for approval", "note for approval", "recommended for approval", "justification", "proposal", "deviation request", "concurrence", "sanction"],
+        "filename_hints": ["approval", "note", "deviation", "sanction", "proposal"],
+        "min_score": 2
+      },
+      "expected_fields": ["note_number", "subject", "background", "proposal", "justification", "options_considered", "cost_implication", "risk_implication", "recommendation", "prepared_by", "reviewed_by", "approved_by", "approval_date", "references", "source_page"],
+      "extraction_fields": [
+        {"name": "note_number", "type": "reference", "required": false, "fallback": "document_number"},
+        {"name": "subject", "type": "text", "required": true, "patterns": ["(?i)\\b(?:subject|sub|re)\\s*[:\\-]\\s*(.{3,200})"]},
+        {"name": "background", "type": "text", "required": false, "patterns": ["(?i)\\b(?:background|context|present\\s*status)\\s*[:\\-]?\\s*(.{3,600})"]},
+        {"name": "proposal", "type": "text", "required": true, "patterns": ["(?i)\\b(?:proposal|proposed|it\\s*is\\s*proposed)\\s*[:\\-]?\\s*(.{3,600})"]},
+        {"name": "justification", "type": "text", "required": false, "patterns": ["(?i)\\b(?:justification|rationale|reason)\\s*[:\\-]?\\s*(.{3,600})"]},
+        {"name": "recommendation", "type": "text", "required": false, "patterns": ["(?i)\\brecommend(?:ation|ed)?\\s*[:\\-]?\\s*(.{3,400})"]},
+        {"name": "prepared_by", "type": "person", "required": false, "fallback": "author"},
+        {"name": "approved_by", "type": "person", "required": false, "fallback": "approved_by"},
+        {"name": "approval_date", "type": "date", "required": false, "fallback": "doc_date"}
+      ],
+      "validation": [
+        {"field": "proposal", "rule": "required", "detail": "An approval note must state what is being approved."},
+        {"field": "recommendation", "rule": "requires_evidence", "detail": "Generated approval notes must cite the inspection/maintenance evidence behind them."},
+        {"field": "approved_by", "rule": "never_autofill", "detail": "MEDHA must never populate an approver name that is not in a source document."}
+      ]
+    },
+    "technical_datasheet": {
+      "name": "Technical Datasheet",
+      "description": "Design and performance data sheet for equipment or an instrument.",
+      "classification": {
+        "keywords": ["datasheet", "data sheet", "design pressure", "design temperature", "rated capacity", "material of construction", "operating conditions", "nozzle schedule", "performance curve"],
+        "filename_hints": ["datasheet", "data_sheet", "ds", "spec", "specification"],
+        "min_score": 2
+      },
+      "expected_fields": ["equipment_id", "equipment_type", "service", "design_pressure", "design_temperature", "operating_pressure", "operating_temperature", "capacity", "material_of_construction", "corrosion_allowance", "code_of_construction", "nozzle_schedule", "revision", "source_page"],
+      "extraction_fields": [
+        {"name": "equipment_id", "type": "tag", "required": false, "patterns": ["(?i)\\b(?:tag|item)\\s*(?:no\\.?|number|#)?\\s*[:\\-]\\s*\\|?\\s*([A-Z]{1,4}-?\\d{2,5}[A-Z]?)"]},
+        {"name": "design_pressure", "type": "quantity", "required": false, "patterns": ["(?i)\\bdesign\\s*pressure\\s*[:\\-]?\\s*([0-9.]+\\s*(?:bar\\s*g?|kg/cm2|kpa|mpa|psi(?:g)?))"]},
+        {"name": "design_temperature", "type": "quantity", "required": false, "patterns": ["(?i)\\bdesign\\s*temp(?:erature)?\\s*[:\\-]?\\s*([\\-0-9.]+\\s*(?:deg\\s*c|°c|c|f))"]},
+        {"name": "operating_pressure", "type": "quantity", "required": false, "patterns": ["(?i)\\boperating\\s*pressure\\s*[:\\-]?\\s*([0-9.]+\\s*(?:bar\\s*g?|kg/cm2|kpa|mpa|psi(?:g)?))"]},
+        {"name": "operating_temperature", "type": "quantity", "required": false, "patterns": ["(?i)\\boperating\\s*temp(?:erature)?\\s*[:\\-]?\\s*([\\-0-9.]+\\s*(?:deg\\s*c|°c|c|f))"]},
+        {"name": "capacity", "type": "quantity", "required": false, "patterns": ["(?i)\\b(?:capacity|rated\\s*flow|duty)\\s*[:\\-]?\\s*([0-9.]+\\s*[A-Za-z/³^0-9]{1,12})"]},
+        {"name": "material_of_construction", "type": "text", "required": false, "patterns": ["(?i)\\b(?:material(?:\\s*of\\s*construction)?|moc)\\s*[:\\-]?\\s*([A-Za-z0-9][A-Za-z0-9 .,/\\-]{2,60})"]},
+        {"name": "corrosion_allowance", "type": "quantity", "required": false, "patterns": ["(?i)\\bcorrosion\\s*allowance\\s*[:\\-]?\\s*([0-9.]+\\s*(?:mm|in(?:ch)?))"]},
+        {"name": "code_of_construction", "type": "text", "required": false, "patterns": ["(?i)\\b(?:code|designed\\s*to|as\\s*per)\\s*[:\\-]?\\s*(ASME[^,;\\n]{0,20}|API\\s*\\d{3}|IS\\s*\\d{3,5}|IBR)"]}
+      ],
+      "validation": [
+        {"field": "design_pressure", "rule": "has_unit", "detail": "Pressure without a unit is unusable - flag rather than assume bar."},
+        {"field": "design_temperature", "rule": "has_unit", "detail": "Temperature without a unit is unusable - flag rather than assume Celsius."},
+        {"field": "operating_pressure", "rule": "not_greater_than", "compare_to": "design_pressure", "detail": "Operating above design is a finding, not a transcription error - flag it."}
+      ]
+    },
+    "work_order": {
+      "name": "Work Order",
+      "description": "CMMS-issued instruction authorising a maintenance job with priority, planning and permit linkage.",
+      "classification": {
+        "keywords": ["work order", "wo no", "job card", "priority", "planner", "craft", "estimated hours", "requested by", "cmms", "notification"],
+        "filename_hints": ["workorder", "wo", "jobcard", "job_card"],
+        "min_score": 2
+      },
+      "expected_fields": ["work_order_no", "equipment_id", "description", "work_type", "priority", "requested_by", "planned_start", "planned_finish", "estimated_hours", "craft", "permit_required", "status", "source_page"],
+      "extraction_fields": [
+        {"name": "work_order_no", "type": "reference", "required": true, "patterns": ["(?i)\\b(?:work\\s*order|w\\.?o\\.?)\\s*(?:no\\.?|number|#)?\\s*[:\\-]?\\s*([A-Z0-9][A-Z0-9/\\-]{3,20})"]},
+        {"name": "equipment_id", "type": "tag", "required": true, "patterns": ["(?i)\\b(?:equipment|asset|functional\\s*location|tag)\\s*[:\\-]?\\s*([A-Z]{1,4}-?\\d{2,5}[A-Z]?)"]},
+        {"name": "work_type", "type": "enum", "required": false, "enum": ["preventive", "corrective", "breakdown", "inspection", "calibration", "modification", "shutdown"]},
+        {"name": "priority", "type": "enum", "required": false, "enum": ["emergency", "urgent", "high", "medium", "low", "routine"], "patterns": ["(?i)\\bpriority\\s*[:\\-]?\\s*(emergency|urgent|high|medium|low|routine|\\d)"]},
+        {"name": "planned_start", "type": "date", "required": false, "patterns": ["(?i)\\b(?:planned|scheduled)\\s*start\\s*[:\\-]?\\s*([0-9A-Za-z/\\-. ]{6,20})"]},
+        {"name": "estimated_hours", "type": "number", "required": false, "patterns": ["(?i)\\bestimated\\s*(?:hours?|man[\\s\\-]?hours?)\\s*[:\\-]?\\s*([0-9.]{1,6})"]},
+        {"name": "permit_required", "type": "boolean", "required": false, "patterns": ["(?i)\\bpermit\\s*(?:required|type)\\s*[:\\-]?\\s*(yes|no|hot|cold|confined\\s*space|height)"]},
+        {"name": "status", "type": "enum", "required": false, "enum": ["created", "released", "in progress", "completed", "closed", "cancelled"]}
+      ],
+      "validation": [
+        {"field": "work_order_no", "rule": "required", "detail": "Work orders are referenced by number in every downstream record."},
+        {"field": "equipment_id", "rule": "required", "detail": "A work order must name the asset it acts on."},
+        {"field": "priority", "rule": "in_enum", "detail": "Priority must match the declared scale; unknown values are flagged."}
+      ]
+    },
+    "calibration_report": {
+      "name": "Calibration Report",
+      "description": "Record of instrument calibration with as-found/as-left readings, reference standard and traceability.",
+      "classification": {
+        "keywords": ["calibration", "as found", "as left", "reference standard", "traceability", "span", "zero", "loop test", "accuracy", "tolerance", "calibrated by", "due date"],
+        "filename_hints": ["calibration", "cal", "loop_test", "certificate"],
+        "min_score": 2
+      },
+      "expected_fields": ["instrument_tag", "instrument_type", "range", "unit", "calibration_date", "next_due_date", "calibrated_by", "reference_standard", "standard_certificate_no", "as_found_readings", "as_left_readings", "tolerance", "result", "ambient_conditions", "source_page"],
+      "extraction_fields": [
+        {"name": "instrument_tag", "type": "tag", "required": true, "patterns": ["\\b(?:PI|PT|PC|TI|TT|TC|FI|FT|FC|LI|LT|LC|AI|AT|PG|TG)-?\\d{2,5}[A-Z]?\\b"]},
+        {"name": "range", "type": "text", "required": false, "patterns": ["(?i)\\brange\\s*[:\\-]?\\s*([\\-0-9.]+\\s*(?:to|-)\\s*[\\-0-9.]+\\s*[A-Za-z/°]{0,10})"]},
+        {"name": "calibration_date", "type": "date", "required": true, "patterns": ["(?i)\\b(?:calibration|calibrated\\s*on)\\s*date?\\s*[:\\-]?\\s*([0-9A-Za-z/\\-. ]{6,20})"], "fallback": "doc_date"},
+        {"name": "next_due_date", "type": "date", "required": false, "patterns": ["(?i)\\b(?:next\\s*due|due\\s*date|valid\\s*(?:up\\s*to|till))\\s*[:\\-]?\\s*([0-9A-Za-z/\\-. ]{6,20})"]},
+        {"name": "calibrated_by", "type": "person", "required": false, "patterns": ["(?i)\\bcalibrated\\s*by\\s*[:\\-]?\\s*([A-Z][A-Za-z.]*(?:[ \\t]+[A-Z][A-Za-z.]*){0,3})"], "fallback": "author"},
+        {"name": "reference_standard", "type": "text", "required": false, "patterns": ["(?i)\\b(?:reference|master)\\s*(?:standard|instrument)\\s*[:\\-]?\\s*([A-Za-z0-9][A-Za-z0-9 ./\\-]{2,40})"]},
+        {"name": "as_found_readings", "type": "table", "required": false, "source": "tables"},
+        {"name": "as_left_readings", "type": "table", "required": false, "source": "tables"},
+        {"name": "tolerance", "type": "quantity", "required": false, "patterns": ["(?i)\\btolerance\\s*[:\\-]?\\s*([+\\-0-9.% ]{2,15})"]},
+        {"name": "result", "type": "enum", "required": false, "enum": ["pass", "fail", "acceptable", "adjusted", "rejected"]}
+      ],
+      "validation": [
+        {"field": "instrument_tag", "rule": "required", "detail": "Calibration must be attributable to one instrument."},
+        {"field": "next_due_date", "rule": "date_after", "compare_to": "calibration_date", "detail": "Due date must follow the calibration date."},
+        {"field": "as_found_readings", "rule": "within_tolerance_check", "detail": "Compare as-found error against stated tolerance; report the comparison, never silently correct it."}
+      ]
+    },
+    "test_report": {
+      "name": "Test Report",
+      "description": "Result of a performance, material, hydro, or acceptance test on equipment or material.",
+      "classification": {
+        "keywords": ["test report", "test certificate", "hydrotest", "hydraulic test", "performance test", "acceptance criteria", "test pressure", "test result", "sample id", "witness", "tpi"],
+        "filename_hints": ["test", "hydrotest", "certificate", "tc", "report"],
+        "min_score": 2
+      },
+      "expected_fields": ["test_id", "equipment_id", "test_type", "test_date", "test_conditions", "acceptance_criteria", "results", "measured_values", "witnessed_by", "conclusion", "deviations", "source_page"],
+      "extraction_fields": [
+        {"name": "test_id", "type": "reference", "required": false, "patterns": ["(?i)\\btest\\s*(?:no\\.?|number|id|certificate\\s*no\\.?)\\s*[:\\-]?\\s*([A-Z0-9][A-Z0-9/\\-]{2,25})"]},
+        {"name": "equipment_id", "type": "tag", "required": false, "patterns": ["(?i)\\b(?:equipment|item|tag)\\s*[:\\-]?\\s*([A-Z]{1,4}-?\\d{2,5}[A-Z]?)"]},
+        {"name": "test_type", "type": "enum", "required": false, "enum": ["hydrotest", "pneumatic test", "performance test", "material test", "vibration test", "insulation resistance", "functional test", "acceptance test"]},
+        {"name": "test_date", "type": "date", "required": true, "fallback": "doc_date"},
+        {"name": "test_conditions", "type": "text", "required": false, "patterns": ["(?i)\\btest\\s*(?:pressure|conditions?|medium|duration)\\s*[:\\-]?\\s*(.{2,120})"]},
+        {"name": "acceptance_criteria", "type": "text", "required": false, "patterns": ["(?i)\\bacceptance\\s*criteri(?:a|on)\\s*[:\\-]?\\s*(.{3,300})"]},
+        {"name": "measured_values", "type": "table", "required": false, "source": "tables"},
+        {"name": "witnessed_by", "type": "person", "required": false, "patterns": ["(?i)\\bwitness(?:ed)?\\s*(?:by)?\\s*[:\\-]?\\s*([A-Z][A-Za-z.]*(?:[ \\t]+[A-Z][A-Za-z.]*){0,3})"]},
+        {"name": "conclusion", "type": "enum", "required": false, "enum": ["pass", "fail", "accepted", "rejected", "conditional"]}
+      ],
+      "validation": [
+        {"field": "test_date", "rule": "required", "detail": "Test results are only meaningful with a date."},
+        {"field": "conclusion", "rule": "in_enum", "detail": "Conclusion must be one of the declared outcomes."},
+        {"field": "measured_values", "rule": "compare_to_criteria", "detail": "Compare measured values with acceptance criteria and report both - never restate a pass the document does not give."}
+      ]
+    }
+  },
+  "fallback_schema": {
+    "name": "Generic Industrial Document",
+    "id": "generic_document",
+    "description": "Used when no schema scores above its minimum. Content is still ingested with full page/section provenance; only schema-specific field extraction is skipped.",
+    "expected_fields": ["title", "revision", "doc_date", "author", "plant_unit", "department", "equipment", "confidentiality"],
+    "extraction_fields": [],
+    "validation": []
+  }
+}

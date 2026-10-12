@@ -1,0 +1,13 @@
+# data_date: 2026-09-11
+code,name,wbs,wbs name,type,duration,start,finish,baseline start,baseline finish,actual start,actual finish,% complete,remaining duration,constraint date,predecessors,contractor,location,unit,quantity
+BR-P17-EXC,Foundation excavation - Pier P17,HPA.1.P17,Bridge Pier P17,task,5,2026-09-01,2026-09-05,2026-09-01,2026-09-05,2026-09-01,2026-09-05,100,0,,,Vasundhara Infra Ltd (DEMO),Bridge 1 Km 12.450,m3,420
+BR-P17-PCC,PCC and reinforcement - Pier P17,HPA.1.P17,Bridge Pier P17,task,2,2026-09-06,2026-09-07,2026-09-06,2026-09-07,2026-09-06,2026-09-07,100,0,,BR-P17-EXC,Vasundhara Infra Ltd (DEMO),Bridge 1 Km 12.450,t,14
+BR-P17-CON,Pier concreting - Pier P17,HPA.1.P17,Bridge Pier P17,task,2,2026-09-12,2026-09-13,2026-09-08,2026-09-09,,,0,2,2026-09-12,BR-P17-PCC,Vasundhara Infra Ltd (DEMO),Bridge 1 Km 12.450,m3,180
+BR-P17-CUR,Curing and deshuttering - Pier P17,HPA.1.P17,Bridge Pier P17,task,1,2026-09-14,2026-09-14,2026-09-10,2026-09-10,,,0,1,,BR-P17-CON,Vasundhara Infra Ltd (DEMO),Bridge 1 Km 12.450,,
+BR-P17-CAP,Pier cap - Pier P17,HPA.1.P17,Bridge Pier P17,task,5,2026-09-15,2026-09-19,2026-09-11,2026-09-15,,,0,5,,BR-P17-CUR,Vasundhara Infra Ltd (DEMO),Bridge 1 Km 12.450,m3,60
+BR-S16-GIR,Girder erection - Span P16-P17,HPA.1.S16,Span P16-P17,task,6,2026-09-20,2026-09-25,2026-09-16,2026-09-21,,,0,6,,BR-P17-CAP,Vasundhara Infra Ltd (DEMO),Bridge 1,nos,5
+BR-S16-DECK,Deck slab - Span P16-P17,HPA.1.S16,Span P16-P17,task,6,2026-09-26,2026-10-01,2026-09-22,2026-09-27,,,0,6,,BR-S16-GIR,Vasundhara Infra Ltd (DEMO),Bridge 1,m3,95
+MS-BR1,Bridge 1 deck complete,HPA.1,Bridge 1,finish_milestone,0,,2026-10-01,,2026-09-27,,,0,0,,BR-S16-DECK,Vasundhara Infra Ltd (DEMO),Bridge 1,,
+RD-DRN,Side drains Km 12-14,HPA.2,Road works,task,8,2026-09-01,2026-09-12,2026-09-01,2026-09-08,2026-09-01,,85,2,,,Vasundhara Infra Ltd (DEMO),Km 12-14,rmt,1600
+RD-GSB,GSB and WMM Km 12-14,HPA.2,Road works,task,10,2026-09-13,2026-09-22,2026-09-09,2026-09-18,,,0,10,,RD-DRN,Vasundhara Infra Ltd (DEMO),Km 12-14,m3,2400
+MS-END,Package A substantial completion,HPA,Highway Package A,finish_milestone,0,,2026-10-01,,2026-09-27,,,0,0,,MS-BR1; RD-GSB,Vasundhara Infra Ltd (DEMO),Km 12-14,,

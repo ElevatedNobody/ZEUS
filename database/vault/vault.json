@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "kdf": "scrypt",
+  "n": 32768,
+  "r": 8,
+  "p": 1,
+  "salt": "c394e7014a6857593e98e2ed05abd569",
+  "verifier": "47313275a0a0e63200aaa16206e8e92349bfe35ba3fec10fa54c96aef109a5a1b16066f0af7222d9e31fdb6d46bfc5e1abe2de8c1d",
+  "cipher": "aes-256-gcm",
+  "created_at": 1789072167.9213042
+}

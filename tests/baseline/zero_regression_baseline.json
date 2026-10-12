@@ -1,0 +1,1458 @@
+{
+ "agents": {
+  "alerts": {
+   "name": "Alert Agent",
+   "tools": []
+  },
+  "automation": {
+   "name": "Automation Agent",
+   "tools": []
+  },
+  "coding": {
+   "name": "Coding Agent",
+   "tools": []
+  },
+  "conversation": {
+   "name": "Conversation Agent",
+   "tools": []
+  },
+  "data_analysis": {
+   "name": "Data Analysis Agent",
+   "tools": []
+  },
+  "document": {
+   "name": "Document Agent",
+   "tools": []
+  },
+  "engineering": {
+   "name": "Engineering Agent",
+   "tools": []
+  },
+  "file": {
+   "name": "File Agent",
+   "tools": []
+  },
+  "industrial_agents": {
+   "name": "Industrial Agent Runner",
+   "tools": []
+  },
+  "inspection": {
+   "name": "Inspection Agent",
+   "tools": []
+  },
+  "inventory": {
+   "name": "Inventory Agent",
+   "tools": []
+  },
+  "knowledge": {
+   "name": "Industrial Knowledge Agent",
+   "tools": []
+  },
+  "maintenance": {
+   "name": "Maintenance Agent",
+   "tools": []
+  },
+  "memory": {
+   "name": "Memory Agent",
+   "tools": []
+  },
+  "operations": {
+   "name": "Operations Agent",
+   "tools": []
+  },
+  "people": {
+   "name": "Employee Register Agent",
+   "tools": []
+  },
+  "productivity": {
+   "name": "Productivity Agent",
+   "tools": []
+  },
+  "report": {
+   "name": "Report Agent",
+   "tools": []
+  },
+  "safety": {
+   "name": "Safety Agent",
+   "tools": []
+  },
+  "security": {
+   "name": "Security Agent",
+   "tools": []
+  },
+  "system": {
+   "name": "System Agent",
+   "tools": []
+  },
+  "vault": {
+   "name": "Secure Locker Agent",
+   "tools": []
+  },
+  "vision": {
+   "name": "Vision Agent",
+   "tools": []
+  }
+ },
+ "autofix_strategies": [
+  "broken_formula_reference",
+  "empty_deck",
+  "empty_document",
+  "empty_workbook",
+  "file_corrupt",
+  "file_empty",
+  "file_missing",
+  "layout_overflow",
+  "low_confidence",
+  "low_extraction",
+  "no_path_returned",
+  "syntax_error",
+  "tool_reported_error",
+  "type_too_small"
+ ],
+ "bat_files": [
+  "APPLY_FIREWALL.bat",
+  "FIREWALL_AGNI.bat",
+  "INSTALL.bat",
+  "INSTALL_AGNI.bat",
+  "INSTALL_ALL.bat",
+  "REMOVE_FIREWALL.bat",
+  "REPAIR_AGNI.bat",
+  "SETUP_AGNI.bat",
+  "SETUP_VOICE.bat",
+  "START.bat",
+  "START_AGNI.bat",
+  "TEST_AGNI.bat",
+  "VERIFY_MODELS.bat"
+ ],
+ "bridge_methods": [
+  "change_password",
+  "create_user",
+  "hello",
+  "history",
+  "listen",
+  "lock",
+  "logout",
+  "open_path",
+  "pick_file",
+  "pick_folder",
+  "probe_network",
+  "resolve_approval",
+  "set_speak",
+  "state",
+  "status",
+  "stop_speaking",
+  "submit",
+  "telemetry",
+  "tool",
+  "unlock_vault"
+ ],
+ "config_keys": [
+  "auth.allow_multiple_users",
+  "auth.app_name",
+  "auth.app_tagline",
+  "auth.debug",
+  "auth.lockout_seconds",
+  "auth.log_level",
+  "auth.max_failed_attempts",
+  "auth.min_password_length",
+  "auth.require_login",
+  "auth.session_idle_minutes",
+  "auth.version",
+  "face.app_name",
+  "face.app_tagline",
+  "face.camera_index",
+  "face.debug",
+  "face.enabled",
+  "face.liveness",
+  "face.liveness_threshold",
+  "face.log_level",
+  "face.login",
+  "face.login_margin",
+  "face.login_threshold",
+  "face.model_pack",
+  "face.threshold",
+  "face.version",
+  "memory.app_name",
+  "memory.app_tagline",
+  "memory.backend",
+  "memory.context_chars",
+  "memory.debug",
+  "memory.log_level",
+  "memory.max_results",
+  "memory.min_score",
+  "memory.on_unavailable",
+  "memory.version",
+  "models.app_name",
+  "models.app_tagline",
+  "models.debug",
+  "models.keep_alive",
+  "models.log_level",
+  "models.max_resident",
+  "models.num_ctx",
+  "models.version",
+  "nodes.app_name",
+  "nodes.app_tagline",
+  "nodes.debug",
+  "nodes.enabled",
+  "nodes.log_level",
+  "nodes.node_name",
+  "nodes.port",
+  "nodes.version",
+  "ollama.allow_remote",
+  "ollama.app_name",
+  "ollama.app_tagline",
+  "ollama.debug",
+  "ollama.generation_timeout",
+  "ollama.host",
+  "ollama.log_level",
+  "ollama.timeout",
+  "ollama.version",
+  "paths.app_name",
+  "paths.app_tagline",
+  "paths.base_dir",
+  "paths.config_dir",
+  "paths.data_dir",
+  "paths.debug",
+  "paths.log_dir",
+  "paths.log_level",
+  "paths.models_dir",
+  "paths.version",
+  "performance.app_name",
+  "performance.app_tagline",
+  "performance.debug",
+  "performance.log_level",
+  "performance.low_resource",
+  "performance.version",
+  "security.app_name",
+  "security.app_tagline",
+  "security.confirm_threshold",
+  "security.debug",
+  "security.firewall_include_ollama",
+  "security.lan_ranges",
+  "security.log_level",
+  "security.network_mode",
+  "security.require_trusted_models",
+  "security.version",
+  "voice.app_name",
+  "voice.app_tagline",
+  "voice.debug",
+  "voice.enabled",
+  "voice.listen_max_seconds",
+  "voice.listen_seconds",
+  "voice.listen_until_silence",
+  "voice.log_level",
+  "voice.max_spoken_chars",
+  "voice.preload",
+  "voice.stt_compute_type",
+  "voice.stt_device",
+  "voice.stt_isolation",
+  "voice.stt_model_size",
+  "voice.stt_provider",
+  "voice.tts_cfg_weight",
+  "voice.tts_device",
+  "voice.tts_exaggeration",
+  "voice.tts_idle_seconds",
+  "voice.tts_keep_loaded",
+  "voice.tts_provider",
+  "voice.tts_temperature",
+  "voice.tts_voice_prompt",
+  "voice.tts_volume",
+  "voice.version",
+  "voice.voice_auto_play",
+  "voice.voice_device",
+  "voice.voice_fallback",
+  "voice.voice_interruptible",
+  "voice.voice_language",
+  "voice.voice_polish",
+  "voice.voice_profile",
+  "voice.voice_speed",
+  "voice.voice_streaming",
+  "voice.voice_style"
+ ],
+ "database_tables": [
+  "auth_events",
+  "calendar_events",
+  "document_chunks",
+  "employees",
+  "facts",
+  "industrial_assets",
+  "industrial_chunks",
+  "industrial_documents",
+  "industrial_ingestion_log",
+  "messages",
+  "notes",
+  "schedules",
+  "sessions",
+  "task_history",
+  "todos",
+  "users",
+  "vault_audit",
+  "vault_files"
+ ],
+ "model_slots": [
+  "classify",
+  "code",
+  "default",
+  "fast",
+  "json_structured",
+  "multilingual",
+  "reasoning",
+  "vision"
+ ],
+ "ops_commands": [
+  "firewall",
+  "firewall all",
+  "firewall apply",
+  "firewall audit",
+  "firewall lockdown",
+  "firewall remove",
+  "firewall restore",
+  "firewall sovereign",
+  "firewall status",
+  "firewall tamper",
+  "firewall test",
+  "install-verify",
+  "preflight",
+  "repair",
+  "system",
+  "test"
+ ],
+ "pipeline_stages": [
+  "authorize",
+  "autofix",
+  "classify",
+  "deliver",
+  "execute",
+  "intent",
+  "memory",
+  "plan",
+  "route",
+  "validate"
+ ],
+ "route_targets": [
+  "acknowledge_alert",
+  "add_event",
+  "add_file_to_vault",
+  "add_note",
+  "add_todo",
+  "agenda_for",
+  "analyze_image",
+  "analyze_spreadsheet",
+  "apply_wfp_firewall",
+  "approval_note",
+  "ask_industrial_kb",
+  "ask_knowledge_base",
+  "calculate",
+  "cancel_shutdown",
+  "cancel_task",
+  "classify_industrial_document",
+  "clear_knowledge_base",
+  "close_application",
+  "complete_todo",
+  "convert_file",
+  "copy_file",
+  "create_folder",
+  "create_presentation",
+  "create_spreadsheet",
+  "delete_event",
+  "delete_file",
+  "delete_note",
+  "delete_todo",
+  "department_roster",
+  "describe_agent",
+  "engage_lockdown",
+  "engineering_calculate",
+  "equipment_details",
+  "equipment_presentation",
+  "equipment_trend",
+  "executive_briefing_pack",
+  "executive_presentation",
+  "executive_report",
+  "executive_workbook",
+  "explain_last_run",
+  "export_plant_data",
+  "export_vault_file",
+  "extract_industrial_document",
+  "face_status",
+  "find_employee",
+  "find_generated_document",
+  "find_part",
+  "find_sop",
+  "focus_window",
+  "forget_document",
+  "forget_fact",
+  "get_battery",
+  "get_clipboard",
+  "get_cpu_usage",
+  "get_disk_usage",
+  "get_memory_usage",
+  "get_system_info",
+  "get_time",
+  "hardware_profile",
+  "hotkey",
+  "import_readings_csv",
+  "index_file",
+  "index_folder",
+  "index_my_documents",
+  "industrial_model_health",
+  "industrial_status",
+  "industrial_term",
+  "ingest_industrial_document",
+  "ingest_industrial_folder",
+  "ingest_industrial_knowledge_corpus",
+  "inspection_history",
+  "inventory_summary",
+  "knowledge_stats",
+  "list_agents",
+  "list_artifacts",
+  "list_employees",
+  "list_engineering_formulas",
+  "list_equipment",
+  "list_events",
+  "list_generated_documents",
+  "list_industrial_agents",
+  "list_industrial_documents",
+  "list_isolations",
+  "list_knowledge_sources",
+  "list_meetings",
+  "list_memories",
+  "list_notes",
+  "list_permits",
+  "list_plant_alerts",
+  "list_running_apps",
+  "list_specialists",
+  "list_todos",
+  "list_vault_files",
+  "list_windows",
+  "lock_screen",
+  "lock_vault",
+  "maintenance_due",
+  "maintenance_history",
+  "maintenance_report",
+  "maximize_window",
+  "media_control",
+  "minimize_window",
+  "model_integrity_report",
+  "model_routing",
+  "monitoring_status",
+  "move_file",
+  "network_status",
+  "open_and_type",
+  "open_application",
+  "open_browser",
+  "open_document",
+  "open_file_explorer",
+  "open_settings",
+  "open_vault_file",
+  "operations_presentation",
+  "overdue_tasks",
+  "pipeline_status",
+  "plant_data_sources",
+  "plant_status",
+  "plant_telemetry",
+  "press_key",
+  "process_meeting_audio",
+  "rag_write_document",
+  "read_file",
+  "read_screen",
+  "register_face",
+  "release_models",
+  "remember_fact",
+  "remind_me",
+  "remove_employee",
+  "remove_face",
+  "remove_vault_file",
+  "remove_wfp_firewall",
+  "resolve_alert",
+  "restart_pc",
+  "run_command",
+  "run_diagnostics",
+  "run_industrial_agent",
+  "safety_report",
+  "safety_status",
+  "schedule_maintenance",
+  "schedule_meeting",
+  "search_files",
+  "search_industrial_evidence",
+  "search_knowledge",
+  "security_status",
+  "seed_industrial_demo_data",
+  "set_clipboard",
+  "show_audit_log",
+  "shutdown_pc",
+  "solve_equation",
+  "sovereignty_report",
+  "spreadsheet_to_presentation",
+  "spreadsheet_to_report",
+  "stop_watching_folder",
+  "system_information",
+  "take_screenshot",
+  "type_text",
+  "unit_convert",
+  "validation_report",
+  "vault_audit_log",
+  "vault_status",
+  "verify_audit_chain",
+  "verify_my_face",
+  "view_logs",
+  "watch_folder",
+  "wfp_blocked_connections",
+  "wfp_firewall_status"
+ ],
+ "task_kinds": [
+  "automation",
+  "chat",
+  "code",
+  "conversion",
+  "document_read",
+  "excel",
+  "file_ops",
+  "industrial_data",
+  "memory",
+  "multi_step",
+  "ocr",
+  "pdf",
+  "powerpoint",
+  "rag",
+  "reasoning",
+  "unknown",
+  "vision",
+  "word"
+ ],
+ "test_functions": 906,
+ "tools": {
+  "acknowledge_alert": {
+   "module": "industrial.plant_tools",
+   "risk": "LOW_RISK"
+  },
+  "add_employee": {
+   "module": "core.vault_tools",
+   "risk": "MEDIUM_RISK"
+  },
+  "add_event": {
+   "module": "core.builtin_tools",
+   "risk": "SAFE"
+  },
+  "add_file_to_vault": {
+   "module": "core.vault_tools",
+   "risk": "MEDIUM_RISK"
+  },
+  "add_note": {
+   "module": "core.builtin_tools",
+   "risk": "SAFE"
+  },
+  "add_todo": {
+   "module": "core.builtin_tools",
+   "risk": "SAFE"
+  },
+  "agenda_for": {
+   "module": "core.builtin_tools",
+   "risk": "SAFE"
+  },
+  "agent_roster": {
+   "module": "core.agni_tools",
+   "risk": "SAFE"
+  },
+  "analyze_image": {
+   "module": "core.builtin_tools",
+   "risk": "SAFE"
+  },
+  "analyze_spreadsheet": {
+   "module": "industrial.plant_tools",
+   "risk": "SAFE"
+  },
+  "apply_wfp_firewall": {
+   "module": "core.agni_tools",
+   "risk": "HIGH_RISK"
+  },
+  "approval_note": {
+   "module": "industrial.plant_tools",
+   "risk": "LOW_RISK"
+  },
+  "approve_permit": {
+   "module": "industrial.plant_tools",
+   "risk": "HIGH_RISK"
+  },
+  "ask_industrial_kb": {
+   "module": "industrial.tools",
+   "risk": "SAFE"
+  },
+  "ask_knowledge_base": {
+   "module": "core.builtin_tools",
+   "risk": "SAFE"
+  },
+  "cancel_reminder": {
+   "module": "core.builtin_tools",
+   "risk": "SAFE"
+  },
+  "cancel_shutdown": {
+   "module": "core.builtin_tools",
+   "risk": "LOW_RISK"
+  },
+  "cancel_task": {
+   "module": "core.builtin_tools",
+   "risk": "SAFE"
+  },
+  "capability_report": {
+   "module": "core.orchestration.tools",
+   "risk": "SAFE"
+  },
+  "classify_industrial_document": {
+   "module": "industrial.tools",
+   "risk": "SAFE"
+  },
+  "clear_industrial_knowledge_base": {
+   "module": "industrial.tools",
+   "risk": "MEDIUM_RISK"
+  },
+  "clear_knowledge_base": {
+   "module": "core.builtin_tools",
+   "risk": "MEDIUM_RISK"
+  },
+  "close_application": {
+   "module": "core.builtin_tools",
+   "risk": "MEDIUM_RISK"
+  },
+  "close_window": {
+   "module": "core.builtin_tools",
+   "risk": "MEDIUM_RISK"
+  },
+  "complete_todo": {
+   "module": "core.builtin_tools",
+   "risk": "SAFE"
+  },
+  "convert_file": {
+   "module": "core.builtin_tools",
+   "risk": "LOW_RISK"
+  },
+  "copy_file": {
+   "module": "core.builtin_tools",
+   "risk": "LOW_RISK"
+  },
+  "create_folder": {
+   "module": "core.builtin_tools",
+   "risk": "LOW_RISK"
+  },
+  "create_presentation": {
+   "module": "core.builtin_tools",
+   "risk": "MEDIUM_RISK"
+  },
+  "create_schedule": {
+   "module": "core.builtin_tools",
+   "risk": "MEDIUM_RISK"
+  },
+  "create_spreadsheet": {
+   "module": "core.builtin_tools",
+   "risk": "MEDIUM_RISK"
+  },
+  "delete_event": {
+   "module": "core.builtin_tools",
+   "risk": "SAFE"
+  },
+  "delete_file": {
+   "module": "core.builtin_tools",
+   "risk": "HIGH_RISK"
+  },
+  "delete_note": {
+   "module": "core.builtin_tools",
+   "risk": "SAFE"
+  },
+  "delete_todo": {
+   "module": "core.builtin_tools",
+   "risk": "SAFE"
+  },
+  "department_roster": {
+   "module": "core.vault_tools",
+   "risk": "LOW_RISK"
+  },
+  "describe_agent": {
+   "module": "core.builtin_tools",
+   "risk": "SAFE"
+  },
+  "disengage_lockdown": {
+   "module": "core.agni_tools",
+   "risk": "HIGH_RISK"
+  },
+  "engage_lockdown": {
+   "module": "core.agni_tools",
+   "risk": "MEDIUM_RISK"
+  },
+  "engineering_calculate": {
+   "module": "core.agni_tools",
+   "risk": "SAFE"
+  },
+  "engineering_formula": {
+   "module": "core.agni_tools",
+   "risk": "SAFE"
+  },
+  "equipment_details": {
+   "module": "industrial.plant_tools",
+   "risk": "SAFE"
+  },
+  "equipment_presentation": {
+   "module": "industrial.plant_tools",
+   "risk": "LOW_RISK"
+  },
+  "equipment_trend": {
+   "module": "industrial.plant_tools",
+   "risk": "SAFE"
+  },
+  "executive_briefing_pack": {
+   "module": "industrial.plant_tools",
+   "risk": "LOW_RISK"
+  },
+  "executive_presentation": {
+   "module": "industrial.plant_tools",
+   "risk": "LOW_RISK"
+  },
+  "executive_report": {
+   "module": "industrial.plant_tools",
+   "risk": "LOW_RISK"
+  },
+  "executive_workbook": {
+   "module": "industrial.plant_tools",
+   "risk": "LOW_RISK"
+  },
+  "explain_last_run": {
+   "module": "core.orchestration.tools",
+   "risk": "SAFE"
+  },
+  "export_plant_data": {
+   "module": "industrial.plant_tools",
+   "risk": "LOW_RISK"
+  },
+  "export_vault_file": {
+   "module": "core.vault_tools",
+   "risk": "HIGH_RISK"
+  },
+  "extract_industrial_document": {
+   "module": "industrial.tools",
+   "risk": "SAFE"
+  },
+  "face_status": {
+   "module": "core.agni_tools",
+   "risk": "SAFE"
+  },
+  "find_employee": {
+   "module": "core.vault_tools",
+   "risk": "LOW_RISK"
+  },
+  "find_generated_document": {
+   "module": "industrial.plant_tools",
+   "risk": "SAFE"
+  },
+  "find_part": {
+   "module": "industrial.plant_tools",
+   "risk": "SAFE"
+  },
+  "find_sop": {
+   "module": "industrial.plant_tools",
+   "risk": "SAFE"
+  },
+  "firewall_status": {
+   "module": "core.agni_tools",
+   "risk": "SAFE"
+  },
+  "focus_window": {
+   "module": "core.builtin_tools",
+   "risk": "LOW_RISK"
+  },
+  "forget_document": {
+   "module": "core.builtin_tools",
+   "risk": "LOW_RISK"
+  },
+  "forget_fact": {
+   "module": "core.builtin_tools",
+   "risk": "LOW_RISK"
+  },
+  "forget_industrial_document": {
+   "module": "industrial.tools",
+   "risk": "LOW_RISK"
+  },
+  "get_battery": {
+   "module": "core.builtin_tools",
+   "risk": "SAFE"
+  },
+  "get_clipboard": {
+   "module": "core.builtin_tools",
+   "risk": "SAFE"
+  },
+  "get_cpu_usage": {
+   "module": "core.builtin_tools",
+   "risk": "SAFE"
+  },
+  "get_disk_usage": {
+   "module": "core.builtin_tools",
+   "risk": "SAFE"
+  },
+  "get_memory_usage": {
+   "module": "core.builtin_tools",
+   "risk": "SAFE"
+  },
+  "get_system_info": {
+   "module": "core.builtin_tools",
+   "risk": "SAFE"
+  },
+  "get_time": {
+   "module": "core.builtin_tools",
+   "risk": "SAFE"
+  },
+  "hardware_profile": {
+   "module": "core.agni_tools",
+   "risk": "SAFE"
+  },
+  "hotkey": {
+   "module": "core.builtin_tools",
+   "risk": "LOW_RISK"
+  },
+  "import_readings_csv": {
+   "module": "core.agni_tools",
+   "risk": "MEDIUM_RISK"
+  },
+  "index_file": {
+   "module": "core.builtin_tools",
+   "risk": "LOW_RISK"
+  },
+  "index_folder": {
+   "module": "core.builtin_tools",
+   "risk": "LOW_RISK"
+  },
+  "index_my_documents": {
+   "module": "core.builtin_tools",
+   "risk": "LOW_RISK"
+  },
+  "industrial_agent_status": {
+   "module": "industrial.tools",
+   "risk": "SAFE"
+  },
+  "industrial_model_health": {
+   "module": "industrial.tools",
+   "risk": "SAFE"
+  },
+  "industrial_status": {
+   "module": "industrial.tools",
+   "risk": "SAFE"
+  },
+  "industrial_term": {
+   "module": "industrial.tools",
+   "risk": "SAFE"
+  },
+  "ingest_industrial_document": {
+   "module": "industrial.tools",
+   "risk": "LOW_RISK"
+  },
+  "ingest_industrial_folder": {
+   "module": "industrial.tools",
+   "risk": "LOW_RISK"
+  },
+  "ingest_industrial_knowledge_corpus": {
+   "module": "industrial.tools",
+   "risk": "LOW_RISK"
+  },
+  "inspection_history": {
+   "module": "industrial.plant_tools",
+   "risk": "SAFE"
+  },
+  "inventory_summary": {
+   "module": "industrial.plant_tools",
+   "risk": "SAFE"
+  },
+  "knowledge_stats": {
+   "module": "core.builtin_tools",
+   "risk": "SAFE"
+  },
+  "list_agents": {
+   "module": "core.builtin_tools",
+   "risk": "SAFE"
+  },
+  "list_artifacts": {
+   "module": "core.agni_tools",
+   "risk": "SAFE"
+  },
+  "list_employees": {
+   "module": "core.vault_tools",
+   "risk": "LOW_RISK"
+  },
+  "list_engineering_formulas": {
+   "module": "core.agni_tools",
+   "risk": "SAFE"
+  },
+  "list_equipment": {
+   "module": "industrial.plant_tools",
+   "risk": "SAFE"
+  },
+  "list_events": {
+   "module": "core.builtin_tools",
+   "risk": "SAFE"
+  },
+  "list_generated_documents": {
+   "module": "industrial.plant_tools",
+   "risk": "SAFE"
+  },
+  "list_industrial_agents": {
+   "module": "industrial.tools",
+   "risk": "SAFE"
+  },
+  "list_industrial_documents": {
+   "module": "industrial.tools",
+   "risk": "SAFE"
+  },
+  "list_isolations": {
+   "module": "industrial.plant_tools",
+   "risk": "SAFE"
+  },
+  "list_knowledge_sources": {
+   "module": "core.builtin_tools",
+   "risk": "SAFE"
+  },
+  "list_meetings": {
+   "module": "core.builtin_tools",
+   "risk": "SAFE"
+  },
+  "list_memories": {
+   "module": "core.builtin_tools",
+   "risk": "SAFE"
+  },
+  "list_notes": {
+   "module": "core.builtin_tools",
+   "risk": "SAFE"
+  },
+  "list_permits": {
+   "module": "industrial.plant_tools",
+   "risk": "SAFE"
+  },
+  "list_plant_alerts": {
+   "module": "industrial.plant_tools",
+   "risk": "SAFE"
+  },
+  "list_plant_datasets": {
+   "module": "industrial.plant_tools",
+   "risk": "SAFE"
+  },
+  "list_running_apps": {
+   "module": "core.builtin_tools",
+   "risk": "SAFE"
+  },
+  "list_specialists": {
+   "module": "core.orchestration.tools",
+   "risk": "SAFE"
+  },
+  "list_todos": {
+   "module": "core.builtin_tools",
+   "risk": "SAFE"
+  },
+  "list_users": {
+   "module": "core.agni_tools",
+   "risk": "LOW_RISK"
+  },
+  "list_vault_files": {
+   "module": "core.vault_tools",
+   "risk": "SAFE"
+  },
+  "list_windows": {
+   "module": "core.builtin_tools",
+   "risk": "SAFE"
+  },
+  "lock_screen": {
+   "module": "core.builtin_tools",
+   "risk": "MEDIUM_RISK"
+  },
+  "lock_vault": {
+   "module": "core.vault_tools",
+   "risk": "SAFE"
+  },
+  "log_inspection": {
+   "module": "industrial.plant_tools",
+   "risk": "LOW_RISK"
+  },
+  "log_maintenance": {
+   "module": "industrial.plant_tools",
+   "risk": "LOW_RISK"
+  },
+  "maintenance_due": {
+   "module": "industrial.plant_tools",
+   "risk": "SAFE"
+  },
+  "maintenance_history": {
+   "module": "industrial.plant_tools",
+   "risk": "SAFE"
+  },
+  "maintenance_report": {
+   "module": "industrial.plant_tools",
+   "risk": "LOW_RISK"
+  },
+  "maximize_window": {
+   "module": "core.builtin_tools",
+   "risk": "LOW_RISK"
+  },
+  "media_control": {
+   "module": "core.builtin_tools",
+   "risk": "SAFE"
+  },
+  "minimize_window": {
+   "module": "core.builtin_tools",
+   "risk": "LOW_RISK"
+  },
+  "model_integrity_report": {
+   "module": "core.agni_tools",
+   "risk": "SAFE"
+  },
+  "model_routing": {
+   "module": "core.orchestration.tools",
+   "risk": "SAFE"
+  },
+  "monitoring_status": {
+   "module": "industrial.plant_tools",
+   "risk": "SAFE"
+  },
+  "mouse_click": {
+   "module": "core.builtin_tools",
+   "risk": "MEDIUM_RISK"
+  },
+  "mouse_move": {
+   "module": "core.builtin_tools",
+   "risk": "LOW_RISK"
+  },
+  "move_file": {
+   "module": "core.builtin_tools",
+   "risk": "MEDIUM_RISK"
+  },
+  "network_status": {
+   "module": "core.agni_tools",
+   "risk": "SAFE"
+  },
+  "open_and_type": {
+   "module": "core.builtin_tools",
+   "risk": "MEDIUM_RISK"
+  },
+  "open_application": {
+   "module": "core.builtin_tools",
+   "risk": "LOW_RISK"
+  },
+  "open_browser": {
+   "module": "core.builtin_tools",
+   "risk": "SAFE"
+  },
+  "open_document": {
+   "module": "industrial.plant_tools",
+   "risk": "LOW_RISK"
+  },
+  "open_file_explorer": {
+   "module": "core.builtin_tools",
+   "risk": "SAFE"
+  },
+  "open_settings": {
+   "module": "core.builtin_tools",
+   "risk": "LOW_RISK"
+  },
+  "open_vault_file": {
+   "module": "core.vault_tools",
+   "risk": "HIGH_RISK"
+  },
+  "operations_presentation": {
+   "module": "industrial.plant_tools",
+   "risk": "LOW_RISK"
+  },
+  "overdue_tasks": {
+   "module": "core.builtin_tools",
+   "risk": "SAFE"
+  },
+  "pin_trusted_models": {
+   "module": "core.agni_tools",
+   "risk": "HIGH_RISK"
+  },
+  "pipeline_status": {
+   "module": "core.orchestration.tools",
+   "risk": "SAFE"
+  },
+  "plant_data_sources": {
+   "module": "industrial.plant_tools",
+   "risk": "SAFE"
+  },
+  "plant_snapshot": {
+   "module": "core.agni_tools",
+   "risk": "SAFE"
+  },
+  "plant_status": {
+   "module": "industrial.plant_tools",
+   "risk": "SAFE"
+  },
+  "plant_telemetry": {
+   "module": "core.agni_tools",
+   "risk": "SAFE"
+  },
+  "press_key": {
+   "module": "core.builtin_tools",
+   "risk": "LOW_RISK"
+  },
+  "process_meeting_audio": {
+   "module": "core.agni_tools",
+   "risk": "MEDIUM_RISK"
+  },
+  "process_meeting_transcript": {
+   "module": "core.agni_tools",
+   "risk": "MEDIUM_RISK"
+  },
+  "productivity_snapshot": {
+   "module": "core.agni_tools",
+   "risk": "SAFE"
+  },
+  "rag_write_document": {
+   "module": "core.builtin_tools",
+   "risk": "MEDIUM_RISK"
+  },
+  "raise_plant_alert": {
+   "module": "industrial.plant_tools",
+   "risk": "LOW_RISK"
+  },
+  "read_file": {
+   "module": "core.builtin_tools",
+   "risk": "LOW_RISK"
+  },
+  "read_screen": {
+   "module": "core.builtin_tools",
+   "risk": "SAFE"
+  },
+  "record_isolation": {
+   "module": "industrial.plant_tools",
+   "risk": "MEDIUM_RISK"
+  },
+  "register_equipment": {
+   "module": "industrial.plant_tools",
+   "risk": "LOW_RISK"
+  },
+  "register_face": {
+   "module": "core.agni_tools",
+   "risk": "MEDIUM_RISK"
+  },
+  "release_models": {
+   "module": "core.orchestration.tools",
+   "risk": "LOW_RISK"
+  },
+  "remember_fact": {
+   "module": "core.builtin_tools",
+   "risk": "SAFE"
+  },
+  "remind_me": {
+   "module": "core.builtin_tools",
+   "risk": "SAFE"
+  },
+  "remove_employee": {
+   "module": "core.vault_tools",
+   "risk": "HIGH_RISK"
+  },
+  "remove_face": {
+   "module": "core.agni_tools",
+   "risk": "HIGH_RISK"
+  },
+  "remove_vault_file": {
+   "module": "core.vault_tools",
+   "risk": "HIGH_RISK"
+  },
+  "remove_wfp_firewall": {
+   "module": "core.agni_tools",
+   "risk": "HIGH_RISK"
+  },
+  "request_permit": {
+   "module": "industrial.plant_tools",
+   "risk": "MEDIUM_RISK"
+  },
+  "resolve_alert": {
+   "module": "industrial.plant_tools",
+   "risk": "MEDIUM_RISK"
+  },
+  "restart_pc": {
+   "module": "core.builtin_tools",
+   "risk": "CRITICAL"
+  },
+  "run_command": {
+   "module": "core.builtin_tools",
+   "risk": "HIGH_RISK"
+  },
+  "run_diagnostics": {
+   "module": "core.builtin_tools",
+   "risk": "SAFE"
+  },
+  "run_industrial_agent": {
+   "module": "core.agni_tools",
+   "risk": "LOW_RISK"
+  },
+  "run_python_sandboxed": {
+   "module": "core.agni_tools",
+   "risk": "MEDIUM_RISK"
+  },
+  "safety_report": {
+   "module": "industrial.plant_tools",
+   "risk": "LOW_RISK"
+  },
+  "safety_status": {
+   "module": "industrial.plant_tools",
+   "risk": "SAFE"
+  },
+  "schedule_maintenance": {
+   "module": "industrial.plant_tools",
+   "risk": "LOW_RISK"
+  },
+  "schedule_meeting": {
+   "module": "core.builtin_tools",
+   "risk": "SAFE"
+  },
+  "search_files": {
+   "module": "core.builtin_tools",
+   "risk": "SAFE"
+  },
+  "search_industrial_evidence": {
+   "module": "industrial.tools",
+   "risk": "SAFE"
+  },
+  "search_knowledge": {
+   "module": "core.builtin_tools",
+   "risk": "SAFE"
+  },
+  "security_events": {
+   "module": "core.agni_tools",
+   "risk": "SAFE"
+  },
+  "security_status": {
+   "module": "core.agni_tools",
+   "risk": "SAFE"
+  },
+  "seed_industrial_demo_data": {
+   "module": "industrial.plant_tools",
+   "risk": "MEDIUM_RISK"
+  },
+  "set_clipboard": {
+   "module": "core.builtin_tools",
+   "risk": "LOW_RISK"
+  },
+  "set_isolation_state": {
+   "module": "industrial.plant_tools",
+   "risk": "HIGH_RISK"
+  },
+  "set_network_mode": {
+   "module": "core.agni_tools",
+   "risk": "HIGH_RISK"
+  },
+  "set_user_role": {
+   "module": "core.agni_tools",
+   "risk": "HIGH_RISK"
+  },
+  "show_audit_log": {
+   "module": "core.builtin_tools",
+   "risk": "SAFE"
+  },
+  "shutdown_pc": {
+   "module": "core.builtin_tools",
+   "risk": "CRITICAL"
+  },
+  "solve_equation": {
+   "module": "core.agni_tools",
+   "risk": "SAFE"
+  },
+  "sovereignty_report": {
+   "module": "core.agni_tools",
+   "risk": "SAFE"
+  },
+  "spreadsheet_to_presentation": {
+   "module": "industrial.plant_tools",
+   "risk": "LOW_RISK"
+  },
+  "spreadsheet_to_report": {
+   "module": "industrial.plant_tools",
+   "risk": "LOW_RISK"
+  },
+  "stop_watching_folder": {
+   "module": "core.builtin_tools",
+   "risk": "SAFE"
+  },
+  "system_information": {
+   "module": "industrial.plant_tools",
+   "risk": "SAFE"
+  },
+  "take_screenshot": {
+   "module": "core.builtin_tools",
+   "risk": "LOW_RISK"
+  },
+  "type_text": {
+   "module": "core.builtin_tools",
+   "risk": "MEDIUM_RISK"
+  },
+  "uncomplete_todo": {
+   "module": "core.builtin_tools",
+   "risk": "SAFE"
+  },
+  "unit_convert": {
+   "module": "core.agni_tools",
+   "risk": "SAFE"
+  },
+  "update_employee": {
+   "module": "core.vault_tools",
+   "risk": "MEDIUM_RISK"
+  },
+  "update_note": {
+   "module": "core.builtin_tools",
+   "risk": "SAFE"
+  },
+  "update_schedule": {
+   "module": "core.builtin_tools",
+   "risk": "MEDIUM_RISK"
+  },
+  "update_stock": {
+   "module": "industrial.plant_tools",
+   "risk": "LOW_RISK"
+  },
+  "update_todo": {
+   "module": "core.builtin_tools",
+   "risk": "SAFE"
+  },
+  "validation_report": {
+   "module": "core.orchestration.tools",
+   "risk": "SAFE"
+  },
+  "vault_audit_log": {
+   "module": "core.vault_tools",
+   "risk": "SAFE"
+  },
+  "vault_overview": {
+   "module": "core.agni_tools",
+   "risk": "SAFE"
+  },
+  "vault_snapshot": {
+   "module": "core.agni_tools",
+   "risk": "LOW_RISK"
+  },
+  "vault_status": {
+   "module": "core.vault_tools",
+   "risk": "SAFE"
+  },
+  "verify_artifact": {
+   "module": "core.agni_tools",
+   "risk": "SAFE"
+  },
+  "verify_audit_chain": {
+   "module": "core.agni_tools",
+   "risk": "SAFE"
+  },
+  "verify_my_face": {
+   "module": "core.agni_tools",
+   "risk": "SAFE"
+  },
+  "view_logs": {
+   "module": "industrial.plant_tools",
+   "risk": "SAFE"
+  },
+  "watch_folder": {
+   "module": "core.builtin_tools",
+   "risk": "LOW_RISK"
+  },
+  "wfp_blocked_connections": {
+   "module": "core.agni_tools",
+   "risk": "MEDIUM_RISK"
+  },
+  "wfp_firewall_status": {
+   "module": "core.agni_tools",
+   "risk": "SAFE"
+  },
+  "write_document": {
+   "module": "core.builtin_tools",
+   "risk": "MEDIUM_RISK"
+  },
+  "write_file": {
+   "module": "core.builtin_tools",
+   "risk": "MEDIUM_RISK"
+  }
+ },
+ "ui_capabilities": [
+  "bridge:change_password",
+  "bridge:create_user",
+  "bridge:hello",
+  "bridge:history",
+  "bridge:listen",
+  "bridge:lock",
+  "bridge:logout",
+  "bridge:open_path",
+  "bridge:pick_file",
+  "bridge:pick_folder",
+  "bridge:probe_network",
+  "bridge:resolve_approval",
+  "bridge:set_speak",
+  "bridge:state",
+  "bridge:status",
+  "bridge:stop_speaking",
+  "bridge:submit",
+  "bridge:telemetry",
+  "bridge:unlock_vault",
+  "tool:acknowledge_alert",
+  "tool:add_employee",
+  "tool:add_event",
+  "tool:add_file_to_vault",
+  "tool:add_note",
+  "tool:add_todo",
+  "tool:agent_roster",
+  "tool:apply_wfp_firewall",
+  "tool:approval_note",
+  "tool:ask_industrial_kb",
+  "tool:capability_report",
+  "tool:delete_event",
+  "tool:delete_note",
+  "tool:delete_todo",
+  "tool:disengage_lockdown",
+  "tool:engage_lockdown",
+  "tool:equipment_details",
+  "tool:export_vault_file",
+  "tool:face_status",
+  "tool:hardware_profile",
+  "tool:ingest_industrial_document",
+  "tool:ingest_industrial_knowledge_corpus",
+  "tool:knowledge_stats",
+  "tool:list_artifacts",
+  "tool:list_industrial_documents",
+  "tool:list_knowledge_sources",
+  "tool:list_users",
+  "tool:lock_vault",
+  "tool:model_integrity_report",
+  "tool:model_routing",
+  "tool:network_status",
+  "tool:pin_trusted_models",
+  "tool:plant_snapshot",
+  "tool:plant_telemetry",
+  "tool:process_meeting_audio",
+  "tool:process_meeting_transcript",
+  "tool:productivity_snapshot",
+  "tool:register_face",
+  "tool:release_models",
+  "tool:remove_employee",
+  "tool:remove_face",
+  "tool:remove_wfp_firewall",
+  "tool:resolve_alert",
+  "tool:run_industrial_agent",
+  "tool:schedule_meeting",
+  "tool:security_status",
+  "tool:seed_industrial_demo_data",
+  "tool:set_network_mode",
+  "tool:set_user_role",
+  "tool:show_audit_log",
+  "tool:sovereignty_report",
+  "tool:vault_overview",
+  "tool:vault_snapshot",
+  "tool:verify_artifact",
+  "tool:verify_audit_chain",
+  "tool:verify_my_face",
+  "tool:wfp_blocked_connections",
+  "tool:wfp_firewall_status"
+ ],
+ "validators": [
+  "bundle",
+  "code",
+  "csv",
+  "data",
+  "docx",
+  "file",
+  "ocr",
+  "pdf",
+  "pptx",
+  "rag",
+  "text",
+  "xlsx"
+ ]
+}

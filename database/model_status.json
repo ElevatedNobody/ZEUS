@@ -1,0 +1,656 @@
+{
+  "models": {
+    "qwen3:4b": {
+      "model": "qwen3:4b",
+      "type": "CHAT",
+      "installed_as": "qwen3:4b",
+      "capabilities": [
+        "completion",
+        "tools",
+        "thinking"
+      ],
+      "present": true,
+      "digest": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7",
+      "checksum": "trusted",
+      "load": true,
+      "inference": true,
+      "function": true,
+      "function_detail": "answered 'READY' - this build ignores think=false (its reasoning leaked into the answer), so ZEUS lets it think and returns only the answer",
+      "load_s": 6.93,
+      "inference_s": 4.69,
+      "resident_gb": 2.96,
+      "vram_gb": 2.96,
+      "commit_delta_gb": 4.3,
+      "status": "PASS",
+      "error": "",
+      "cause": "",
+      "fallback": "",
+      "states": [
+        "DOWNLOADED",
+        "INSTALLED",
+        "CHECKSUM_VALID",
+        "LOAD_TEST_PASSED",
+        "INFERENCE_TEST_PASSED"
+      ],
+      "evidence": "unloaded before test: bge-m3:latest\n",
+      "slot": "fast",
+      "thinking_control": {
+        "think_false_leaks": true,
+        "think_true_clean": true,
+        "leaked_sample": "Hmm, the user wants me to reply with exactly one word: \"READY\". \n\nThis seems straightforward - they're testing if I can "
+      },
+      "unloaded": true,
+      "tested_at": 1790510193.653396,
+      "points": [
+        {
+          "point": "INSTALLED",
+          "status": "PASS",
+          "detail": "qwen3:4b"
+        },
+        {
+          "point": "DIGEST TRUSTED",
+          "status": "PASS",
+          "detail": "trusted"
+        },
+        {
+          "point": "MEMORY ROOM",
+          "status": "PASS",
+          "detail": "room made (other models unloaded first)"
+        },
+        {
+          "point": "LOADED + RESIDENT",
+          "status": "PASS",
+          "detail": "6.93 s, 2.96 GB resident"
+        },
+        {
+          "point": "ANSWERED",
+          "status": "PASS",
+          "detail": "4.69 s"
+        },
+        {
+          "point": "OUTPUT VALIDATED",
+          "status": "PASS",
+          "detail": "answered 'READY' - this build ignores think=false (its reasoning leaked into the answer), so ZEUS lets it think and returns only the answer"
+        },
+        {
+          "point": "BEHAVIOUR CALIBRATED",
+          "status": "PASS",
+          "detail": "think=false is ignored - it is allowed to think and only the answer is kept"
+        },
+        {
+          "point": "UNLOADED + METRICS",
+          "status": "PASS",
+          "detail": "VRAM 2.96 GB, commit +4.3 GB, unloaded after the test"
+        }
+      ]
+    },
+    "qwen3:1.7b": {
+      "model": "qwen3:1.7b",
+      "type": "CHAT",
+      "installed_as": "qwen3:1.7b",
+      "capabilities": [
+        "completion",
+        "tools",
+        "thinking"
+      ],
+      "present": true,
+      "digest": "8f68893c685c3ddff2aa3fffce2aa60a30bb2da65ca488b61fff134a4d1730e7",
+      "checksum": "trusted",
+      "load": true,
+      "inference": true,
+      "function": true,
+      "function_detail": "answered 'READY'",
+      "load_s": 5.12,
+      "inference_s": 0.36,
+      "resident_gb": 1.59,
+      "vram_gb": 1.59,
+      "commit_delta_gb": 2.37,
+      "status": "PASS",
+      "error": "",
+      "cause": "",
+      "fallback": "",
+      "states": [
+        "DOWNLOADED",
+        "INSTALLED",
+        "CHECKSUM_VALID",
+        "LOAD_TEST_PASSED",
+        "INFERENCE_TEST_PASSED"
+      ],
+      "evidence": "",
+      "slot": "classify",
+      "thinking_control": {
+        "think_false_leaks": false
+      },
+      "unloaded": true,
+      "tested_at": 1790510193.653396,
+      "points": [
+        {
+          "point": "INSTALLED",
+          "status": "PASS",
+          "detail": "qwen3:1.7b"
+        },
+        {
+          "point": "DIGEST TRUSTED",
+          "status": "PASS",
+          "detail": "trusted"
+        },
+        {
+          "point": "MEMORY ROOM",
+          "status": "PASS",
+          "detail": "room made (other models unloaded first)"
+        },
+        {
+          "point": "LOADED + RESIDENT",
+          "status": "PASS",
+          "detail": "5.12 s, 1.59 GB resident"
+        },
+        {
+          "point": "ANSWERED",
+          "status": "PASS",
+          "detail": "0.36 s"
+        },
+        {
+          "point": "OUTPUT VALIDATED",
+          "status": "PASS",
+          "detail": "answered 'READY'"
+        },
+        {
+          "point": "BEHAVIOUR CALIBRATED",
+          "status": "PASS",
+          "detail": "honours think=false"
+        },
+        {
+          "point": "UNLOADED + METRICS",
+          "status": "PASS",
+          "detail": "VRAM 1.59 GB, commit +2.37 GB, unloaded after the test"
+        }
+      ]
+    },
+    "qwen3:8b": {
+      "model": "qwen3:8b",
+      "type": "CHAT",
+      "installed_as": "qwen3:8b",
+      "capabilities": [
+        "completion",
+        "tools",
+        "thinking"
+      ],
+      "present": true,
+      "digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+      "checksum": "trusted",
+      "load": true,
+      "inference": true,
+      "function": true,
+      "function_detail": "answered 'READY'",
+      "load_s": 8.58,
+      "inference_s": 0.7,
+      "resident_gb": 5.2,
+      "vram_gb": 5.2,
+      "commit_delta_gb": 5.24,
+      "status": "PASS",
+      "error": "",
+      "cause": "",
+      "fallback": "",
+      "states": [
+        "DOWNLOADED",
+        "INSTALLED",
+        "CHECKSUM_VALID",
+        "LOAD_TEST_PASSED",
+        "INFERENCE_TEST_PASSED"
+      ],
+      "evidence": "",
+      "slot": "default,json_structured",
+      "thinking_control": {
+        "think_false_leaks": false
+      },
+      "unloaded": true,
+      "tested_at": 1790510193.653396,
+      "points": [
+        {
+          "point": "INSTALLED",
+          "status": "PASS",
+          "detail": "qwen3:8b"
+        },
+        {
+          "point": "DIGEST TRUSTED",
+          "status": "PASS",
+          "detail": "trusted"
+        },
+        {
+          "point": "MEMORY ROOM",
+          "status": "PASS",
+          "detail": "room made (other models unloaded first)"
+        },
+        {
+          "point": "LOADED + RESIDENT",
+          "status": "PASS",
+          "detail": "8.58 s, 5.2 GB resident"
+        },
+        {
+          "point": "ANSWERED",
+          "status": "PASS",
+          "detail": "0.7 s"
+        },
+        {
+          "point": "OUTPUT VALIDATED",
+          "status": "PASS",
+          "detail": "answered 'READY'"
+        },
+        {
+          "point": "BEHAVIOUR CALIBRATED",
+          "status": "PASS",
+          "detail": "honours think=false"
+        },
+        {
+          "point": "UNLOADED + METRICS",
+          "status": "PASS",
+          "detail": "VRAM 5.2 GB, commit +5.24 GB, unloaded after the test"
+        }
+      ]
+    },
+    "deepseek-r1:8b": {
+      "model": "deepseek-r1:8b",
+      "type": "CHAT",
+      "installed_as": "deepseek-r1:8b",
+      "capabilities": [
+        "tools",
+        "thinking",
+        "completion"
+      ],
+      "present": true,
+      "digest": "6995872bfe4c521a67b32da386cd21d5c6e819b6e0d62f79f64ec83be99f5763",
+      "checksum": "trusted",
+      "load": true,
+      "inference": true,
+      "function": true,
+      "function_detail": "answered 'READY'",
+      "load_s": 8.03,
+      "inference_s": 24.58,
+      "resident_gb": 5.2,
+      "vram_gb": 5.2,
+      "commit_delta_gb": 5.24,
+      "status": "PASS",
+      "error": "",
+      "cause": "",
+      "fallback": "",
+      "states": [
+        "DOWNLOADED",
+        "INSTALLED",
+        "CHECKSUM_VALID",
+        "LOAD_TEST_PASSED",
+        "INFERENCE_TEST_PASSED"
+      ],
+      "evidence": "",
+      "slot": "reasoning",
+      "thinking_control": {
+        "think_false_leaks": false
+      },
+      "unloaded": true,
+      "tested_at": 1790510193.653396,
+      "points": [
+        {
+          "point": "INSTALLED",
+          "status": "PASS",
+          "detail": "deepseek-r1:8b"
+        },
+        {
+          "point": "DIGEST TRUSTED",
+          "status": "PASS",
+          "detail": "trusted"
+        },
+        {
+          "point": "MEMORY ROOM",
+          "status": "PASS",
+          "detail": "room made (other models unloaded first)"
+        },
+        {
+          "point": "LOADED + RESIDENT",
+          "status": "PASS",
+          "detail": "8.03 s, 5.2 GB resident"
+        },
+        {
+          "point": "ANSWERED",
+          "status": "PASS",
+          "detail": "24.58 s"
+        },
+        {
+          "point": "OUTPUT VALIDATED",
+          "status": "PASS",
+          "detail": "answered 'READY'"
+        },
+        {
+          "point": "BEHAVIOUR CALIBRATED",
+          "status": "PASS",
+          "detail": "honours think=false"
+        },
+        {
+          "point": "UNLOADED + METRICS",
+          "status": "PASS",
+          "detail": "VRAM 5.2 GB, commit +5.24 GB, unloaded after the test"
+        }
+      ]
+    },
+    "qwen2.5-coder:7b": {
+      "model": "qwen2.5-coder:7b",
+      "type": "CHAT",
+      "installed_as": "qwen2.5-coder:7b",
+      "capabilities": [
+        "completion",
+        "tools",
+        "insert"
+      ],
+      "present": true,
+      "digest": "dae161e27b0e90dd1856c8bb3209201fd6736d8eb66298e75ed87571486f4364",
+      "checksum": "trusted",
+      "load": true,
+      "inference": true,
+      "function": true,
+      "function_detail": "answered 'READY'",
+      "load_s": 7.21,
+      "inference_s": 0.48,
+      "resident_gb": 4.42,
+      "vram_gb": 4.42,
+      "commit_delta_gb": 4.93,
+      "status": "PASS",
+      "error": "",
+      "cause": "",
+      "fallback": "",
+      "states": [
+        "DOWNLOADED",
+        "INSTALLED",
+        "CHECKSUM_VALID",
+        "LOAD_TEST_PASSED",
+        "INFERENCE_TEST_PASSED"
+      ],
+      "evidence": "",
+      "slot": "code",
+      "thinking_control": {
+        "think_false_leaks": false
+      },
+      "unloaded": true,
+      "tested_at": 1790510193.653396,
+      "points": [
+        {
+          "point": "INSTALLED",
+          "status": "PASS",
+          "detail": "qwen2.5-coder:7b"
+        },
+        {
+          "point": "DIGEST TRUSTED",
+          "status": "PASS",
+          "detail": "trusted"
+        },
+        {
+          "point": "MEMORY ROOM",
+          "status": "PASS",
+          "detail": "room made (other models unloaded first)"
+        },
+        {
+          "point": "LOADED + RESIDENT",
+          "status": "PASS",
+          "detail": "7.21 s, 4.42 GB resident"
+        },
+        {
+          "point": "ANSWERED",
+          "status": "PASS",
+          "detail": "0.48 s"
+        },
+        {
+          "point": "OUTPUT VALIDATED",
+          "status": "PASS",
+          "detail": "answered 'READY'"
+        },
+        {
+          "point": "BEHAVIOUR CALIBRATED",
+          "status": "PASS",
+          "detail": "not a thinking model"
+        },
+        {
+          "point": "UNLOADED + METRICS",
+          "status": "PASS",
+          "detail": "VRAM 4.42 GB, commit +4.93 GB, unloaded after the test"
+        }
+      ]
+    },
+    "qwen3-vl:8b": {
+      "model": "qwen3-vl:8b",
+      "type": "VISION",
+      "installed_as": "qwen3-vl:8b",
+      "capabilities": [
+        "completion",
+        "vision",
+        "tools",
+        "thinking"
+      ],
+      "present": true,
+      "digest": "901cae73216286ea8c5aba8b46d307ff7188f737285ec500c795a12f05225d28",
+      "checksum": "trusted",
+      "load": true,
+      "inference": true,
+      "function": true,
+      "function_detail": "named the test circle's colour: 'red'",
+      "load_s": 13.71,
+      "inference_s": 18.1,
+      "resident_gb": 5.81,
+      "vram_gb": 5.15,
+      "commit_delta_gb": 5.73,
+      "status": "PASS",
+      "error": "",
+      "cause": "",
+      "fallback": "",
+      "states": [
+        "DOWNLOADED",
+        "INSTALLED",
+        "CHECKSUM_VALID",
+        "LOAD_TEST_PASSED",
+        "INFERENCE_TEST_PASSED"
+      ],
+      "evidence": "",
+      "slot": "vision",
+      "thinking_control": {},
+      "unloaded": true,
+      "tested_at": 1790510193.653396,
+      "points": [
+        {
+          "point": "INSTALLED",
+          "status": "PASS",
+          "detail": "qwen3-vl:8b"
+        },
+        {
+          "point": "DIGEST TRUSTED",
+          "status": "PASS",
+          "detail": "trusted"
+        },
+        {
+          "point": "MEMORY ROOM",
+          "status": "PASS",
+          "detail": "room made (other models unloaded first)"
+        },
+        {
+          "point": "LOADED + RESIDENT",
+          "status": "PASS",
+          "detail": "13.71 s, 5.81 GB resident"
+        },
+        {
+          "point": "ANSWERED",
+          "status": "PASS",
+          "detail": "18.1 s"
+        },
+        {
+          "point": "OUTPUT VALIDATED",
+          "status": "PASS",
+          "detail": "named the test circle's colour: 'red'"
+        },
+        {
+          "point": "BEHAVIOUR CALIBRATED",
+          "status": "PASS",
+          "detail": "names the colour of a generated image"
+        },
+        {
+          "point": "UNLOADED + METRICS",
+          "status": "PASS",
+          "detail": "VRAM 5.15 GB, commit +5.73 GB, unloaded after the test"
+        }
+      ]
+    },
+    "bge-m3": {
+      "model": "bge-m3",
+      "type": "EMBEDDING",
+      "installed_as": "bge-m3:latest",
+      "capabilities": [
+        "embedding"
+      ],
+      "present": true,
+      "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+      "checksum": "trusted",
+      "load": true,
+      "inference": true,
+      "function": true,
+      "function_detail": "1024-dim vectors; query ranked the pump document first (cosine 0.651 vs 0.403)",
+      "load_s": 6.36,
+      "inference_s": 0.37,
+      "resident_gb": 0.62,
+      "vram_gb": 0.62,
+      "commit_delta_gb": 2.08,
+      "status": "PASS",
+      "error": "",
+      "cause": "",
+      "fallback": "",
+      "states": [
+        "DOWNLOADED",
+        "INSTALLED",
+        "CHECKSUM_VALID",
+        "LOAD_TEST_PASSED",
+        "INFERENCE_TEST_PASSED"
+      ],
+      "evidence": "",
+      "slot": "embedding",
+      "thinking_control": {},
+      "unloaded": true,
+      "tested_at": 1790510275.6484547,
+      "points": [
+        {
+          "point": "INSTALLED",
+          "status": "PASS",
+          "detail": "bge-m3:latest"
+        },
+        {
+          "point": "DIGEST TRUSTED",
+          "status": "PASS",
+          "detail": "trusted"
+        },
+        {
+          "point": "MEMORY ROOM",
+          "status": "PASS",
+          "detail": "room made (other models unloaded first)"
+        },
+        {
+          "point": "LOADED + RESIDENT",
+          "status": "PASS",
+          "detail": "6.36 s, 0.62 GB resident"
+        },
+        {
+          "point": "ANSWERED",
+          "status": "PASS",
+          "detail": "0.37 s"
+        },
+        {
+          "point": "OUTPUT VALIDATED",
+          "status": "PASS",
+          "detail": "1024-dim vectors; query ranked the pump document first (cosine 0.651 vs 0.403)"
+        },
+        {
+          "point": "BEHAVIOUR CALIBRATED",
+          "status": "PASS",
+          "detail": "vectors rank the right passage first"
+        },
+        {
+          "point": "UNLOADED + METRICS",
+          "status": "PASS",
+          "detail": "VRAM 0.62 GB, commit +2.08 GB, unloaded after the test"
+        }
+      ]
+    },
+    "qwen2.5:3b-instruct-q4_K_M": {
+      "model": "qwen2.5:3b-instruct-q4_K_M",
+      "type": "CHAT",
+      "installed_as": "qwen2.5:3b-instruct-q4_K_M",
+      "capabilities": [
+        "completion",
+        "tools"
+      ],
+      "present": true,
+      "digest": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b",
+      "checksum": "trusted",
+      "load": true,
+      "inference": true,
+      "function": true,
+      "function_detail": "answered 'READY'",
+      "load_s": 6.25,
+      "inference_s": 0.21,
+      "resident_gb": 2.01,
+      "vram_gb": 2.01,
+      "commit_delta_gb": 3.41,
+      "status": "PASS",
+      "error": "",
+      "cause": "",
+      "fallback": "",
+      "states": [
+        "DOWNLOADED",
+        "INSTALLED",
+        "CHECKSUM_VALID",
+        "LOAD_TEST_PASSED",
+        "INFERENCE_TEST_PASSED"
+      ],
+      "evidence": "",
+      "slot": "fast (routed)",
+      "thinking_control": {
+        "think_false_leaks": false
+      },
+      "unloaded": true,
+      "tested_at": 1790510193.653396,
+      "points": [
+        {
+          "point": "INSTALLED",
+          "status": "PASS",
+          "detail": "qwen2.5:3b-instruct-q4_K_M"
+        },
+        {
+          "point": "DIGEST TRUSTED",
+          "status": "PASS",
+          "detail": "trusted"
+        },
+        {
+          "point": "MEMORY ROOM",
+          "status": "PASS",
+          "detail": "room made (other models unloaded first)"
+        },
+        {
+          "point": "LOADED + RESIDENT",
+          "status": "PASS",
+          "detail": "6.25 s, 2.01 GB resident"
+        },
+        {
+          "point": "ANSWERED",
+          "status": "PASS",
+          "detail": "0.21 s"
+        },
+        {
+          "point": "OUTPUT VALIDATED",
+          "status": "PASS",
+          "detail": "answered 'READY'"
+        },
+        {
+          "point": "BEHAVIOUR CALIBRATED",
+          "status": "PASS",
+          "detail": "not a thinking model"
+        },
+        {
+          "point": "UNLOADED + METRICS",
+          "status": "PASS",
+          "detail": "VRAM 2.01 GB, commit +3.41 GB, unloaded after the test"
+        }
+      ]
+    }
+  }
+}

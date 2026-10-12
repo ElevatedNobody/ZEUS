@@ -1,0 +1,587 @@
+{
+  "version": "1.0.0",
+  "description": "Local industrial knowledge taxonomy for MEDHA. Terminology, categories, synonyms and abbreviations used to normalise industrial language, expand retrieval queries, and tag extracted document content. Fully offline - no external ontology service.",
+  "categories": {
+    "facility": "Plants, units and installations",
+    "process_unit": "Named process units inside a refinery or petrochemical complex",
+    "rotating_equipment": "Machines with rotating parts",
+    "static_equipment": "Pressure-containing equipment without rotating parts",
+    "piping_valves": "Piping, fittings, valves and actuators",
+    "instrumentation": "Field instruments and measured variables",
+    "control_systems": "Control and automation systems",
+    "measurement": "Measured process/condition variables",
+    "integrity": "Corrosion, damage mechanisms, inspection",
+    "maintenance": "Maintenance strategies and execution",
+    "operations": "Operating activities and states",
+    "safety": "Process safety, HSE and permits",
+    "reliability": "Reliability and failure analysis",
+    "quality": "Quality control and assurance",
+    "documentation": "Engineering document types"
+  },
+  "abbreviations": {
+    "P&ID": "Piping and Instrumentation Diagram",
+    "PFD": "Process Flow Diagram",
+    "DCS": "Distributed Control System",
+    "PLC": "Programmable Logic Controller",
+    "SCADA": "Supervisory Control and Data Acquisition",
+    "SIS": "Safety Instrumented System",
+    "SIF": "Safety Instrumented Function",
+    "SIL": "Safety Integrity Level",
+    "ESD": "Emergency Shutdown",
+    "MOC": "Management of Change",
+    "PSM": "Process Safety Management",
+    "PSSR": "Pre-Startup Safety Review",
+    "HAZOP": "Hazard and Operability Study",
+    "HAZID": "Hazard Identification Study",
+    "LOPA": "Layer of Protection Analysis",
+    "QRA": "Quantitative Risk Assessment",
+    "FMEA": "Failure Mode and Effects Analysis",
+    "FMECA": "Failure Mode, Effects and Criticality Analysis",
+    "RCA": "Root Cause Analysis",
+    "RCM": "Reliability Centred Maintenance",
+    "RBI": "Risk Based Inspection",
+    "CUI": "Corrosion Under Insulation",
+    "IOW": "Integrity Operating Window",
+    "CML": "Condition Monitoring Location",
+    "TML": "Thickness Measurement Location",
+    "NDT": "Non-Destructive Testing",
+    "NDE": "Non-Destructive Examination",
+    "UT": "Ultrasonic Testing",
+    "RT": "Radiographic Testing",
+    "MPI": "Magnetic Particle Inspection",
+    "MT": "Magnetic Particle Testing",
+    "PT": "Liquid Penetrant Testing",
+    "DPT": "Dye Penetrant Testing",
+    "ECT": "Eddy Current Testing",
+    "PMI": "Positive Material Identification",
+    "HSE": "Health, Safety and Environment",
+    "PPE": "Personal Protective Equipment",
+    "PTW": "Permit To Work",
+    "LOTO": "Lockout/Tagout",
+    "JSA": "Job Safety Analysis",
+    "MSDS": "Material Safety Data Sheet",
+    "SDS": "Safety Data Sheet",
+    "SOP": "Standard Operating Procedure",
+    "WI": "Work Instruction",
+    "WO": "Work Order",
+    "CMMS": "Computerised Maintenance Management System",
+    "EAM": "Enterprise Asset Management",
+    "KPI": "Key Performance Indicator",
+    "OEE": "Overall Equipment Effectiveness",
+    "MTBF": "Mean Time Between Failures",
+    "MTTR": "Mean Time To Repair",
+    "MTTF": "Mean Time To Failure",
+    "RUL": "Remaining Useful Life",
+    "CBM": "Condition Based Maintenance",
+    "PdM": "Predictive Maintenance",
+    "PM": "Preventive Maintenance",
+    "CDU": "Crude Distillation Unit",
+    "VDU": "Vacuum Distillation Unit",
+    "ADU": "Atmospheric Distillation Unit",
+    "FCC": "Fluid Catalytic Cracking",
+    "FCCU": "Fluid Catalytic Cracking Unit",
+    "RFCC": "Resid Fluid Catalytic Cracking",
+    "HDS": "Hydrodesulphurisation",
+    "DHDS": "Diesel Hydrodesulphurisation",
+    "HDT": "Hydrotreater",
+    "HCU": "Hydrocracker Unit",
+    "CCR": "Continuous Catalyst Regeneration (reformer)",
+    "SRU": "Sulphur Recovery Unit",
+    "ARU": "Amine Regeneration Unit",
+    "SWS": "Sour Water Stripper",
+    "HGU": "Hydrogen Generation Unit",
+    "SMR": "Steam Methane Reformer",
+    "LPG": "Liquefied Petroleum Gas",
+    "LNG": "Liquefied Natural Gas",
+    "NGL": "Natural Gas Liquids",
+    "VGO": "Vacuum Gas Oil",
+    "ATF": "Aviation Turbine Fuel",
+    "MS": "Motor Spirit (gasoline)",
+    "HSD": "High Speed Diesel",
+    "BFW": "Boiler Feed Water",
+    "CW": "Cooling Water",
+    "IA": "Instrument Air",
+    "PA": "Plant Air",
+    "HP": "High Pressure",
+    "MP": "Medium Pressure",
+    "LP": "Low Pressure",
+    "PSV": "Pressure Safety Valve",
+    "PRV": "Pressure Relief Valve",
+    "MOV": "Motor Operated Valve",
+    "XV": "On/off (shutdown) valve",
+    "FCV": "Flow Control Valve",
+    "LCV": "Level Control Valve",
+    "PCV": "Pressure Control Valve",
+    "TCV": "Temperature Control Valve",
+    "VFD": "Variable Frequency Drive",
+    "MCC": "Motor Control Centre",
+    "UPS": "Uninterruptible Power Supply",
+    "HVAC": "Heating, Ventilation and Air Conditioning",
+    "OEM": "Original Equipment Manufacturer",
+    "MOM": "Minutes of Meeting",
+    "TAR": "Turnaround",
+    "T&I": "Turnaround and Inspection",
+    "IIoT": "Industrial Internet of Things",
+    "OT": "Operational Technology",
+    "IT": "Information Technology",
+    "APC": "Advanced Process Control",
+    "MPC": "Model Predictive Control",
+    "PID": "Proportional-Integral-Derivative (controller)",
+    "MES": "Manufacturing Execution System",
+    "ERP": "Enterprise Resource Planning",
+    "AM": "Additive Manufacturing",
+    "AGV": "Automated Guided Vehicle",
+    "UAV": "Unmanned Aerial Vehicle",
+    "API": "American Petroleum Institute (standards body)",
+    "ASME": "American Society of Mechanical Engineers",
+    "ASTM": "ASTM International (standards body)",
+    "ISO": "International Organization for Standardization",
+    "IEC": "International Electrotechnical Commission",
+    "ISA": "International Society of Automation",
+    "NACE": "NACE International (corrosion, now AMPP)",
+    "OISD": "Oil Industry Safety Directorate (India)",
+    "PESO": "Petroleum and Explosives Safety Organisation (India)",
+    "CCOE": "Chief Controller of Explosives (India)",
+    "IBR": "Indian Boiler Regulations"
+  },
+  "terms": {
+    "refinery": {
+      "category": "facility",
+      "definition": "Industrial facility that separates and converts crude oil into fuels, lubricants and petrochemical feedstocks.",
+      "aliases": ["oil refinery", "petroleum refinery", "refining complex"],
+      "related": ["crude distillation unit", "fluid catalytic cracking", "hydrotreater", "reformer"]
+    },
+    "petrochemical plant": {
+      "category": "facility",
+      "definition": "Facility converting refinery or gas streams into chemical intermediates and polymers.",
+      "aliases": ["petchem plant", "chemical complex"],
+      "related": ["cracker", "polymerisation unit", "refinery"]
+    },
+    "crude distillation unit": {
+      "category": "process_unit",
+      "definition": "Primary refinery unit separating crude oil into fractions by boiling range at near-atmospheric pressure.",
+      "aliases": ["CDU", "atmospheric distillation unit", "ADU", "crude unit", "atmospheric tower"],
+      "related": ["vacuum distillation unit", "desalter", "fired heater", "distillation column"]
+    },
+    "vacuum distillation unit": {
+      "category": "process_unit",
+      "definition": "Unit distilling atmospheric residue under vacuum to recover gas oils without thermal cracking.",
+      "aliases": ["VDU", "vacuum unit", "vacuum tower"],
+      "related": ["crude distillation unit", "vacuum gas oil"]
+    },
+    "fluid catalytic cracking": {
+      "category": "process_unit",
+      "definition": "Conversion process cracking heavy gas oils into gasoline and light olefins over a fluidised zeolite catalyst.",
+      "aliases": ["FCC", "FCCU", "cat cracker", "catalytic cracker", "RFCC"],
+      "related": ["riser", "regenerator", "catalyst", "slide valve", "main fractionator"]
+    },
+    "hydrotreater": {
+      "category": "process_unit",
+      "definition": "Unit removing sulphur, nitrogen and metals from hydrocarbon streams by reaction with hydrogen over a catalyst.",
+      "aliases": ["HDT", "hydrotreating unit", "hydrodesulphurisation unit", "HDS", "DHDS"],
+      "related": ["hydrogen unit", "reactor", "recycle gas compressor", "amine unit"]
+    },
+    "hydrocracker": {
+      "category": "process_unit",
+      "definition": "High-pressure unit cracking heavy feed into lighter products in the presence of hydrogen and a dual-function catalyst.",
+      "aliases": ["HCU", "hydrocracking unit"],
+      "related": ["hydrotreater", "hydrogen unit", "high pressure separator"]
+    },
+    "reformer": {
+      "category": "process_unit",
+      "definition": "Catalytic unit upgrading naphtha to high-octane reformate and hydrogen; also refers to a steam reformer producing hydrogen from natural gas.",
+      "aliases": ["catalytic reformer", "CCR reformer", "platformer", "steam reformer", "SMR"],
+      "related": ["hydrogen unit", "naphtha", "catalyst regeneration"]
+    },
+    "hydrogen unit": {
+      "category": "process_unit",
+      "definition": "Unit producing hydrogen, typically by steam methane reforming with pressure-swing adsorption purification.",
+      "aliases": ["HGU", "hydrogen generation unit", "hydrogen plant"],
+      "related": ["reformer", "PSA", "hydrotreater", "hydrocracker"]
+    },
+    "sulphur recovery unit": {
+      "category": "process_unit",
+      "definition": "Unit converting hydrogen sulphide from amine and sour water systems into elemental sulphur, usually by the Claus process.",
+      "aliases": ["SRU", "Claus unit", "sulfur recovery unit"],
+      "related": ["amine unit", "sour water stripper", "tail gas treatment"]
+    },
+    "boiler": {
+      "category": "static_equipment",
+      "definition": "Fired or waste-heat pressure vessel generating steam from boiler feed water.",
+      "aliases": ["steam generator", "package boiler", "utility boiler", "HRSG"],
+      "related": ["boiler feed water", "deaerator", "economiser", "superheater", "safety valve"]
+    },
+    "cooling tower": {
+      "category": "static_equipment",
+      "definition": "Evaporative heat rejection device that cools circulating water for plant heat exchangers.",
+      "aliases": ["CT", "induced draft cooling tower"],
+      "related": ["cooling water", "heat exchanger", "biocide dosing", "drift eliminator"]
+    },
+    "pump": {
+      "category": "rotating_equipment",
+      "definition": "Machine adding energy to a liquid to raise its pressure or move it through a system.",
+      "aliases": ["centrifugal pump", "positive displacement pump", "reciprocating pump", "screw pump"],
+      "related": ["mechanical seal", "impeller", "NPSH", "cavitation", "vibration", "bearing"]
+    },
+    "compressor": {
+      "category": "rotating_equipment",
+      "definition": "Machine raising the pressure of a gas; centrifugal, reciprocating or screw type in process plants.",
+      "aliases": ["centrifugal compressor", "reciprocating compressor", "screw compressor", "air compressor"],
+      "related": ["surge", "anti-surge control", "intercooler", "dry gas seal", "vibration"]
+    },
+    "turbine": {
+      "category": "rotating_equipment",
+      "definition": "Machine extracting shaft work from a flowing fluid; steam and gas turbines drive generators and large compressors.",
+      "aliases": ["steam turbine", "gas turbine", "turbo-expander"],
+      "related": ["compressor", "governor", "overspeed trip", "condenser"]
+    },
+    "motor": {
+      "category": "rotating_equipment",
+      "definition": "Electrical machine converting electrical power into rotating mechanical power to drive pumps, fans and compressors.",
+      "aliases": ["electric motor", "induction motor", "LT motor", "HT motor"],
+      "related": ["variable frequency drive", "motor control centre", "insulation resistance", "vibration"]
+    },
+    "heat exchanger": {
+      "category": "static_equipment",
+      "definition": "Equipment transferring heat between two fluids without mixing them; shell-and-tube, plate or air-cooled.",
+      "aliases": ["shell and tube exchanger", "plate heat exchanger", "air cooler", "fin fan cooler", "condenser", "reboiler"],
+      "related": ["fouling", "tube bundle", "TEMA", "pressure drop", "thermal design"]
+    },
+    "pressure vessel": {
+      "category": "static_equipment",
+      "definition": "Closed container designed to hold gases or liquids at a pressure different from ambient, designed to a code such as ASME VIII.",
+      "aliases": ["vessel", "drum", "separator", "reactor", "accumulator", "knock-out drum"],
+      "related": ["nozzle", "relief valve", "hydrotest", "thickness measurement", "design pressure"]
+    },
+    "storage tank": {
+      "category": "static_equipment",
+      "definition": "Atmospheric or low-pressure tank storing crude, intermediates or products; typically designed to API 650 and inspected to API 653.",
+      "aliases": ["tank", "floating roof tank", "fixed roof tank", "bullet", "sphere"],
+      "related": ["bund", "dyke", "tank farm", "settlement survey", "bottom plate corrosion"]
+    },
+    "distillation column": {
+      "category": "static_equipment",
+      "definition": "Vertical vessel separating a mixture into fractions by repeated vapour-liquid contact on trays or packing.",
+      "aliases": ["column", "fractionator", "tower", "stripper", "absorber", "splitter"],
+      "related": ["tray", "packing", "reflux", "reboiler", "flooding"]
+    },
+    "fired heater": {
+      "category": "static_equipment",
+      "definition": "Direct-fired equipment heating process fluid in tubes inside a combustion chamber.",
+      "aliases": ["furnace", "process heater", "charge heater", "reboiler furnace"],
+      "related": ["burner", "tube skin temperature", "coking", "draft", "stack"]
+    },
+    "pipeline": {
+      "category": "piping_valves",
+      "definition": "Long-distance pipe system transporting crude, products, gas or utilities between facilities.",
+      "aliases": ["cross-country pipeline", "trunk line", "flowline"],
+      "related": ["pigging", "cathodic protection", "leak detection", "right of way", "SCADA"]
+    },
+    "piping": {
+      "category": "piping_valves",
+      "definition": "In-plant pipe, fittings and supports carrying process and utility fluids; designed to codes such as ASME B31.3.",
+      "aliases": ["process piping", "pipework", "line"],
+      "related": ["pipe support", "expansion loop", "flange", "gasket", "stress analysis"]
+    },
+    "valve": {
+      "category": "piping_valves",
+      "definition": "Device controlling flow direction, rate or pressure in a piping system.",
+      "aliases": ["gate valve", "globe valve", "ball valve", "butterfly valve", "check valve", "control valve"],
+      "related": ["actuator", "packing", "seat leakage", "stem", "passing"]
+    },
+    "actuator": {
+      "category": "piping_valves",
+      "definition": "Pneumatic, hydraulic, electric or manual device that moves a valve to its commanded position.",
+      "aliases": ["valve actuator", "pneumatic actuator", "motor operator"],
+      "related": ["positioner", "solenoid valve", "stroke test", "fail-safe position"]
+    },
+    "relief valve": {
+      "category": "piping_valves",
+      "definition": "Self-actuated safety device that opens at set pressure to protect equipment from overpressure.",
+      "aliases": ["PSV", "PRV", "safety valve", "safety relief valve"],
+      "related": ["set pressure", "pop test", "flare header", "overpressure scenario", "API 520"]
+    },
+    "control loop": {
+      "category": "control_systems",
+      "definition": "Closed-loop arrangement of measurement, controller and final element that holds a process variable at setpoint.",
+      "aliases": ["loop", "regulatory loop", "PID loop"],
+      "related": ["setpoint", "controller tuning", "transmitter", "control valve", "cascade control"]
+    },
+    "plc": {
+      "category": "control_systems",
+      "definition": "Industrial digital controller executing cyclic logic for discrete and sequential control.",
+      "aliases": ["PLC", "programmable logic controller", "programmable controller"],
+      "related": ["ladder logic", "I/O module", "SCADA", "interlock"]
+    },
+    "dcs": {
+      "category": "control_systems",
+      "definition": "Distributed Control System: plant-wide control architecture with distributed controllers and centralised operator consoles.",
+      "aliases": ["DCS", "distributed control system", "process control system"],
+      "related": ["operator station", "control loop", "historian", "alarm management", "advanced process control"]
+    },
+    "scada": {
+      "category": "control_systems",
+      "definition": "Supervisory system collecting telemetry and issuing commands across geographically distributed assets.",
+      "aliases": ["SCADA", "supervisory control and data acquisition"],
+      "related": ["RTU", "pipeline", "historian", "telemetry"]
+    },
+    "safety instrumented system": {
+      "category": "control_systems",
+      "definition": "Independent instrumented protection layer that takes the process to a safe state when defined limits are exceeded.",
+      "aliases": ["SIS", "emergency shutdown system", "ESD system", "trip system"],
+      "related": ["SIL", "SIF", "proof test", "IEC 61511", "LOPA"]
+    },
+    "instrumentation": {
+      "category": "instrumentation",
+      "definition": "Field devices that measure, indicate, transmit and act on process variables.",
+      "aliases": ["field instruments", "instruments"],
+      "related": ["transmitter", "calibration", "control loop", "impulse line"]
+    },
+    "transmitter": {
+      "category": "instrumentation",
+      "definition": "Instrument converting a measured process variable into a standard signal (4-20 mA, HART, fieldbus).",
+      "aliases": ["pressure transmitter", "level transmitter", "flow transmitter", "temperature transmitter"],
+      "related": ["calibration", "span", "zero drift", "control loop"]
+    },
+    "vibration": {
+      "category": "measurement",
+      "definition": "Oscillatory motion of machinery, measured as displacement, velocity or acceleration and used as the primary indicator of rotating-machine health.",
+      "aliases": ["vibration level", "overall vibration", "velocity mm/s"],
+      "related": ["condition monitoring", "unbalance", "misalignment", "bearing defect frequency", "FFT spectrum", "ISO 10816"]
+    },
+    "temperature": {
+      "category": "measurement",
+      "definition": "Measured thermal state of a process, bearing or surface; a primary process and condition variable.",
+      "aliases": ["process temperature", "bearing temperature", "skin temperature"],
+      "related": ["thermocouple", "RTD", "thermography", "trip setpoint"]
+    },
+    "pressure": {
+      "category": "measurement",
+      "definition": "Force per unit area exerted by a fluid; measured for control, protection and integrity assessment.",
+      "aliases": ["process pressure", "discharge pressure", "differential pressure"],
+      "related": ["relief valve", "design pressure", "MAWP", "transmitter"]
+    },
+    "flow": {
+      "category": "measurement",
+      "definition": "Volumetric or mass rate of fluid movement, measured for control, balance and custody transfer.",
+      "aliases": ["flow rate", "throughput"],
+      "related": ["orifice plate", "coriolis meter", "control valve", "mass balance"]
+    },
+    "level": {
+      "category": "measurement",
+      "definition": "Height of liquid or interface in a vessel or tank; a key control and safety variable.",
+      "aliases": ["liquid level", "interface level"],
+      "related": ["level transmitter", "high level trip", "gauge glass", "overfill protection"]
+    },
+    "corrosion": {
+      "category": "integrity",
+      "definition": "Degradation of material by chemical or electrochemical reaction with its environment.",
+      "aliases": ["metal loss", "wall thinning", "material degradation"],
+      "related": ["CUI", "erosion", "pitting", "cathodic protection", "corrosion rate", "damage mechanism"]
+    },
+    "damage mechanism": {
+      "category": "integrity",
+      "definition": "Specific degradation process acting on equipment, such as sulphidation, HTHA, chloride stress corrosion cracking or creep.",
+      "aliases": ["degradation mechanism", "failure mechanism"],
+      "related": ["API 571", "RBI", "corrosion", "inspection plan"]
+    },
+    "inspection": {
+      "category": "integrity",
+      "definition": "Planned examination of equipment condition to confirm fitness for service and detect degradation.",
+      "aliases": ["equipment inspection", "in-service inspection", "external inspection", "internal inspection"],
+      "related": ["NDT", "thickness measurement", "RBI", "inspection report", "corrosion rate"]
+    },
+    "non-destructive testing": {
+      "category": "integrity",
+      "definition": "Techniques that examine material condition without impairing usefulness - UT, RT, MPI, PT, ECT and visual methods.",
+      "aliases": ["NDT", "NDE", "non destructive examination"],
+      "related": ["ultrasonic testing", "radiography", "weld inspection", "flaw sizing"]
+    },
+    "thickness measurement": {
+      "category": "integrity",
+      "definition": "Ultrasonic or radiographic measurement of remaining wall thickness at defined monitoring locations.",
+      "aliases": ["UT thickness", "wall thickness survey", "TML reading"],
+      "related": ["corrosion rate", "minimum required thickness", "remaining life", "CML"]
+    },
+    "preventive maintenance": {
+      "category": "maintenance",
+      "definition": "Maintenance performed at fixed intervals of time or usage to reduce the probability of failure.",
+      "aliases": ["PM", "time based maintenance", "planned maintenance", "scheduled maintenance"],
+      "related": ["maintenance strategy", "work order", "CMMS", "PM schedule"]
+    },
+    "predictive maintenance": {
+      "category": "maintenance",
+      "definition": "Maintenance triggered by measured or modelled equipment condition rather than a fixed calendar interval.",
+      "aliases": ["PdM", "condition based maintenance", "CBM"],
+      "related": ["condition monitoring", "vibration", "remaining useful life", "anomaly detection"]
+    },
+    "condition monitoring": {
+      "category": "maintenance",
+      "definition": "Continuous or periodic measurement of machine and equipment parameters to detect developing faults.",
+      "aliases": ["CM", "machine monitoring", "health monitoring"],
+      "related": ["vibration", "thermography", "oil analysis", "acoustic emission", "motor current signature analysis"]
+    },
+    "maintenance strategy": {
+      "category": "maintenance",
+      "definition": "The chosen mix of corrective, preventive, predictive and redesign tactics for an asset, usually selected via RCM.",
+      "aliases": ["maintenance philosophy", "maintenance tactic"],
+      "related": ["RCM", "criticality analysis", "FMEA", "spares strategy"]
+    },
+    "work order": {
+      "category": "maintenance",
+      "definition": "Formal instruction authorising and recording a maintenance job, its resources, permits and completion notes.",
+      "aliases": ["WO", "job card", "maintenance order"],
+      "related": ["CMMS", "permit to work", "notification", "backlog"]
+    },
+    "turnaround": {
+      "category": "operations",
+      "definition": "Planned, plant-wide shutdown for inspection, maintenance and modification of equipment that cannot be serviced online.",
+      "aliases": ["TAR", "shutdown", "T&I", "outage", "overhaul"],
+      "related": ["shutdown", "startup", "work list", "critical path", "pre-startup safety review"]
+    },
+    "shutdown": {
+      "category": "operations",
+      "definition": "Controlled or automatic stopping of a unit or equipment item, planned or triggered by protection systems.",
+      "aliases": ["trip", "unit shutdown", "emergency shutdown"],
+      "related": ["startup", "turnaround", "interlock", "ESD"]
+    },
+    "startup": {
+      "category": "operations",
+      "definition": "Sequence bringing a unit from a shutdown state to stable operating conditions.",
+      "aliases": ["start-up", "commissioning", "recommissioning"],
+      "related": ["shutdown", "PSSR", "SOP", "purging"]
+    },
+    "permit to work": {
+      "category": "safety",
+      "definition": "Formal written authorisation controlling hazardous work, defining precautions, isolation and validity period.",
+      "aliases": ["PTW", "work permit", "hot work permit", "cold work permit", "confined space entry permit"],
+      "related": ["lockout/tagout", "job safety analysis", "gas test", "isolation certificate"]
+    },
+    "lockout/tagout": {
+      "category": "safety",
+      "definition": "Procedure isolating and locking energy sources, with tags identifying the isolation, before work begins.",
+      "aliases": ["LOTO", "lock out tag out", "energy isolation"],
+      "related": ["permit to work", "isolation", "blinding", "de-energisation"]
+    },
+    "process safety": {
+      "category": "safety",
+      "definition": "Discipline preventing loss of containment and major accidents through design, procedures and protection layers.",
+      "aliases": ["PSM", "process safety management"],
+      "related": ["HAZOP", "LOPA", "management of change", "mechanical integrity", "process safety event"]
+    },
+    "hazop": {
+      "category": "safety",
+      "definition": "Structured team review applying guidewords to process deviations to identify hazards and operability problems.",
+      "aliases": ["HAZOP", "hazard and operability study"],
+      "related": ["LOPA", "risk assessment", "node", "guideword", "safeguard"]
+    },
+    "risk assessment": {
+      "category": "safety",
+      "definition": "Systematic evaluation of hazard likelihood and consequence to decide whether risk is tolerable and what controls are needed.",
+      "aliases": ["risk analysis", "risk evaluation", "QRA", "risk matrix"],
+      "related": ["HAZOP", "LOPA", "ALARP", "severity", "likelihood"]
+    },
+    "emergency response": {
+      "category": "safety",
+      "definition": "Planned organisation and procedures for responding to fires, releases, injuries and other plant emergencies.",
+      "aliases": ["emergency preparedness", "ERP", "on-site emergency plan"],
+      "related": ["mutual aid", "muster point", "fire water system", "drill", "incident command"]
+    },
+    "incident": {
+      "category": "safety",
+      "definition": "Unplanned event that caused or could have caused injury, loss of containment, damage or business interruption.",
+      "aliases": ["accident", "near miss", "loss of containment", "event"],
+      "related": ["root cause analysis", "incident report", "lessons learned", "corrective action"]
+    },
+    "failure mode": {
+      "category": "reliability",
+      "definition": "The specific way in which an item fails to perform its required function.",
+      "aliases": ["mode of failure"],
+      "related": ["FMEA", "failure mechanism", "effect", "criticality"]
+    },
+    "root cause": {
+      "category": "reliability",
+      "definition": "The underlying condition or decision whose correction prevents recurrence of a failure.",
+      "aliases": ["RCA", "root cause analysis", "causal factor"],
+      "related": ["5 why", "fishbone diagram", "fault tree", "corrective action"]
+    },
+    "reliability": {
+      "category": "reliability",
+      "definition": "Probability that an item performs its required function under stated conditions for a stated period.",
+      "aliases": ["equipment reliability", "asset reliability"],
+      "related": ["MTBF", "availability", "RCM", "bad actor analysis", "Weibull analysis"]
+    },
+    "availability": {
+      "category": "reliability",
+      "definition": "Proportion of time an asset is capable of performing its function, combining reliability and maintainability.",
+      "aliases": ["uptime", "mechanical availability"],
+      "related": ["MTBF", "MTTR", "OEE", "downtime"]
+    },
+    "calibration": {
+      "category": "quality",
+      "definition": "Comparison of an instrument's output against a traceable reference and adjustment to bring error within tolerance.",
+      "aliases": ["instrument calibration", "loop calibration"],
+      "related": ["calibration report", "traceability", "as-found", "as-left", "tolerance"]
+    },
+    "engineering standard": {
+      "category": "documentation",
+      "definition": "Published technical requirement (API, ASME, ISO, IEC, ISA, OISD, IBR) governing design, inspection or operation.",
+      "aliases": ["standard", "code", "specification", "recommended practice"],
+      "related": ["API 570", "API 653", "ASME VIII", "IEC 61511", "compliance"]
+    },
+    "p&id": {
+      "category": "documentation",
+      "definition": "Piping and Instrumentation Diagram: schematic showing equipment, piping, instruments and control functions with tag numbers.",
+      "aliases": ["P&ID", "piping and instrumentation diagram", "PID drawing"],
+      "related": ["PFD", "line list", "tag number", "isometric drawing", "management of change"]
+    },
+    "datasheet": {
+      "category": "documentation",
+      "definition": "Document listing the design, construction and performance data of an equipment item or instrument.",
+      "aliases": ["technical datasheet", "equipment datasheet", "spec sheet"],
+      "related": ["vendor document", "nameplate", "design conditions"]
+    },
+    "standard operating procedure": {
+      "category": "documentation",
+      "definition": "Approved step-by-step instruction for carrying out an operating or maintenance task safely and consistently.",
+      "aliases": ["SOP", "operating procedure", "work instruction", "WI"],
+      "related": ["startup", "shutdown", "permit to work", "revision", "competency"]
+    },
+    "shift log": {
+      "category": "documentation",
+      "definition": "Chronological record of plant conditions, actions, abnormalities and handover notes kept by operating shifts.",
+      "aliases": ["logbook", "shift handover", "operator log"],
+      "related": ["handover", "abnormal condition", "alarm", "trend"]
+    }
+  },
+  "equipment_tag_patterns": {
+    "description": "Regex fragments used to spot equipment tag numbers in extracted text. Prefix letters follow common refinery conventions.",
+    "patterns": [
+      {"name": "pump", "regex": "\\bP-?\\d{2,5}[A-Z]?\\b", "equipment_type": "pump"},
+      {"name": "compressor", "regex": "\\b(?:K|C)-?\\d{2,5}[A-Z]?\\b", "equipment_type": "compressor"},
+      {"name": "heat_exchanger", "regex": "\\bE-?\\d{2,5}[A-Z]?\\b", "equipment_type": "heat exchanger"},
+      {"name": "vessel", "regex": "\\b(?:V|D)-?\\d{2,5}[A-Z]?\\b", "equipment_type": "pressure vessel"},
+      {"name": "column", "regex": "\\b(?:T|C)-?\\d{2,5}[A-Z]?\\b", "equipment_type": "distillation column"},
+      {"name": "fired_heater", "regex": "\\b(?:F|H)-?\\d{2,5}[A-Z]?\\b", "equipment_type": "fired heater"},
+      {"name": "tank", "regex": "\\bTK-?\\d{2,5}[A-Z]?\\b", "equipment_type": "storage tank"},
+      {"name": "valve", "regex": "\\b(?:XV|FCV|LCV|PCV|TCV|MOV|PSV|PRV)-?\\d{2,5}[A-Z]?\\b", "equipment_type": "valve"},
+      {"name": "instrument", "regex": "\\b(?:PI|PT|TI|TT|FI|FT|LI|LT|AI|AT|VI|VT)-?\\d{2,5}[A-Z]?\\b", "equipment_type": "instrument"},
+      {"name": "line_number", "regex": "\\b\\d{1,2}\"?-[A-Z]{1,4}-\\d{3,6}-[A-Z0-9]{2,8}\\b", "equipment_type": "piping"}
+    ]
+  },
+  "confidentiality_levels": [
+    "public",
+    "internal",
+    "confidential",
+    "restricted",
+    "secret"
+  ],
+  "claim_types": {
+    "historical_fact": "Dated, verifiable event or development from the industrial history corpus.",
+    "engineering_principle": "General physical or engineering principle that is not site-specific.",
+    "modern_best_practice": "Current industry practice or recommended approach, not a mandatory requirement.",
+    "company_specific": "Information specific to one company, plant or organisation.",
+    "user_document": "Content extracted from a document the user supplied.",
+    "ai_inference": "Conclusion produced by the model, not directly present in any source."
+  }
+}

@@ -1,0 +1,8 @@
+# The CRUDEX NETWORK server (python -m crudex_server serve ...), for a machine
+# that runs ONLY the server (a VPS). On a CRUDEX installation these are already
+# present. Python 3.10+.
+#
+#   PySide6    QtWebSockets (RFC 6455 WebSocket server) + QtNetwork (TLS via OpenSSL)
+#   cryptography   Ed25519 device signatures; the private CA of make-cert
+PySide6>=6.7.0,<6.12
+cryptography>=42.0.0

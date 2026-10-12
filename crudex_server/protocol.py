@@ -1,0 +1,129 @@
+"""
+The ZEUS NETWORK protocol - one definition, used by the server and the client.
+
+Transport: ONE WebSocket per device (RFC 6455) over TLS (wss://), device -> server.
+Both laptops only ever make OUTBOUND connections to the server, so neither needs
+a public IP, an open port or port-forwarding, and it does not matter that they
+sit on different networks. The server authenticates every device, enforces the
+pairings and permissions, and stores-and-forwards: an event for a device that is
+offline waits in its queue and is delivered, once, when it reconnects.
+
+Frames
+    text    one JSON object: {"t": <type>, ...}. Requests carry "rid"; the answer
+            repeats it. Errors: {"t": "error", "rid", "code", "message"}.
+    binary  a file chunk: MAGIC (4) | transfer id (16, uuid bytes) | offset (8,
+            big-endian) | data. Upload: client -> server. Download: server -> client.
+
+Authentication (every connection)
+    server  {"t": "hello", "nonce": b64, "protocol": 1, "server": "..."}
+    client  {"t": "auth", "api_key": "...", "device": {...identity...}, "sig": b64}
+            sig = Ed25519(device private key, AUTH_CONTEXT | nonce | device_id).
+            The API key identifies the ACCOUNT; the signature proves this is the
+            same DEVICE that registered (its private key never leaves the device).
+    server  {"t": "welcome", ...} or {"t": "error", "code": "auth_failed"|"revoked"|...}
+
+Nothing in this module does I/O.
+"""
+
+from __future__ import annotations
+
+import struct
+import uuid
+from typing import Dict, FrozenSet, Tuple
+
+PROTOCOL_VERSION = 1
+AUTH_CONTEXT = b"crudex-auth-v1|"
+
+# ------------------------------------------------------------ permissions ----
+# A grant is given BY one device TO a paired peer, and each device controls only
+# its own grants. A flow from A to B needs A's outbound grant AND B's inbound one.
+SEND_FILES = "SEND_FILES"                            # I may send files to this peer
+RECEIVE_FILES = "RECEIVE_FILES"                      # I accept files from this peer
+READ_SHARED_DATA = "READ_SHARED_DATA"                # the peer may read what I mark SHARED
+WRITE_SHARED_DATA = "WRITE_SHARED_DATA"              # the peer may write into my shared data (folder sync)
+SEND_TASKS = "SEND_TASKS"                            # I may send tasks to this peer
+RECEIVE_TASKS = "RECEIVE_TASKS"                      # I run tasks this peer sends me
+READ_SHARED_KNOWLEDGE = "READ_SHARED_KNOWLEDGE"      # the peer may search / receive my shared knowledge
+WRITE_SHARED_KNOWLEDGE = "WRITE_SHARED_KNOWLEDGE"    # the peer's shared knowledge may be added to mine
+VIEW_STATUS = "VIEW_STATUS"                          # the peer may see my presence and status
+
+PERMISSIONS: Tuple[str, ...] = (SEND_FILES, RECEIVE_FILES, READ_SHARED_DATA, WRITE_SHARED_DATA, SEND_TASKS,
+                                RECEIVE_TASKS, READ_SHARED_KNOWLEDGE, WRITE_SHARED_KNOWLEDGE, VIEW_STATUS)
+
+# What a new pairing starts with. Everything that lets the OTHER device act on
+# this one - run tasks here, write here - starts OFF and is switched on by a person.
+DEFAULT_GRANTS: FrozenSet[str] = frozenset({SEND_FILES, RECEIVE_FILES, READ_SHARED_DATA, SEND_TASKS,
+                                            READ_SHARED_KNOWLEDGE, VIEW_STATUS})
+DANGEROUS: FrozenSet[str] = frozenset({RECEIVE_TASKS, WRITE_SHARED_DATA, WRITE_SHARED_KNOWLEDGE})
+
+PERMISSION_TEXT: Dict[str, str] = {
+    SEND_FILES: "Send files to this device",
+    RECEIVE_FILES: "Accept files from this device",
+    READ_SHARED_DATA: "Let this device read what I mark SHARED",
+    WRITE_SHARED_DATA: "Let this device write into my synced folders",
+    SEND_TASKS: "Send tasks to this device",
+    RECEIVE_TASKS: "Run tasks this device sends me (allowlisted task types only)",
+    READ_SHARED_KNOWLEDGE: "Let this device search / receive my shared knowledge",
+    WRITE_SHARED_KNOWLEDGE: "Let this device's shared knowledge be added to mine",
+    VIEW_STATUS: "Let this device see when I am online",
+}
+
+# ---------------------------------------------------------------- kinds ----
+# kind -> (grant the SENDER must give the recipient, grant the RECIPIENT must give the sender)
+# None = only an active pairing is needed.
+KIND_RULES: Dict[str, Tuple] = {
+    "message": (None, None),
+    "notification": (None, None),
+    "receipt": (None, None),                       # server-generated delivery receipts
+    "task": (SEND_TASKS, RECEIVE_TASKS),
+    "task_status": ("reply", "reply"),             # only as the answer to a task that exists
+    "task_cancel": ("reply", "reply"),
+    "share": (READ_SHARED_DATA, None),             # a shared item (memory, conversation, preferences, ...)
+    "knowledge": (READ_SHARED_KNOWLEDGE, None),    # a shared knowledge entry
+    "sync_manifest": (READ_SHARED_DATA, None),     # folder sync: what I have
+    "sync_request": (None, READ_SHARED_DATA),      # folder sync: send me these (owner must grant READ)
+    "file": (SEND_FILES, RECEIVE_FILES),           # generated by the server when an upload completes
+}
+FILE_KINDS = ("file", "document", "artifact", "project_bundle", "sync_file")
+
+TASK_STATES = ("PENDING", "RECEIVED", "RUNNING", "COMPLETED", "FAILED", "CANCELLED")
+TASK_FINAL = ("COMPLETED", "FAILED", "CANCELLED")
+
+# ---------------------------------------------------------------- limits ----
+MAX_TEXT_FRAME = 512 * 1024              # one JSON frame
+MAX_BODY_BYTES = 256 * 1024              # a message / share body; larger content goes as a file
+CHUNK_SIZE = 256 * 1024                  # file chunk payload
+UPLOAD_WINDOW = 4 * 1024 * 1024          # bytes in flight before the client waits for an ack
+DOWNLOAD_WINDOW = 4 * 1024 * 1024        # bytes the server sends per download request
+MAX_BINARY_FRAME = CHUNK_SIZE + 64
+PAIRING_CODE_TTL = 600                   # seconds
+PAIRING_MAX_FAILURES = 5                 # wrong codes per device per 10 minutes
+AUTH_MAX_FAILURES = 10                   # failed authentications per address per 10 minutes
+
+# ---------------------------------------------------------------- chunks ----
+MAGIC = b"CRX1"
+_HEADER = struct.Struct(">4s16sQ")
+HEADER_SIZE = _HEADER.size
+
+
+def pack_chunk(transfer_id: str, offset: int, data: bytes) -> bytes:
+    return _HEADER.pack(MAGIC, uuid.UUID(transfer_id).bytes, offset) + data
+
+
+def unpack_chunk(frame: bytes) -> Tuple[str, int, bytes]:
+    if len(frame) < HEADER_SIZE:
+        raise ValueError("chunk frame too short")
+    magic, raw_id, offset = _HEADER.unpack_from(frame)
+    if magic != MAGIC:
+        raise ValueError("not a ZEUS chunk")
+    return str(uuid.UUID(bytes=raw_id)), offset, bytes(frame[HEADER_SIZE:])
+
+
+def valid_grants(grants) -> Tuple[str, ...]:
+    return tuple(sorted({g for g in (grants or ()) if g in PERMISSIONS}))
+
+
+def masked(secret: str, visible: int = 4) -> str:
+    """"••••••••••••7X92" - how a stored key is shown. Never more than 4 characters."""
+    secret = secret or ""
+    return "•" * 12 + secret[-visible:] if len(secret) > visible * 3 else "•" * 12
